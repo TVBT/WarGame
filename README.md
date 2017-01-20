@@ -23,8 +23,9 @@
 **Optional** features:
 
 - [ ] Login with Facebook.
+- [ ] User's rank in game
 - [ ] Chat in game
-- [ ] Private chat.
+- [ ] Create a team to competition with other team
 
 ## Wireframe:
 
