@@ -13,7 +13,6 @@
 
 **Optional** features:
 
-### User
 - [ ] Login with Facebook.
 - [ ] Chat in game
 - [ ] Private chat.
