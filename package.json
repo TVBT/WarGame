@@ -1,4 +1,15 @@
 {
   "name": "wargame",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "directories": {
+    "client": "client"
+  },
+  "scripts": {
+    "typings": "typings"
+  },
+  "devDependencies": {
+    "less": "^2.7.2",
+    "phaser": "^2.6.2",
+    "typings": "^2.1.0"
+  }
 }
