@@ -1,12 +1,21 @@
 # WarGame - *TVBT Team*
  - First game demo with NodeJS and Phaser.
- - Game start with two team, and after x time. Which team has higher point is win.
+ - Game start with two team has equal number of player each team.
+ - Match timeout is 3 minutes
+ - Team's mission is guard the HeadTower.
+ - Team is the Winner of game when has one of below conditions: 
+  + Destroy the HeadTower of competitor team
+  + When the match timeoout. Team has higher point is win.
+  + All of player of competitor team is leave out.
 
 ## User Stories
 **Required** features:
-- [ ] User can input username and join game.
-- [ ] Chose team in game
+- [ ] User must input username to play game.
+- [ ] User view the list of current matchs
+- [ ] User can choose and join a waitting match
+- [ ] Choose team in game
 - [ ] User can view other user in current game
+- [ ] Owner of match can setting game (choose map, timeout, numplayer ,..)
 - [ ] User can hit other user in other team to get point.
 - [ ] Realtime moving, action in game
 
