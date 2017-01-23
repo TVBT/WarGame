@@ -11,6 +11,6 @@
   },
   "files": [
     "node_modules/phaser/typescript/phaser.d.ts",
-    "client/app.ts"
+    "client/src/app.ts"
   ]
 }
