@@ -1,4 +1,4 @@
-import {LoginDialog} from "./dialogs/login.dialog";
+import {LoginDialog} from "./components/dialogs/login.dialog";
 
 var AppConfig = {
     data: {

@@ -3,7 +3,7 @@
  */
 
 import Vue = require('vue');
-import {AppConfig} from "./components/app.config";
+import {AppConfig} from "./app.config";
 
 function generateComponents (components) {
     var componentDict = {};

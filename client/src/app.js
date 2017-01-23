@@ -3,7 +3,7 @@
  */
 "use strict";
 var Vue = require("vue");
-var app_config_1 = require("./components/app.config");
+var app_config_1 = require("./app.config");
 function generateComponents(components) {
     var componentDict = {};
     for (var i = 0; i < components.length; i++) {
