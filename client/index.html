@@ -6,10 +6,22 @@
     <link rel="stylesheet" href="assets/css/app.css" type="text/css" />
 
     <script src="assets/js/phaser.min.js"></script>
-    <script src="src/app.js"></script>
+
+    <script src="../node_modules/systemjs/dist/system.js"></script>
+
+    <script src="../systemjs.config.js"></script>
 </head>
 <body>
 
-<div id="content"></div>
+<div id="app">
+    <login-dialog></login-dialog>
+    <div id="content"></div>
+</div>
+
+<script>
+
+    // loads /js/main.js
+    SystemJS.import('src/app.js');
+</script>
 </body>
 </html>

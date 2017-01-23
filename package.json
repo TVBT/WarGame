@@ -10,6 +10,11 @@
   "devDependencies": {
     "less": "^2.7.2",
     "phaser": "^2.6.2",
+    "typescript": "^2.1.5",
     "typings": "^2.1.0"
+  },
+  "dependencies": {
+    "systemjs": "^0.19.43",
+    "vue": "^2.1.10"
   }
 }
