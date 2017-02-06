@@ -20,5 +20,9 @@
     "webpack": "^2.2.1",
     "webpack-dev-server": "^1.16.2",
     "webpack-merge": "^2.6.1"
+  },
+  "dependencies": {
+    "express": "^4.14.1",
+    "socket.io": "^1.7.2"
   }
 }
