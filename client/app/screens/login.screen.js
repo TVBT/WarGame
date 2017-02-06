@@ -8,29 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+/**
+ * Created by thinhth2 on 2/6/2017.
+ */
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var app_component_1 = require('./app.component');
-var login_screen_1 = require("./screens/login.screen");
-var lobby_screen_1 = require("./screens/lobby.screen");
-var play_screen_1 = require("./screens/play.screen");
-var AppModule = (function () {
-    function AppModule() {
+var LoginScreen = (function () {
+    function LoginScreen() {
     }
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
-            declarations: [
-                app_component_1.AppComponent,
-                login_screen_1.LoginScreen,
-                lobby_screen_1.LobbyScreen,
-                play_screen_1.PlayScreen
-            ],
-            bootstrap: [app_component_1.AppComponent]
+    LoginScreen = __decorate([
+        core_1.Component({
+            selector: 'login-screen',
+            template: "\n    <div>login-screen</div>\n  ",
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], LoginScreen);
+    return LoginScreen;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+exports.LoginScreen = LoginScreen;
+//# sourceMappingURL=login.screen.js.map
