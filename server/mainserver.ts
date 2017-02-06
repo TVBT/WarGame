@@ -28,12 +28,14 @@ class Main {
 
     startSocket(server, io, port) {
         io.on('connection', function(){
-            client.on('event', function(data){
-                console.log("client connected!");
-            });
-            client.on('disconnect', function(){
-                console.log("client disconnected!");
-            });
+            // client.on('event', function(data){
+            //     console.log("client connected!");
+            // });
+            // client.on('disconnect', function(){
+            //     console.log("client disconnected!");
+            // });
+
+            console.log('a user connected');
         });
 
         server.listen(port);
