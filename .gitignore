@@ -3,3 +3,5 @@ node_modules/
 .idea/
 client/app/**/*.js
 client/app/**/*.js.map
+server/**/*.js
+server/**/*.js.map
