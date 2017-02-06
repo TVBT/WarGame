@@ -1,23 +1,26 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {StateService, SCREEN_STATE} from "./services/state.service";
 
-var STATE = {
-  LOGIN: 'login',
-  LOBBY: 'lobby',
-  PLAY: 'play'
-};
 
 @Component({
-  selector: 'app',
-  template: `
+    selector: 'app',
+    template: `
     <div>
-        <login-screen *ngIf="state=='${STATE.LOGIN}'"></login-screen>
-        <lobby-screen *ngIf="state=='${STATE.LOBBY}'"></lobby-screen>
-        <play-screen *ngIf="state=='${STATE.PLAY}'"></play-screen>
+        <login-screen *ngIf="screenState=='${SCREEN_STATE.LOGIN}'"></login-screen>
+        <lobby-screen *ngIf="screenState=='${SCREEN_STATE.LOBBY}'"></lobby-screen>
+        <play-screen *ngIf="screenState=='${SCREEN_STATE.PLAY}'"></play-screen>
     </div>
   `,
 })
-export class AppComponent  {
-  name = 'Angular';
+export class AppComponent {
+    name = 'Angular';
 
-  state = STATE.LOGIN;
+    screenState;
+
+    constructor(private stateService:StateService) {
+        this.screenState = this.stateService.getScreenState();
+        this.stateService.screenStateChange.subscribe((state) => {
+           this.screenState = state;
+        });
+    }
 }

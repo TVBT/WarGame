@@ -7,6 +7,7 @@ import {LobbyScreen} from "./screens/lobby/lobby.screen";
 import {PlayScreen} from "./screens/play.screen";
 import {UserService} from "./services/user.service";
 import {CommandService} from "./services/command.service";
+import {StateService} from "./services/state.service";
 
 @NgModule({
     imports: [BrowserModule],
@@ -18,7 +19,8 @@ import {CommandService} from "./services/command.service";
     ],
     providers: [
         UserService,
-        CommandService
+        CommandService,
+        StateService
     ],
     bootstrap: [AppComponent]
 })
