@@ -5,3 +5,4 @@
 interface Window {
     App:any;
 }
+

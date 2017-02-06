@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
+    <title>Angular QuickStart</title>
     <meta charset="UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <link rel="stylesheet" href="styles.css">
 
-    <title>App Development Page</title>
-</head>
-<body>
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
 
-<% if (htmlWebpackPlugin.options.metadata.isDevServer) { %>
-<!-- Webpack Dev Server reload -->
-<script src="/webpack-dev-server.js"></script>
-<% } %>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
 
-<script>
-    window.App.run();
-</script>
-</body>
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('main.js').catch(function(err){ console.error(err); });
+    </script>
+  </head>
+
+  <body>
+    <my-app></my-app>
+  </body>
 </html>
