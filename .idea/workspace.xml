@@ -1,217 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9053e9d3-ce57-4130-be15-fe98b0a849c7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/index.ts" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/WarGame.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/WarGame_node_modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/typescript-compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_config.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/css/app.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/css/app.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/fonts/prstart.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/Nintendo-Button-A.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/Nintendo-Button-B.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/Nintendo-Button-Select.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/Nintendo-Button-Start.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/Nintendo-Dpad-Neutral.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/appear_1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/appear_2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/appear_3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/appear_4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/base.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/base_destroyed.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/battle_city.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/big_explosion_1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/big_explosion_2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/big_explosion_3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/big_explosion_4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/big_explosion_5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/bullet_down.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/bullet_explosion_1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/bullet_explosion_2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/bullet_explosion_3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/bullet_left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/bullet_right.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/bullet_up.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/copyright.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/enemy.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/flag.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/game_over.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/lives.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/namcot.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/points_100.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/points_200.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/points_300.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/points_400.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/points_500.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/powerup_grenade.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/powerup_helmet.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/powerup_shovel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/powerup_star.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/powerup_tank.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/powerup_timer.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/roman_one.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/roman_one_red.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/roman_one_white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/shield_1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/shield_2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_down_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_down_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_down_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_down_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_down_c1_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_down_c1_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_down_c2_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_down_c2_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_left_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_left_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_left_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_left_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_left_c1_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_left_c1_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_left_c2_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_left_c2_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_right_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_right_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_right_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_right_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_right_c1_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_right_c1_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_right_c2_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_right_c2_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_up_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_up_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_up_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_up_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_up_c1_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_up_c1_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_up_c2_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_armor_up_c2_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_down_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_down_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_down_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_down_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_left_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_left_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_left_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_left_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_right_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_right_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_right_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_right_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_up_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_up_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_up_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_basic_up_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_down_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_down_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_down_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_down_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_left_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_left_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_left_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_left_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_right_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_right_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_right_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_right_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_up_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_up_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_up_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_fast_up_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_down_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_down_c0_t1_s1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_down_c0_t1_s2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_down_c0_t1_s3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_down_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_down_c0_t2_s1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_down_c0_t2_s2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_down_c0_t2_s3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_left_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_left_c0_t1_s1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_left_c0_t1_s2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_left_c0_t1_s3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_left_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_left_c0_t2_s1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_left_c0_t2_s2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_left_c0_t2_s3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_right_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_right_c0_t1_s1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_right_c0_t1_s2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_right_c0_t1_s3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_right_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_right_c0_t2_s1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_right_c0_t2_s2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_right_c0_t2_s3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_up_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_up_c0_t1_s1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_up_c0_t1_s2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_up_c0_t1_s3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_up_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_up_c0_t2_s1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_up_c0_t2_s2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_player1_up_c0_t2_s3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_down_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_down_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_down_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_down_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_left_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_left_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_left_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_left_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_right_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_right_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_right_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_right_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_up_c0_t1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_up_c0_t1_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_up_c0_t2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/tank_power_up_c0_t2_f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/trees.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/wall_brick.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/wall_steel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/water_1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/water_2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/images/white_line.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/js/phaser.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/sound/bullet_hit_1.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/sound/bullet_hit_2.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/sound/bullet_shot.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/sound/explosion_1.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/sound/explosion_2.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/sound/game_over.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/sound/pause.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/sound/powerup_appear.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/sound/powerup_pick.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/sound/stage_start.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/assets/sound/statistics_1.ogg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/app.config.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/app.config.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/app.config.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/app.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/app.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/app.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/src/components/dialogs/login.dialog.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/systemjs.config.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="d5489a25-6c38-4c5e-99d1-bfba36114745" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/index.html" afterPath="$PROJECT_DIR$/client/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tsconfig.json" afterPath="$PROJECT_DIR$/tsconfig.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typings.json" afterPath="$PROJECT_DIR$/typings.json" />
     </list>
     <ignored path="WarGame.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
-    <ignored path="$PROJECT_DIR$/dist/" />
-    <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -233,26 +31,6 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/index.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/index.html">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
@@ -264,14 +42,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/config/webpack.config.js" />
-        <option value="$PROJECT_DIR$/package.json" />
-      </list>
-    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
@@ -311,6 +81,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -329,45 +101,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WarGame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WarGame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WarGame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WarGame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="nodejs_interpreter_path" value="D:/Program Files/nodejs/node" />
     <property name="js-jscs-nodeInterpreter" value="D:\Program Files\nodejs\node.exe" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -423,29 +167,30 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9053e9d3-ce57-4130-be15-fe98b0a849c7" name="Default" comment="" />
-      <created>1486353876211</created>
+      <changelist id="d5489a25-6c38-4c5e-99d1-bfba36114745" name="Default" comment="" />
+      <created>1486354238659</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1486353876211</updated>
-      <workItem from="1486353878209" duration="214000" />
+      <updated>1486354238659</updated>
+      <workItem from="1486354241211" duration="120000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214000" />
+    <option name="totallyTimeSpent" value="120000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1932" height="1056" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973601" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973601" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -474,34 +219,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

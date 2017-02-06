@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/typescript-webpack-starter.iml" filepath="$PROJECT_DIR$/.idea/typescript-webpack-starter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/WarGame.iml" filepath="$PROJECT_DIR$/.idea/WarGame.iml" />
     </modules>
   </component>
 </project>
