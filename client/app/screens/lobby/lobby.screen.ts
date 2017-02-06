@@ -4,9 +4,9 @@
 import { Component } from '@angular/core';
 
 @Component({
+    moduleId: module.id,
     selector: 'lobby-screen',
-    template: `
-    <div>lobby-screen</div>
-  `,
+    templateUrl: './lobby.screen.html',
+    styleUrls: ['./lobby.screen.css']
 })
 export class LobbyScreen  {  }
