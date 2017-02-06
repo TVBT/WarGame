@@ -4,9 +4,9 @@
 import { Component } from '@angular/core';
 
 @Component({
+    moduleId: module.id,
     selector: 'login-screen',
-    template: `
-    <div>login-screen</div>
-  `,
+    templateUrl: './login.screen.html',
+    styleUrls:  ['./login.screen.css']
 })
 export class LoginScreen  {  }
