@@ -2,26 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>War Game</title>
-    <link rel="stylesheet" href="assets/css/app.css" type="text/css" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="assets/js/phaser.min.js"></script>
-
-    <script src="../node_modules/systemjs/dist/system.js"></script>
-
-    <script src="../systemjs.config.js"></script>
+    <title>App Development Page</title>
 </head>
 <body>
 
-<div id="app">
-    <login-dialog></login-dialog>
-    <div id="content"></div>
-</div>
+<% if (htmlWebpackPlugin.options.metadata.isDevServer) { %>
+<!-- Webpack Dev Server reload -->
+<script src="/webpack-dev-server.js"></script>
+<% } %>
 
 <script>
-
-    // loads /js/main.js
-    SystemJS.import('src/app.js');
+    window.App.run();
 </script>
 </body>
 </html>

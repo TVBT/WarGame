@@ -1,17 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es5",
     "module": "commonjs",
-    "lib": ["DOM", "ES5", "ES2015.Promise"],
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false
+    "target": "es5",
+    "sourceMap": true
   },
-  "files": [
-    "node_modules/phaser/typescript/phaser.d.ts",
-    "client/src/app.ts"
+  "exclude": [
+    "node_modules"
   ]
 }
