@@ -5,6 +5,7 @@ import {AppComponent}  from './app.component';
 import {LoginScreen} from "./screens/login.screen";
 import {LobbyScreen} from "./screens/lobby.screen";
 import {PlayScreen} from "./screens/play.screen";
+import {UserService} from "./services/user.service";
 
 @NgModule({
     imports: [BrowserModule],
@@ -13,6 +14,9 @@ import {PlayScreen} from "./screens/play.screen";
         LoginScreen,
         LobbyScreen,
         PlayScreen
+    ],
+    providers: [
+        UserService
     ],
     bootstrap: [AppComponent]
 })

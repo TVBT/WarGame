@@ -14,6 +14,7 @@ var app_component_1 = require('./app.component');
 var login_screen_1 = require("./screens/login.screen");
 var lobby_screen_1 = require("./screens/lobby.screen");
 var play_screen_1 = require("./screens/play.screen");
+var user_service_1 = require("./services/user.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,6 +26,9 @@ var AppModule = (function () {
                 login_screen_1.LoginScreen,
                 lobby_screen_1.LobbyScreen,
                 play_screen_1.PlayScreen
+            ],
+            providers: [
+                user_service_1.UserService
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 
