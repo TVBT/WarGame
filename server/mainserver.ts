@@ -67,6 +67,11 @@ class Main {
             res.send('Welcome to WarGame!')
         })
 
+        app.get('/api', function (req, res) {
+            var path    = require("path");
+            res.sendFile(path.join(__dirname+'/../docs/api.html'));
+        })
+
         app.listen(port, function () {
             console.log('Http app listening on port ' + port +'!')
         })
