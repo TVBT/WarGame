@@ -37,6 +37,10 @@ export class LoginScreen implements OnInit {
     }
 
     onUsernameChanged() {
+        if (!this.username) {
+            this.userValidate = this.username && this.username.length > 0;
+            return;
+        }
         // this.errorMsg = "Tài khoản đã tồn tại";
         this.commandService.verifyUsername(this.username);
     }
