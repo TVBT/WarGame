@@ -7,12 +7,13 @@ import { Injectable, EventEmitter } from '@angular/core';
 var SCREEN_STATE = {
     LOGIN: 'login',
     LOBBY: 'lobby',
-    PLAY: 'play'
+    PLAY: 'play',
+    WAIT_SERVER: 'wait_server'
 };
 
 @Injectable()
 class StateService {
-    screenState = SCREEN_STATE.LOGIN;
+    screenState = SCREEN_STATE.WAIT_SERVER;
     screenStateChange = new EventEmitter();
 
     getScreenState() {
