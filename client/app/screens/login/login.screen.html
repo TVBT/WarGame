@@ -1,5 +1,18 @@
+<div class="login-page">
+    <div class="form">
+        <form class="login-form">
+            <div class="error">{{errorMsg}}</div>
+            <div class="form-group">
+                <input type="text" name="username" placeholder="username"
+                       [(ngModel)]="username"
+                       (keyup)="onUsernameChanged()"/>
+                <span class="hidden glyphicon glyphicon-ok"
+                      [class.hidden]="!userValidate"
+                      [class.glyphicon-ok]="userExist"
+                      [class.glyphicon-remove]="!userExist"></span>
+            </div>
 
-<div>
-    <input type="text" />
-    <button id="btnCheckNickName">Check Name</button>
+            <button>Join</button>
+        </form>
+    </div>
 </div>
