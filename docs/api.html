@@ -1,0 +1,82 @@
+﻿<style>
+	#mainContent {
+		margin: 10px 10px;
+	}
+	#item {
+		margin-bottom: 50px;
+	}
+</style>
+<div id="mainContent">
+
+<div id="item">
+<h2>* <strong>CHECK NICK NAME</strong> *</h2>
+<p>&lt;<em>Kiểm tra nickname đã tồn tại hay chưa.</em>&gt;</p>
+
+<ul>
+	<li><p><strong>IdCommand</strong></p>
+	<code>
+		<p>CHECK_NICK_NAME:int = 1</p>
+	</code>
+	
+	<li><p><strong>Input:</strong></p>
+	<code>
+		<p>username:string (username cần check)</p>
+	</code>
+
+	<li><p><strong>Output:</strong></p>
+	<code>
+		<p>status:int (1=thành công, 0=thất bại)</p>
+	</code>
+</ul>
+</div>
+ 
+<div id="item">
+<h2>* <strong>AUTO JOIN ROOM</strong> *</h2>
+<p>&lt;<em>User nhấn tham gia, server tự đẩy vào 1 room phù hợp.</em>&gt;</p>
+
+<ul>
+	<li><p><strong>IdCommand</strong></p>
+	<code>
+		<p>AUTO_JOIN_ROOM:int = 2</p>
+	</code>
+	
+	<li><p><strong>Input:</strong></p>
+	<code>
+		<p>empty</p>
+	</code>
+
+	<li><p><strong>Output:</strong></p>
+	<code>
+		<p>status:int (1=thành công, 0=thất bại)</p>
+		<p>roomid:int (roomid hiện tại user đang vào)</p>
+	</code>
+</ul>
+</div>
+
+<div id="item">
+<h2>* <strong>GET ROOM INFO</strong> *</h2>
+<p>&lt;<em>Trả về thông tin room mà user đang tham gia.</em>&gt;</p>
+
+<ul>
+	<li><p><strong>IdCommand</strong></p>
+	<code>
+		<p>GET_ROOM_INFO:int = 3</p>
+	</code>
+	
+	<li><p><strong>Input:</strong></p>
+	<code>
+		<p>roomid:int</p>
+	</code>
+
+	<li><p><strong>Output:</strong></p>
+	<code>
+		<p>status:int (1=thành công, 0=thất bại)</p>
+		<p>playerlist:[ playersteam1:[], playersteam2:[] ] (playerlist chứa 2 mảng player hiện tại của 2 team)</p>
+		<p>roomname:string (tên phòng)</p>
+		<p>totalplayer:int (tổng số user đang trong phòng)</p>
+	</code>
+</ul>
+</div>
+ 
+ 
+</div>
