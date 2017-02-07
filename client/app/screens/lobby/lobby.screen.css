@@ -1,3 +1,26 @@
-* {
+.lobby-con {
+    text-align: center;
+    width: 800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.button-con {
+    margin: auto;
+}
+
+.vs {
     color: #FFFFFF;
+    font-size: 40px;
+}
+
+.lobby-con .table {
+    margin-bottom: 0;
+}
+
+.lobby-con .table > tbody > tr:first-child > td {
+    border: none;
 }
