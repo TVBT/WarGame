@@ -43,7 +43,7 @@ Here's a walkthrough of the app wireframe:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='' title='Video Walkthrough - My Group' width='' alt='Video Walkthrough />
+<img src='https://github.com/TVBT/WarGame/blob/master/docs/flow.png' title='Video Walkthrough - My Group' width='' alt='Video Walkthrough />
 
 
 ## License
