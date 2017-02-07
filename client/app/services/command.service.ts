@@ -3,6 +3,7 @@
  */
 import {Injectable, EventEmitter} from '@angular/core';
 import {StateService} from "./state.service";
+import {KeyExchange} from "../../../share/keyexchange";
 
 @Injectable()
 export class CommandService {
@@ -21,13 +22,22 @@ export class CommandService {
         this.socket = io(url);
         this.socket.on('connect', () => {
             this.socketReady = true;
-            this.stateService.showPlay();
+            this.stateService.showLogin();
         });
         this.socket.on('event', this.handleMessage.bind(this));
         this.socket.on('disconnect', () => {
             this.socketReady = false;
             alert("Mất kết nối");
             this.stateService.showLogin();
+        });
+    }
+
+    verifyUsername(username) {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.CHECK_NICK_NAME,
+            data: {
+                [KeyExchange.KEY_DATA.USER_NAME]: username
+            }
         });
     }
 

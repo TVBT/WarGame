@@ -3,7 +3,8 @@
     "baseDir": "client",
     "routes": {
       "/node_modules": "node_modules",
-      "/assets": "client/assets"
+      "/assets": "client/assets",
+      "/share": "share"
     }
   }
 }

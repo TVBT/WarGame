@@ -93,14 +93,17 @@ class Main {
         var isValid = this.userManager.checkValidNickName(userName);
         var status = isValid ? 1 : 0;
         var obj = {
-            [KeyExchange.KEY_DATA.STATUS] : status
+            command: KeyExchange.KEY_COMMAND.CHECK_NICK_NAME,
+            data : {
+                [KeyExchange.KEY_DATA.STATUS] : status
+            }
         };
 
-        this.sendUser(KeyExchange.KEY_COMMAND.CHECK_NICK_NAME, obj, client);
+        this.sendUser(obj, client);
     }
 
-    sendUser(command, params, recipient) {
-        recipient.emit(command, params);
+    sendUser(params, recipient) {
+        recipient.emit('event', params);
     }
 
     sendListUser(command, params, recipients) {

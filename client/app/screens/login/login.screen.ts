@@ -3,6 +3,7 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {CommandService} from "../../services/command.service";
+import {KeyExchange} from "../../../../share/keyexchange";
 
 @Component({
     moduleId: module.id,
@@ -17,8 +18,18 @@ export class LoginScreen implements OnInit {
     userExist = true;
     userValidate = false;
 
-    constructor() {
+    constructor(private commandService:CommandService) {
+        this.commandService.onMessage.subscribe((msg) => {
+            this.userExist = !msg[KeyExchange.KEY_DATA.STATUS];
+            if (this.userExist) {
+                this.errorMsg = "Tên tài khoản đã tồn tại";
+            }
 
+            this.userValidate = this.username && this.username.length > 0;
+            if (!this.userValidate) {
+                this.errorMsg = "";
+            }
+        });
     }
 
     ngOnInit() {
@@ -27,10 +38,6 @@ export class LoginScreen implements OnInit {
 
     onUsernameChanged() {
         // this.errorMsg = "Tài khoản đã tồn tại";
-
-        this.userValidate = this.username && this.username.length > 0;
-        if (!this.userValidate) {
-            this.errorMsg = "";
-        }
+        this.commandService.verifyUsername(this.username);
     }
 }
