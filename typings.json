@@ -7,5 +7,8 @@
     "socket.io": "registry:dt/socket.io#1.4.4+20160915014424",
     "socket.io-client": "registry:dt/socket.io-client#1.4.4+20161116080703",
     "vue": "registry:dt/vue#1.0.21+20160929090511"
+  },
+  "globalDevDependencies": {
+    "phaser": "github:photonstorm/phaser/v2/typescript/typings.json"
   }
 }

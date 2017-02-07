@@ -66,6 +66,7 @@
   },
   "dependencies": {
     "express": "^4.14.1",
+    "phaser": "^2.6.2",
     "socket.io": "^1.7.2"
   }
 }
