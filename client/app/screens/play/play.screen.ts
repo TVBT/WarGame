@@ -23,7 +23,7 @@ export class PlayScreen implements AfterViewInit {
 
             game.load.tilemap('tilemap', 'assets/map/map.json?v=1', null, Phaser.Tilemap.TILED_JSON);
             game.load.image('map', 'assets/map/map.png');
-            game.load.image('tank', 'assets/images/tank.png');
+            game.load.spritesheet('tank', 'assets/images/tank1.png', 32, 32);
 
         }
 
@@ -57,6 +57,11 @@ export class PlayScreen implements AfterViewInit {
             sprite.body.setSize(32, 32, 0, 0);
 
             cursors = game.input.keyboard.createCursorKeys();
+
+            sprite.animations.add("down", [0,3], 10, false);
+            sprite.animations.add("left", [1,4], 10, false);
+            sprite.animations.add("right", [6,7], 10, false);
+            sprite.animations.add("up", [2,5], 10, false);
         }
 
         function update() {
@@ -68,16 +73,16 @@ export class PlayScreen implements AfterViewInit {
 
             if (cursors.left.isDown) {
                 sprite.body.velocity.x = -100;
-                sprite.body.rotation = 180;
+                sprite.animations.play("left");
             } else if (cursors.right.isDown) {
                 sprite.body.velocity.x = 100;
-                sprite.body.rotation = 0;
+                sprite.animations.play("right");
             } else if (cursors.up.isDown) {
                 sprite.body.velocity.y = -100;
-                sprite.body.rotation = -90;
+                sprite.animations.play("up");
             } else if (cursors.down.isDown) {
                 sprite.body.velocity.y = 100;
-                sprite.body.rotation = 90;
+                sprite.animations.play("down");
             }
         }
 
