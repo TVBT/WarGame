@@ -29,14 +29,17 @@ class Main {
         io.on('connection', function(client){
             console.log('client:'+client);
             client.on('event', function(data){
-                console.log("client connected!" + data);
+                console.log("client send :" + data);
             });
+
             client.on('disconnect', function(){
                 console.log("client disconnected!");
             });
 
-            console.log('a user connected');
+            //console.log('a user connected');
         });
+
+
 
         server.listen(port);
         console.log('Socket App listening on port ' + port +'!')
