@@ -96,7 +96,7 @@ class Main {
             [KeyExchange.KEY_DATA.STATUS] : status
         };
 
-        this.sendUser(KeyExchange.KEY_COMMAND.CHECK_NICK_NAME, JSON.stringify(obj), client);
+        this.sendUser(KeyExchange.KEY_COMMAND.CHECK_NICK_NAME, obj, client);
     }
 
     sendUser(command, params, recipient) {
