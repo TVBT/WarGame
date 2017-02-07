@@ -11,6 +11,7 @@
     "prestart": "npm run build",
     "client:dev": "concurrently \"npm run build:watch\" \"npm run serve\"",
     "server:dev": "concurrently \"tsc -p server/ -w\" \"node server/mainserver.js\"",
+    "server:compile": "tsc -p server/ ",
     "pree2e": "npm run build:e2e",
     "e2e": "concurrently \"npm run serve:e2e\" \"npm run protractor\" --kill-others --success first",
     "preprotractor": "webdriver-manager update",
