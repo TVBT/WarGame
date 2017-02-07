@@ -1,13 +1,14 @@
 /**
  * Created by thinhth2 on 2/6/2017.
  */
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {StateService} from "./state.service";
 
 @Injectable()
 export class CommandService {
     socket;
     socketReady = false;
+    onMessage = new EventEmitter();
 
     constructor(private stateService:StateService) {
 
@@ -31,7 +32,7 @@ export class CommandService {
 
     handleMessage(data) {
         if (this.socketReady) {
-
+            this.onMessage.emit(data);
         }
     }
 }
