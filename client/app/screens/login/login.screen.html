@@ -8,8 +8,8 @@
                        (keyup)="onUsernameChanged()"/>
                 <span class="hidden glyphicon glyphicon-ok"
                       [class.hidden]="!userValidate"
-                      [class.glyphicon-ok]="userExist"
-                      [class.glyphicon-remove]="!userExist"></span>
+                      [class.glyphicon-ok]="!userExist"
+                      [class.glyphicon-remove]="userExist"></span>
             </div>
 
             <button>Join</button>

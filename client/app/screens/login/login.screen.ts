@@ -20,7 +20,7 @@ export class LoginScreen implements OnInit {
 
     constructor(private commandService:CommandService) {
         this.commandService.onMessage.subscribe((msg) => {
-            this.userExist = !msg[KeyExchange.KEY_DATA.STATUS];
+            this.userExist = !msg.data[KeyExchange.KEY_DATA.STATUS];
             if (this.userExist) {
                 this.errorMsg = "Tên tài khoản đã tồn tại";
             }
