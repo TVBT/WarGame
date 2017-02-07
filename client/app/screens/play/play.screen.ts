@@ -54,7 +54,7 @@ export class PlayScreen implements AfterViewInit {
             sprite.anchor.set(0.5);
             game.physics.enable(sprite);
 
-            sprite.body.setSize(16, 16, 8, 8);
+            sprite.body.setSize(32, 32, 0, 0);
 
             cursors = game.input.keyboard.createCursorKeys();
         }
