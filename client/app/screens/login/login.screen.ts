@@ -19,6 +19,7 @@ export class LoginScreen implements OnInit {
     errorMsg = "";
     userExist = true;
     userValidate = false;
+    isValid = false;
 
     constructor(private commandService:CommandService,
                 private stateService:StateService) {
@@ -50,6 +51,9 @@ export class LoginScreen implements OnInit {
         this.userExist = !data[KeyExchange.KEY_DATA.STATUS];
         if (this.userExist) {
             this.errorMsg = Resources.bundle.existAccount;
+            this.isValid = false;
+        } else {
+            this.isValid = true;
         }
 
         this.userValidate = this.username && this.username.length > 0;
@@ -59,7 +63,9 @@ export class LoginScreen implements OnInit {
     }
 
     onJoinClick() {
-        this.commandService.autoJoinRoom(this.username);
+        if (this.isValid) {
+            this.commandService.autoJoinRoom(this.username);
+        }
     }
 
     onAutoJoinRoom(data) {
