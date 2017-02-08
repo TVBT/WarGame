@@ -2,6 +2,7 @@ import {UserManager} from "./manager/usermanager";
 import {RoomManager} from "./manager/roommanager";
 import {UserInfo} from "./model/userinfo";
 import {KeyExchange} from "../share/keyexchange";
+import {PlayerInfo} from "./game/playerinfo";
 /**
  * Created by thuctvd on 2/6/2017.
  */
@@ -54,7 +55,9 @@ class Main {
             client.on('disconnect', function(){
                 console.log("client disconnected!");
 
+                var userInfo = this.userManager.getUserById(client.id);
                 this.userManager.removeUser(client.id);
+                this.userManager.removeUserName(userInfo.userName);
             }.bind(this));
         });
 
@@ -84,7 +87,13 @@ class Main {
                 this.handleUserLogin(msg.data, client);
                 break;
 
+            case KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM:
+                this.handleAutoJoin(msg.data, client);
+                break;
 
+            case KeyExchange.KEY_COMMAND.GET_ROOM_INFO:
+                this.handleGetRoomInfo(msg.data, client);
+                break;
         }
     }
 
@@ -92,31 +101,61 @@ class Main {
         var userName = data[KeyExchange.KEY_DATA.USER_NAME];
         var isValid = this.userManager.checkValidNickName(userName);
         var status = isValid ? 1 : 0;
-        var obj = {
+        var object = {
             command: KeyExchange.KEY_COMMAND.CHECK_NICK_NAME,
             data : {
                 [KeyExchange.KEY_DATA.STATUS] : status
             }
         };
 
-        this.sendUser(obj, client);
+        this.sendUser(object, client);
     }
 
-    sendUser(params, recipient) {
-        recipient.emit('event', params);
+    handleAutoJoin(data, client) {
+        var userInfo = this.userManager.getUserById(client.id);
+        var roomInfo = this.roomManager.joinRoom(userInfo);
+
+        var object = {
+            command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
+            data : {
+                [KeyExchange.KEY_DATA.STATUS] : 1,
+                [KeyExchange.KEY_DATA.ROOM_ID] : roomInfo.roomId
+            }
+        };
+
+        this.sendUser(object, client);
     }
 
-    sendListUser(command, params, recipients) {
+    handleGetRoomInfo(data, client) {
+        var roomId = data[KeyExchange.KEY_DATA.ROOM_ID];
+        var roomInfo = this.roomManager.getRoomById(roomId);
+
+        var object;
+        if (roomInfo) {
+          object = roomInfo.parseJsonData();
+        }
+
+        object["command"] = KeyExchange.KEY_COMMAND.GET_ROOM_INFO;
+        object.data[KeyExchange.KEY_DATA.STATUS] = roomInfo ? 1 : 0;
+
+        this.sendUser(object, client);
+    }
+
+    sendUser(object, recipient) {
+        recipient.emit('event', object);
+    }
+
+    sendListUser(object, recipients) {
         var i = 0;
         var num = recipients.length;
 
         for (i; i < num; i++) {
-            recipients[i].emit(command, params);
+            recipients[i].emit('event', object);
         }
     }
 
-    sendAllUser(command, params) {
-        this.io.emit(command, params);
+    sendAllUser(command, object) {
+        this.io.emit('event', object);
     }
 }
 

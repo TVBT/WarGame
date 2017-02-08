@@ -12,6 +12,12 @@ class KeyData {
     USER_ID = "uid";
     USER_NAME = "un";
     STATUS = "st";
+    ROOM_ID = "rid";
+    ROOM_NAME = "rn";
+    PLAYER_LIST = "pl";
+    TOTAL_PLAYER = "ttp";
+    PLAYER_ID = "pid";
+    READY_STATUS = "rst";
 }
 
 export class KeyExchange {

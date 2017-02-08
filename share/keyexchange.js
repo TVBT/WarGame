@@ -15,6 +15,12 @@ var KeyData = (function () {
         this.USER_ID = "uid";
         this.USER_NAME = "un";
         this.STATUS = "st";
+        this.ROOM_ID = "rid";
+        this.ROOM_NAME = "rn";
+        this.PLAYER_LIST = "pl";
+        this.TOTAL_PLAYER = "ttp";
+        this.PLAYER_ID = "pid";
+        this.READY_STATUS = "rst";
     }
     return KeyData;
 }());
