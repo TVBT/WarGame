@@ -59,7 +59,7 @@ export class LoginScreen implements OnInit {
     }
 
     onJoinClick() {
-        this.commandService.autoJoinRoom();
+        this.commandService.autoJoinRoom(this.username);
     }
 
     onAutoJoinRoom(data) {

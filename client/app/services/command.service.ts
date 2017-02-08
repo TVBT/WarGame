@@ -41,10 +41,12 @@ export class CommandService {
         });
     }
 
-    autoJoinRoom() {
+    autoJoinRoom(username) {
         this.socket.emit("event", {
             command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
-            data: {}
+            data: {
+                [KeyExchange.KEY_DATA.USER_NAME]: username
+            }
         });
     }
 
