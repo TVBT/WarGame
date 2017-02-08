@@ -114,12 +114,16 @@ class Main {
     handleAutoJoin(data, client) {
         var userInfo:UserInfo = this.userManager.getUserById(client.id);
         userInfo.userName = data[KeyExchange.KEY_DATA.USER_NAME];
-        var roomInfo = this.roomManager.joinRoom(userInfo);
+        var status = this.userManager.checkValidNickName(userInfo.userName)?1:0;
 
+        if(status == 1) {
+            this.userManager.addUserName(userInfo.userName);
+            var roomInfo = this.roomManager.joinRoom(userInfo);
+        }
         var object = {
             command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
             data : {
-                [KeyExchange.KEY_DATA.STATUS] : 1,
+                [KeyExchange.KEY_DATA.STATUS] : status,
                 [KeyExchange.KEY_DATA.ROOM_ID] : roomInfo.roomId
             }
         };
