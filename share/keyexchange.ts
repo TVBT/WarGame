@@ -6,18 +6,21 @@ class KeyCommand {
     CHECK_NICK_NAME = 1;
     AUTO_JOIN_ROOM = 2;
     GET_ROOM_INFO = 3;
+    USER_JOIN_LOBBY_ROOM = 4;
 }
 
 class KeyData {
-    USER_ID = "uid";
-    USER_NAME = "un";
-    STATUS = "st";
-    ROOM_ID = "rid";
-    ROOM_NAME = "rn";
-    PLAYER_LIST = "pl";
-    TOTAL_PLAYER = "ttp";
-    PLAYER_ID = "pid";
-    READY_STATUS = "rst";
+    USER_ID = "userid";
+    USER_NAME = "username";
+    STATUS = "status";
+    ROOM_ID = "roomid";
+    ROOM_NAME = "roomname";
+    PLAYER_LIST = "playerlist";
+    TOTAL_PLAYER = "totalplayer";
+    PLAYER_ID = "playerid";
+    READY_STATUS = "readystatus";
+    TEAM_ID = "teamid";
+    MESSAGE = "message";
 }
 
 export class KeyExchange {

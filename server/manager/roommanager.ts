@@ -1,5 +1,6 @@
 import {PlayerInfo} from "../game/playerinfo";
 import {RoomInfo} from "../model/roominfo";
+import {UserInfo} from "../model/userinfo";
 /**
  * Created by vutp on 2/7/2017.
  */
@@ -18,14 +19,15 @@ export class RoomManager {
         return RoomManager._instance;
     }
 
-    joinRoom(userInfo) {
-        var roomInfo = this.getRoomValid();
+    joinRoom(userInfo:UserInfo) {
+        var roomInfo:RoomInfo = this.getRoomValid();
         if (roomInfo == null) {
             roomInfo = this.createRoom();
         }
 
         var playerInfo = new PlayerInfo(userInfo);
-        roomInfo.addPlayer(playerInfo);
+        var teamId = roomInfo.addPlayer(playerInfo);
+        userInfo.teamId = teamId;
 
         return roomInfo;
     }

@@ -9,7 +9,7 @@ export class PlayerInfo {
     public playerId: number;
     public isReady: boolean;
 
-    constructor(userInfo) {
+    constructor(userInfo:UserInfo) {
         this.userInfo = userInfo;
         this.playerId = -1;
         this.isReady = false;
@@ -19,6 +19,7 @@ export class PlayerInfo {
         var object = {
             [KeyExchange.KEY_DATA.PLAYER_ID] : this.playerId,
             [KeyExchange.KEY_DATA.READY_STATUS] : this.isReady,
+            [KeyExchange.KEY_DATA.TEAM_ID] : this.userInfo.teamId,
         };
 
         return object;

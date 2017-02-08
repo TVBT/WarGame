@@ -11,9 +11,10 @@
 ## User Stories
 **Required** features:
 - [x] User must input username to play game.
-- [ ] User view the list of current matchs
-- [ ] User can auto join a room to have match
+- [x] User can auto join a room to have match
+- [ ] User view all player in current waitting room
 - [ ] User can change team in waiting room
+- [ ] User can ready to start match
 - [ ] User can hit other user in other team to get point.
 - [ ] Realtime moving, action in game
 

@@ -2,6 +2,7 @@ import {UserManager} from "./manager/usermanager";
 import {RoomManager} from "./manager/roommanager";
 import {UserInfo} from "./model/userinfo";
 import {KeyExchange} from "../share/keyexchange";
+import {RoomInfo} from "./model/roominfo";
 
 /**
  * Created by thuctvd on 2/6/2017.
@@ -84,7 +85,7 @@ class Main {
     receiveMessageHandler(msg, client) {
         switch (msg.command) {
             case KeyExchange.KEY_COMMAND.CHECK_NICK_NAME:
-                this.handleUserLogin(msg.data, client);
+                this.handleCheckUserNameExist(msg.data, client);
                 break;
 
             case KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM:
@@ -97,7 +98,7 @@ class Main {
         }
     }
 
-    handleUserLogin(data, client) {
+    handleCheckUserNameExist(data, client) {
         var userName = data[KeyExchange.KEY_DATA.USER_NAME];
         var isValid = this.userManager.checkValidNickName(userName);
         var status = isValid ? 1 : 0;
@@ -115,25 +116,47 @@ class Main {
         var userInfo:UserInfo = this.userManager.getUserById(client.id);
         userInfo.userName = data[KeyExchange.KEY_DATA.USER_NAME];
         var status = this.userManager.checkValidNickName(userInfo.userName)?1:0;
+        var object:{};
 
         if(status == 1) {
             this.userManager.addUserName(userInfo.userName);
-            var roomInfo = this.roomManager.joinRoom(userInfo);
-        }
-        var object = {
-            command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
-            data : {
-                [KeyExchange.KEY_DATA.STATUS] : status,
-                [KeyExchange.KEY_DATA.ROOM_ID] : roomInfo.roomId
-            }
-        };
+            var roomInfo:RoomInfo = this.roomManager.joinRoom(userInfo);
+            object = {
+                command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
+                data : {
+                    [KeyExchange.KEY_DATA.STATUS] : 1,
+                    [KeyExchange.KEY_DATA.ROOM_ID] : roomInfo.roomId,
+                    [KeyExchange.KEY_DATA.TEAM_ID] : userInfo.teamId
+                }
+            };
+            this.sendUser(object, client);
 
-        this.sendUser(object, client);
+            var objectToOtherUser = {
+                command: KeyExchange.KEY_COMMAND.USER_JOIN_LOBBY_ROOM,
+                data : {
+                    [KeyExchange.KEY_DATA.USER_ID] : client.id,
+                    [KeyExchange.KEY_DATA.USER_NAME] : userInfo.userName,
+                    [KeyExchange.KEY_DATA.TEAM_ID] : userInfo.teamId
+                }
+            };
+            //this.sendToOtherUserInRoom(objectToOtherUser, roomInfo.getListUserExceptPlayerId());
+
+        } else {
+            object = {
+                command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
+                data : {
+                    [KeyExchange.KEY_DATA.STATUS] : 0,
+                    [KeyExchange.KEY_DATA.MESSAGE] : "User này đã tồn tại, ko thể tham gia!"
+                }
+            };
+            this.sendUser(object, client);
+        }
+
     }
 
     handleGetRoomInfo(data, client) {
         var roomId = data[KeyExchange.KEY_DATA.ROOM_ID];
-        var roomInfo = this.roomManager.getRoomById(roomId);
+        var roomInfo:RoomInfo = this.roomManager.getRoomById(roomId);
 
         var object;
         if (roomInfo) {

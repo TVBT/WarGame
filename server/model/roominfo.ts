@@ -24,19 +24,24 @@ export class RoomInfo {
         this.automicPlayerId = 1;
     }
 
-    addPlayer(playerInfo) {
+    addPlayer(playerInfo):number {
+        var teamId:number = -1;
         playerInfo.playerId = this.automicPlayerId;
 
         var numPlayer1 = this.listPlayer1.length;
         var numPlayer2 = this.listPlayer2.length;
 
-        if (numPlayer1 == numPlayer2) {
+        if (numPlayer1 <= numPlayer2) {
             this.listPlayer1.push(playerInfo);
-        } else if (numPlayer1 > numPlayer2) {
+            teamId = 1;
+        } else {
             this.listPlayer2.push(playerInfo);
+            teamId = 2;
         }
 
         this.automicPlayerId++;
+
+        return teamId;
     }
 
     removePlayer(player) {
@@ -82,5 +87,21 @@ export class RoomInfo {
         }
 
         return arrObject;
+    }
+
+    getListUserExceptPlayerId(playerId:number) {
+        var listPlayers = [];
+        var i = 0;
+        var len = this.listPlayer1.length;
+        for (i = 0; i < len; i++) {
+            if(this.listPlayer1[i].playerId != playerId)
+                listPlayers.push(this.listPlayer1[i]);
+        }
+        len = this.listPlayer2.length;
+        for (i = 0; i < len; i++) {
+            if(this.listPlayer2[i].playerId != playerId)
+                listPlayers.push(this.listPlayer2[i]);
+        }
+        return listPlayers;
     }
 }

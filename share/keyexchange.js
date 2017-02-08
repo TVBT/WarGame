@@ -7,20 +7,23 @@ var KeyCommand = (function () {
         this.CHECK_NICK_NAME = 1;
         this.AUTO_JOIN_ROOM = 2;
         this.GET_ROOM_INFO = 3;
+        this.USER_JOIN_LOBBY_ROOM = 4;
     }
     return KeyCommand;
 }());
 var KeyData = (function () {
     function KeyData() {
-        this.USER_ID = "uid";
-        this.USER_NAME = "un";
-        this.STATUS = "st";
-        this.ROOM_ID = "rid";
-        this.ROOM_NAME = "rn";
-        this.PLAYER_LIST = "pl";
-        this.TOTAL_PLAYER = "ttp";
-        this.PLAYER_ID = "pid";
-        this.READY_STATUS = "rst";
+        this.USER_ID = "userid";
+        this.USER_NAME = "username";
+        this.STATUS = "status";
+        this.ROOM_ID = "roomid";
+        this.ROOM_NAME = "roomname";
+        this.PLAYER_LIST = "playerlist";
+        this.TOTAL_PLAYER = "totalplayer";
+        this.PLAYER_ID = "playerid";
+        this.READY_STATUS = "readystatus";
+        this.TEAM_ID = "teamid";
+        this.MESSAGE = "message";
     }
     return KeyData;
 }());
