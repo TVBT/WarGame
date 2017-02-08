@@ -10,18 +10,17 @@
 
 ## User Stories
 **Required** features:
-- [ ] User must input username to play game.
+- [x] User must input username to play game.
 - [ ] User view the list of current matchs
-- [ ] User can choose and join a waitting match
-- [ ] Choose team in game
-- [ ] User can view other user in current game
-- [ ] Owner of match can setting game (choose map, timeout, numplayer ,..)
+- [ ] User can auto join a room to have match
+- [ ] User can change team in waiting room
 - [ ] User can hit other user in other team to get point.
 - [ ] Realtime moving, action in game
 
 
 **Optional** features:
-
+- [ ] Owner of match can setting game (choose map, timeout, numplayer ,..)
+- [ ] User can view other user in a match
 - [ ] Login with Facebook.
 - [ ] User's rank in game
 - [ ] Chat in game
@@ -37,6 +36,10 @@ Here's a walkthrough of the app wireframe:
 ## Libraries:
 - NodeJS
 - Phaser
+- SocketIO
+- WebPack
+- TypeScript
+- Angular 2
 
 
 ## Video Walkthrough
