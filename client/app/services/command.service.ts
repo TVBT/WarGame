@@ -41,6 +41,13 @@ export class CommandService {
         });
     }
 
+    autoJoinRoom() {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
+            data: {}
+        });
+    }
+
     handleMessage(data) {
         if (this.socketReady) {
             this.onMessage.emit(data);
