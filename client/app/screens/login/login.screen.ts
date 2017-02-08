@@ -53,6 +53,7 @@ export class LoginScreen implements OnInit {
             this.errorMsg = Resources.bundle.existAccount;
             this.isValid = false;
         } else {
+            this.errorMsg = "";
             this.isValid = true;
         }
 
