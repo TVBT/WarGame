@@ -2,7 +2,7 @@ import {UserManager} from "./manager/usermanager";
 import {RoomManager} from "./manager/roommanager";
 import {UserInfo} from "./model/userinfo";
 import {KeyExchange} from "../share/keyexchange";
-import {PlayerInfo} from "./game/playerinfo";
+
 /**
  * Created by thuctvd on 2/6/2017.
  */
@@ -112,7 +112,8 @@ class Main {
     }
 
     handleAutoJoin(data, client) {
-        var userInfo = this.userManager.getUserById(client.id);
+        var userInfo:UserInfo = this.userManager.getUserById(client.id);
+        userInfo.userName = data[KeyExchange.KEY_DATA.USER_NAME];
         var roomInfo = this.roomManager.joinRoom(userInfo);
 
         var object = {
