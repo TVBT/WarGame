@@ -1,3 +1,4 @@
+import {KeyExchange} from "../../../../share/keyexchange";
 /**
  * Mô tả các Item có trên MAP
  * id: id của item
@@ -34,7 +35,7 @@ export class SnowFloor implements MapItem{
     index:number;
     isCanHit:boolean;
     constructor(){
-        this.id = 1;
+        this.id = KeyExchange.MAP_ITEM.SNOW;
         this.name = "snowFloor";
         this.x = 0;
         this.y = 0;
@@ -60,7 +61,7 @@ export class River implements MapItem{
     index:number;
     isCanHit:boolean;
     constructor(){
-        this.id = 2;
+        this.id = KeyExchange.MAP_ITEM.RIVER;
         this.name = "river";
         this.x = 0;
         this.y = 0;
@@ -87,7 +88,7 @@ export class Grass implements MapItem{
     index:number;
     isCanHit:boolean;
     constructor(){
-        this.id = 3;
+        this.id = KeyExchange.MAP_ITEM.GRASS;
         this.name = "grass";
         this.x = 0;
         this.y = 0;
@@ -114,7 +115,7 @@ export class Brick implements MapItem{
     index:number;
     isCanHit:boolean;
     constructor(){
-        this.id = 4;
+        this.id = KeyExchange.MAP_ITEM.BRICK;
         this.name = "brick";
         this.x = 0;
         this.y = 0;
@@ -140,7 +141,7 @@ export class Concrete implements MapItem{
     index:number;
     isCanHit:boolean;
     constructor(){
-        this.id = 5;
+        this.id = KeyExchange.MAP_ITEM.CONCRETE;
         this.name = "concrete";
         this.x = 0;
         this.y = 0;
@@ -166,7 +167,7 @@ export class EagleTopLeft implements MapItem{
     index:number;
     isCanHit:boolean;
     constructor(){
-        this.id = 6;
+        this.id = KeyExchange.MAP_ITEM.EAGLE_TOP_LEFT;
         this.name = "egale-top-left";
         this.x = 0;
         this.y = 0;
@@ -192,7 +193,7 @@ export class EagleTopRight implements MapItem{
     index:number;
     isCanHit:boolean;
     constructor(){
-        this.id = 7;
+        this.id = KeyExchange.MAP_ITEM.EAGLE_TOP_RIGHT;
         this.name = "egale-top-right";
         this.x = 0;
         this.y = 0;
@@ -218,7 +219,7 @@ export class EagleBotLeft implements MapItem{
     index:number;
     isCanHit:boolean;
     constructor(){
-        this.id = 8;
+        this.id = KeyExchange.MAP_ITEM.EAGLE_BOT_LEFT;
         this.name = "egale-bot-left";
         this.x = 0;
         this.y = 0;
@@ -244,7 +245,7 @@ export class EagleBotRight implements MapItem{
     index:number;
     isCanHit:boolean;
     constructor(){
-        this.id = 9;
+        this.id = KeyExchange.MAP_ITEM.EAGLE_BOT_RIGHT;
         this.name = "egale-bot-right";
         this.x = 0;
         this.y = 0;

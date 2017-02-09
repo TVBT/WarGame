@@ -25,4 +25,16 @@ export class TankGameLogic {
         this.mapManager.createMap(mapId);
     }
 
+    /**
+     * Get data map hiện tại
+     * @returns {Array}
+     */
+    public getMapData() :Array {
+        return this.mapManager.mapData;
+    }
+
+    public getPlayerData() :Array{
+        return [];
+    }
+
 }
