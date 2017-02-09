@@ -104,7 +104,7 @@ export class Room {
     }
 
     startGame() {
-        this.gameLogic.startGame();
+        this.gameLogic.startGame(1);
     }
 
     getListUserExceptUserId(userId:number) {

@@ -3,30 +3,31 @@ import {RoomManager} from "./manager/roommanager";
 import {KeyExchange} from "../share/keyexchange";
 import {Room} from "./model/room";
 import {User} from "./model/user";
-import {UserInfo} from "./model/userinfo";
+import {ConfigManager} from "./manager/configmanager";
 
 /**
  * Created by thuctvd on 2/6/2017.
  */
 
-class Main {
+export class Main {
     private HTTP_PORT = 9090;
     private SOCKET_PORT = 9191;
 
     public io;
     public userManager = UserManager.getInstance();
     public roomManager = RoomManager.getInstance();
+    public configManager = ConfigManager.getInstance();
 
-    constructor(httpPort, socketPort) {
-        if(httpPort !== undefined && socketPort !== undefined){
-            this.HTTP_PORT = httpPort;
-            this.SOCKET_PORT = socketPort;
+    static _instance: Main;
+    static getInstance() : Main {
+        if (!Main._instance) {
+            Main._instance = new Main();
         }
 
-        this.startServer();
+        return Main._instance;
     }
 
-    startServer() {
+    startServer(httpPort,socketPort) {
         var app = require('express')();
         var server = require('http').createServer(app);
         this.io = require('socket.io')(server);
@@ -42,8 +43,6 @@ class Main {
 
             var user = new User();
             user.client = client;
-            var userInfo:UserInfo = new UserInfo();
-            user.setUserInfo(userInfo);
             this.userManager.addUser(client.id, user);
 
             client.on('event', function(msg) {
@@ -56,10 +55,10 @@ class Main {
             client.on('disconnect', function(){
                 console.log("client disconnected!");
 
-                var user:User = this.userManager.getUserById(client.id);
+                var user = this.userManager.getUserById(client.id);
                 this.roomManager.leaveRoom(user);
                 this.userManager.removeUser(client.id);
-                this.userManager.removeUserName(user.userInfo.userName);
+                this.userManager.removeUserName(user.userName);
             }.bind(this));
         });
 
@@ -136,7 +135,7 @@ class Main {
                 data : {
                     [KeyExchange.KEY_DATA.STATUS] : 1,
                     [KeyExchange.KEY_DATA.ROOM_ID] : room.roomId,
-                    [KeyExchange.KEY_DATA.PLAYER_INFO] : user.parseJsonDataPlayer()
+                    [KeyExchange.KEY_DATA.TEAM_ID] : user.player.teamId
                 }
             };
             this.sendUser(object, user);
@@ -177,11 +176,8 @@ class Main {
 
     handleUserReady(data, client) {
         var user:User = this.userManager.getUserById(client.id);
-        if (user.player.isReady) {
-            return;
-        }
-
         user.player.isReady = true;
+
         var object = {
             command: KeyExchange.KEY_COMMAND.USER_READY,
             data : {
@@ -195,27 +191,16 @@ class Main {
 
     handleUserChangeTeam(data, client) {
         var user:User = this.userManager.getUserById(client.id);
-        if (user.player.isReady) {
-            let object = {
-                command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
-                data : {
-                    [KeyExchange.KEY_DATA.STATUS] : 0
-                }
-            };
-            this.sendUser(object, user);
-        } else {
-            var room:Room = user.room;
-            room.changeTeam(user);
 
-            var objPlayer = user.parseJsonDataPlayer();
-            objPlayer[KeyExchange.KEY_DATA.STATUS] = 1;
+        var object = {
+            command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
+            data : {
+                [KeyExchange.KEY_DATA.READY_STATUS] : user.player.isReady,
+                [KeyExchange.KEY_DATA.PLAYER_ID] : user.player.playerId,
+            }
+        };
 
-            let object = {
-                command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
-                data : objPlayer
-            };
-            this.sendListUser(object, user.room.getListUsers());
-        }
+        this.sendListUser(object, user.room.getListUsers());
     }
 
     sendUser(object, user:User) {
@@ -236,4 +221,5 @@ class Main {
     }
 }
 
-var main = new Main(9090, 9191);
+let main = Main.getInstance();
+main.startServer(9090,9191);
