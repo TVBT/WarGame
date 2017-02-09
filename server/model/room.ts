@@ -128,4 +128,20 @@ export class Room {
 
         return users;
     }
+
+    changeTeam(user) {
+        var index = this.team1.indexOf(user);
+        if (index >= 0) {
+            user.player.teamId = 2;
+            this.team1.splice(index, 1);
+            this.team2.push(user);
+        } else {
+            index = this.team2.indexOf(user);
+            if (index >= 0) {
+                user.player.teamId = 1;
+                this.team2.splice(index, 1);
+                this.team1.push(user);
+            }
+        }
+    }
 }

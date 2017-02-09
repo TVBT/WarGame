@@ -3,6 +3,7 @@ import {RoomManager} from "./manager/roommanager";
 import {KeyExchange} from "../share/keyexchange";
 import {Room} from "./model/room";
 import {User} from "./model/user";
+import {UserInfo} from "./model/userinfo";
 
 /**
  * Created by thuctvd on 2/6/2017.
@@ -41,6 +42,8 @@ class Main {
 
             var user = new User();
             user.client = client;
+            var userInfo:UserInfo = new UserInfo();
+            user.setUserInfo(userInfo);
             this.userManager.addUser(client.id, user);
 
             client.on('event', function(msg) {
@@ -189,13 +192,12 @@ class Main {
 
     handleUserChangeTeam(data, client) {
         var user:User = this.userManager.getUserById(client.id);
+        var room:Room = user.room;
+        room.changeTeam(user);
 
         var object = {
             command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
-            data : {
-                [KeyExchange.KEY_DATA.READY_STATUS] : user.player.isReady,
-                [KeyExchange.KEY_DATA.PLAYER_ID] : user.player.playerId,
-            }
+            data : user.parseJsonDataPlayer()
         };
 
         this.sendListUser(object, user.room.getListUsers());

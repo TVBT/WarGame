@@ -34,7 +34,9 @@ export class RoomManager {
 
     leaveRoom(user:User) {
         var room:Room = user.room;
-        room.removeUser(user);
+        if (room) {
+            room.removeUser(user);
+        }
     }
 
     getRoomValid() {

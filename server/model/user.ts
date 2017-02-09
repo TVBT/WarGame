@@ -13,7 +13,6 @@ export class User {
     public room:Room;
 
     constructor() {
-        this.userInfo = new UserInfo();
     }
 
     setUserInfo(userInfo) {
