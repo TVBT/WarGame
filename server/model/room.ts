@@ -1,6 +1,7 @@
 import {KeyExchange} from "../../share/keyexchange";
 import {Player} from "../game/player";
 import {User} from "./user";
+import {TankGameLogic} from "../game/tankgamelogic";
 /**
  * Created by vutp on 2/7/2017.
  */
@@ -13,6 +14,7 @@ export class Room {
     public team1:Array<User>;                       // Danh sách user ở đội 1
     public team2:Array<User>;                       // Danh sách user ở đội 2
     private automicPlayerId:number;
+    private gameLogic:TankGameLogic;
 
     constructor() {
         this.roomId = -1;
@@ -103,6 +105,10 @@ export class Room {
 
     getListUsers() {
         return this.team1.concat(this.team2);
+    }
+
+    startGame() {
+        this.gameLogic.startGame(this);
     }
 
     getListUserExceptUserId(userId:number) {
