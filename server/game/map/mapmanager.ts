@@ -1,4 +1,5 @@
 import {ConfigManager} from "../../manager/configmanager";
+import {KeyExchange} from "../../../share/keyexchange";
 /**
  * Created by thuctvd on 2/9/2017.
  */
@@ -24,4 +25,11 @@ export class MapManager {
         return (this.config.MAP_NUM_COL * row) + col;
     }
 
+    parseJsonDataMapInfo() {
+        var object = {
+            [KeyExchange.KEY_DATA.MAP_ID] : this.id,
+        };
+
+        return object;
+    }
 }

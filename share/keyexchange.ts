@@ -9,6 +9,11 @@ class KeyCommand {
     USER_JOIN_LOBBY_ROOM = 4;
     USER_READY = 5;
     CHANGE_TEAM = 6;
+    JOIN_GAME = 7;
+    ACTION_IN_GAME = 8;
+
+    // sub command
+    START_GAME = 1;
 }
 
 class KeyData {
@@ -21,9 +26,16 @@ class KeyData {
     TOTAL_PLAYER = "totalplayer";
     PLAYER_INFO = "playerinfo";
     PLAYER_ID = "playerid";
+    PLAYER_POSITION = "playerposition";
     READY_STATUS = "readystatus";
     TEAM_ID = "teamid";
     MESSAGE = "message";
+    START_GAME_TIME = "startgametime";
+    PLAY_GAME_TIME = "playgametime";
+    MAP_INFO = "mapinfo";
+    MAP_ID = "mapid";
+    MAP_DATA = "mapdata";
+    LIST_PLAYER_POSITION = "listplayerposition";
 }
 
 class MapItem {

@@ -29,11 +29,11 @@ export class TankGameLogic {
      * Get data map hiện tại
      * @returns {Array}
      */
-    public getMapData() {
+    public getMapData() :Array<any> {
         return this.mapManager.mapData;
     }
 
-    public getPlayerData() {
+    public getPlayerData() :Array<any> {
         return [];
     }
 

@@ -27,4 +27,14 @@ export class ConfigManager {
 
         return ConfigManager._instance;
     }
+
+    getPosIndexPlayerBy(teamId:number, index:number) {
+        switch (teamId) {
+            case 1:
+                return this.TEAM1_POS_INDEX[index];
+
+            case 2:
+                return this.TEAM2_POS_INDEX[index];
+        }
+    }
 }

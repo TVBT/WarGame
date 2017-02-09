@@ -5,6 +5,7 @@ import {Room} from "./model/room";
 import {User} from "./model/user";
 import {ConfigManager} from "./manager/configmanager";
 import {UserInfo} from "./model/userinfo";
+import {MapManager} from "./game/map/mapmanager";
 
 /**
  * Created by thuctvd on 2/6/2017.
@@ -15,9 +16,10 @@ export class Main {
     private SOCKET_PORT = 9191;
 
     public io;
-    public userManager = UserManager.getInstance();
-    public roomManager = RoomManager.getInstance();
-    public configManager = ConfigManager.getInstance();
+    public userManager:UserManager = UserManager.getInstance();
+    public roomManager:RoomManager = RoomManager.getInstance();
+    public configManager:ConfigManager = ConfigManager.getInstance();
+    public mapManager:MapManager = new MapManager();
 
     static _instance: Main;
     static getInstance() : Main {
@@ -40,17 +42,15 @@ export class Main {
 
     startSocket(server, io, port) {
         io.on('connection', (client) => {
-            console.log('client:'+ client);
-
             var user = new User();
             user.client = client;
             var userInfo:UserInfo = new UserInfo();
             user.setUserInfo(userInfo);
             this.userManager.addUser(client.id, user);
 
-            client.on('event', function(msg) {
-                console.log("receive msg client: " + msg);
+            this.mapManager.createMap(0);
 
+            client.on('event', function(msg) {
                 this.receiveMessageHandler(msg, client);
 
             }.bind(this));
@@ -86,6 +86,8 @@ export class Main {
     }
 
     receiveMessageHandler(msg, client) {
+        console.log("receive msg client --- cmd: " + msg.command + " --- data: " + JSON.stringify(msg.data));
+
         switch (msg.command) {
             case KeyExchange.KEY_COMMAND.CHECK_NICK_NAME:
                 this.handleCheckUserNameExist(msg.data, client);
@@ -138,7 +140,7 @@ export class Main {
                 data : {
                     [KeyExchange.KEY_DATA.STATUS] : 1,
                     [KeyExchange.KEY_DATA.ROOM_ID] : room.roomId,
-                    [KeyExchange.KEY_DATA.TEAM_ID] : user.player.teamId
+                    [KeyExchange.KEY_DATA.PLAYER_INFO] : user.parseJsonDataPlayer()
                 }
             };
             this.sendUser(object, user);
@@ -168,7 +170,7 @@ export class Main {
 
         var object;
         if (room) {
-          object = room.parseJsonData();
+            object = room.parseJsonData();
         }
 
         object["command"] = KeyExchange.KEY_COMMAND.GET_ROOM_INFO;
@@ -190,6 +192,11 @@ export class Main {
         };
 
         this.sendListUser(object, user.room.getListUsers());
+
+        var room:Room = user.room;
+        if (room.checkAllReady()) {
+            this.userJoinGame(user);
+        }
     }
 
     handleUserChangeTeam(data, client) {
@@ -206,16 +213,34 @@ export class Main {
         this.sendListUser(object, user.room.getListUsers());
     }
 
+    userJoinGame(user) {
+        var room:Room = user.room;
+
+        var object = {
+            command: KeyExchange.KEY_COMMAND.JOIN_GAME,
+            data : {
+                [KeyExchange.KEY_DATA.START_GAME_TIME] : 3,
+                [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : 300,
+                [KeyExchange.KEY_DATA.MAP_INFO] : this.mapManager.parseJsonDataMapInfo(),
+                [KeyExchange.KEY_DATA.LIST_PLAYER_POSITION] : room.getPostionPlayers()
+            }
+        };
+
+        this.sendUser(object, user);
+
+        console.log("send msg userJoinGame --- cmd: " + KeyExchange.KEY_COMMAND.JOIN_GAME + " --- data: " + JSON.stringify(object));
+    }
+
     sendUser(object, user:User) {
         user.client.emit('event', object);
     }
 
-    sendListUser(object, user:Array<User>) {
+    sendListUser(object, users:Array<User>) {
         var i = 0;
-        var num = user.length;
+        var num = users.length;
 
         for (i; i < num; i++) {
-            user[i].client.emit('event', object);
+            users[i].client.emit('event', object);
         }
     }
 
