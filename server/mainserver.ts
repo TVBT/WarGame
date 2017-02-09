@@ -4,6 +4,7 @@ import {KeyExchange} from "../share/keyexchange";
 import {Room} from "./model/room";
 import {User} from "./model/user";
 import {ConfigManager} from "./manager/configmanager";
+import {UserInfo} from "./model/userinfo";
 
 /**
  * Created by thuctvd on 2/6/2017.
@@ -43,6 +44,8 @@ export class Main {
 
             var user = new User();
             user.client = client;
+            var userInfo:UserInfo = new UserInfo();
+            user.setUserInfo(userInfo);
             this.userManager.addUser(client.id, user);
 
             client.on('event', function(msg) {
