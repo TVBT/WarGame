@@ -50,9 +50,19 @@ export class CommandService {
         });
     }
 
-    handleMessage(data) {
+    getRoomInfo(roomId) {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.GET_ROOM_INFO,
+            data: {
+                [KeyExchange.KEY_DATA.ROOM_ID]: roomId
+            }
+        });
+    }
+
+    handleMessage(msg) {
         if (this.socketReady) {
-            this.onMessage.emit(data);
+            this.onMessage.emit(msg);
+            console.log(msg);
         }
     }
 }

@@ -6,15 +6,18 @@
                 <div class="panel-body">
                     <table class="table">
                         <tbody>
-                        <tr>
-                            <td>cục shit ma thuật</td>
+                        <tr *ngFor="let member of team1">
+                            <td [class.success]="member.readystatus">{{member.playerid}}</td>
                         </tr>
-                        <tr>
-                            <td>cục shit ma thuật</td>
-                        </tr>
-                        <tr class="success">
-                            <td>cục shit ma thuật <div class="glyphicon glyphicon-ok pull-left"></div></td>
-                        </tr>
+                        <!--<tr>-->
+                            <!--<td>cục shit ma thuật</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>cục shit ma thuật</td>-->
+                        <!--</tr>-->
+                        <!--<tr class="success">-->
+                            <!--<td>cục shit ma thuật <div class="glyphicon glyphicon-ok pull-left"></div></td>-->
+                        <!--</tr>-->
                         </tbody>
                     </table>
                 </div>
@@ -26,11 +29,8 @@
                 <div class="panel-heading">Team 2</div>
                 <div class="panel-body"><table class="table">
                     <tbody>
-                    <tr>
-                        <td>cục shit bí ẩn</td>
-                    </tr>
-                    <tr>
-                        <td>cục shit bí ẩn</td>
+                    <tr *ngFor="let member of team2">
+                        <td [class.success]="member.readystatus">{{member.playerid}}</td>
                     </tr>
                     </tbody>
                 </table></div>

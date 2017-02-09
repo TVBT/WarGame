@@ -6,6 +6,7 @@ import {CommandService} from "../../services/command.service";
 import {KeyExchange} from "../../../../share/keyexchange";
 import {StateService} from "../../services/state.service";
 import {Resources} from "../../model/resources";
+import {UserService} from "../../services/user.service";
 
 @Component({
     moduleId: module.id,
@@ -22,7 +23,9 @@ export class LoginScreen implements OnInit {
     isValid = false;
 
     constructor(private commandService:CommandService,
-                private stateService:StateService) {
+                private stateService:StateService,
+                private userService:UserService)
+    {
         this.commandService.onMessage.subscribe((msg) => {
             switch (msg.command) {
                 case KeyExchange.KEY_COMMAND.CHECK_NICK_NAME:
@@ -72,6 +75,9 @@ export class LoginScreen implements OnInit {
     onAutoJoinRoom(data) {
         var status = data[KeyExchange.KEY_DATA.STATUS];
         if (status) {
+            var user = this.userService.myUser();
+            user.name = this.username;
+            user.roomId = data[KeyExchange.KEY_DATA.ROOM_ID];
             this.stateService.showLobby();
         } else {
             this.errorMsg = Resources.bundle.tryAgain;

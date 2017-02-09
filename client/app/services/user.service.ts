@@ -6,10 +6,10 @@ import {User} from "../model/user";
 
 @Injectable()
 export class UserService {
-    _myUser:User;
+    private _myUser:User;
 
     myUser(): User {
-        if (this._myUser) {
+        if (!this._myUser) {
             this._myUser = new User();
         }
         return this._myUser;
