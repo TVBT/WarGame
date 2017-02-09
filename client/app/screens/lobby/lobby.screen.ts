@@ -17,6 +17,7 @@ export class LobbyScreen implements OnInit {
     team2 = {id: 1, members: []};
 
     totalPlayers = [];
+    disableButtons = false;
 
     constructor(private userService:UserService,
                 private commandService:CommandService) {
@@ -60,6 +61,10 @@ export class LobbyScreen implements OnInit {
     private onUserReady(data) {
         var status = data[KeyExchange.KEY_DATA.READY_STATUS];
         var playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        var myUser = this.userService.myUser();
+        if (myUser.playerInfo[KeyExchange.KEY_DATA.PLAYER_ID] == playerId && status) {
+            this.disableButtons = true;
+        }
         for (let player of this.totalPlayers) {
             if (player[KeyExchange.KEY_DATA.PLAYER_ID] == playerId) {
                 player.readystatus = status;
@@ -84,15 +89,20 @@ export class LobbyScreen implements OnInit {
 
     private onUserChangeTeam(data) {
         var playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        var status = data[KeyExchange.KEY_DATA.STATUS];
+        if (!status) return;
+
         var changeTeam = (team1, team2) => {
             for(let member of team1.members) {
                 if (member[KeyExchange.KEY_DATA.PLAYER_ID] == playerId) {
-                    team2.members.push(data);
                     team1.members.splice(this.team1.members.indexOf(member), 1);
+                    this.totalPlayers.splice(this.totalPlayers.indexOf(member), 1);
+                    team2.members.push(data);
+                    this.totalPlayers.push(data);
                     return true;
                 }
             }
-        }
+        };
 
         var changed = changeTeam(this.team1, this.team2);
         if (!changed) {

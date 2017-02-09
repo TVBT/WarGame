@@ -8,16 +8,17 @@
                         <tbody>
                         <tr *ngFor="let member of team1.members">
                             <td [class.success]="member.readystatus">{{member.username}}
-                                <div *ngIf="member.readystatus == 1" class="glyphicon glyphicon-ok pull-left"></div></td>
+                                <div *ngIf="member.readystatus" class="glyphicon glyphicon-ok pull-left"></div>
+                            </td>
                         </tr>
                         <!--<tr>-->
-                            <!--<td>cục shit ma thuật</td>-->
+                        <!--<td>cục shit ma thuật</td>-->
                         <!--</tr>-->
                         <!--<tr>-->
-                            <!--<td>cục shit ma thuật</td>-->
+                        <!--<td>cục shit ma thuật</td>-->
                         <!--</tr>-->
                         <!--<tr class="success">-->
-                            <!--<td>cục shit ma thuật <div class="glyphicon glyphicon-ok pull-left"></div></td>-->
+                        <!--<td>cục shit ma thuật <div class="glyphicon glyphicon-ok pull-left"></div></td>-->
                         <!--</tr>-->
                         </tbody>
                     </table>
@@ -28,19 +29,26 @@
         <div class="col-sm-5">
             <div class="panel panel-info">
                 <div class="panel-heading">Team 2</div>
-                <div class="panel-body"><table class="table">
-                    <tbody>
-                    <tr *ngFor="let member of team2.members">
-                        <td [class.success]="member.readystatus">{{member.username}}
-                            <div *ngIf="member.readystatus == 1" class="glyphicon glyphicon-ok pull-left"></div></td>
-                    </tr>
-                    </tbody>
-                </table></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                        <tr *ngFor="let member of team2.members">
+                            <td [class.success]="member.readystatus">{{member.username}}
+                                <div *ngIf="member.readystatus" class="glyphicon glyphicon-ok pull-left"></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
     <div class="button-con">
-        <button type="button" class="btn-lg btn-info" (click)="onChangeTeamClick()">Change Team</button>
-        <button type="button" class="btn-lg btn-warning" (click)="onReadyClick()">READY</button>
+        <button type="button" class="btn-lg btn-info" (click)="!disableButtons && onChangeTeamClick()"
+                [class.disabled]="disableButtons">Change Team
+        </button>
+        <button type="button" class="btn-lg btn-warning" (click)="!disableButtons && onReadyClick()"
+                [class.disabled]="disableButtons">READY
+        </button>
     </div>
 </div>

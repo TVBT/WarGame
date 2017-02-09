@@ -78,6 +78,7 @@ export class LoginScreen implements OnInit {
             var user = this.userService.myUser();
             user.name = this.username;
             user.roomId = data[KeyExchange.KEY_DATA.ROOM_ID];
+            user.playerInfo = data[KeyExchange.KEY_DATA.PLAYER_INFO];
             this.stateService.showLobby();
         } else {
             this.errorMsg = Resources.bundle.tryAgain;
