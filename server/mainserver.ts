@@ -196,7 +196,7 @@ class Main {
     handleUserChangeTeam(data, client) {
         var user:User = this.userManager.getUserById(client.id);
         if (user.player.isReady) {
-            var object = {
+            let object = {
                 command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
                 data : {
                     [KeyExchange.KEY_DATA.STATUS] : 0
@@ -210,7 +210,7 @@ class Main {
             var objPlayer = user.parseJsonDataPlayer();
             objPlayer[KeyExchange.KEY_DATA.STATUS] = 1;
 
-            var object = {
+            let object = {
                 command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
                 data : objPlayer
             };

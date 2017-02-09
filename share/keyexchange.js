@@ -22,6 +22,7 @@ var KeyData = (function () {
         this.ROOM_NAME = "roomname";
         this.PLAYER_LIST = "playerlist";
         this.TOTAL_PLAYER = "totalplayer";
+        this.PLAYER_INFO = "playerinfo";
         this.PLAYER_ID = "playerid";
         this.READY_STATUS = "readystatus";
         this.TEAM_ID = "teamid";
