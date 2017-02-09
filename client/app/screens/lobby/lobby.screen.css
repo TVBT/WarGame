@@ -24,3 +24,13 @@
 .lobby-con .table > tbody > tr:first-child > td {
     border: none;
 }
+
+button {
+    outline: none;
+}
+
+button.disabled, button.disabled:hover, button.disabled:focus {
+    background-color: #9c9c9c;
+    cursor: default;
+    border: none;
+}

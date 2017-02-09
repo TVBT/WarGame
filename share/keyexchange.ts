@@ -7,6 +7,8 @@ class KeyCommand {
     AUTO_JOIN_ROOM = 2;
     GET_ROOM_INFO = 3;
     USER_JOIN_LOBBY_ROOM = 4;
+    USER_READY = 5;
+    CHANGE_TEAM = 6;
 }
 
 class KeyData {
@@ -17,6 +19,7 @@ class KeyData {
     ROOM_NAME = "roomname";
     PLAYER_LIST = "playerlist";
     TOTAL_PLAYER = "totalplayer";
+    PLAYER_INFO = "playerinfo";
     PLAYER_ID = "playerid";
     READY_STATUS = "readystatus";
     TEAM_ID = "teamid";

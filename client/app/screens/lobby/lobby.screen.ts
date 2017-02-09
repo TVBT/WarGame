@@ -13,8 +13,11 @@ import {KeyExchange} from "../../../../share/keyexchange";
     styleUrls: ['./lobby.screen.css']
 })
 export class LobbyScreen implements OnInit {
-    team1 = [];
-    team2 = [];
+    team1 = {id: 0, members: []};
+    team2 = {id: 1, members: []};
+
+    totalPlayers = [];
+    disableButtons = false;
 
     constructor(private userService:UserService,
                 private commandService:CommandService) {
@@ -22,6 +25,16 @@ export class LobbyScreen implements OnInit {
             switch (msg.command) {
                 case KeyExchange.KEY_COMMAND.GET_ROOM_INFO:
                     this.onGetRoomInfo(msg.data);
+                    break;
+                case KeyExchange.KEY_COMMAND.USER_READY:
+                    this.onUserReady(msg.data);
+                    break;
+                case KeyExchange.KEY_COMMAND.USER_JOIN_LOBBY_ROOM:
+                    this.onUserJoinLobby(msg.data);
+                    break;
+                case KeyExchange.KEY_COMMAND.CHANGE_TEAM:
+                    this.onUserChangeTeam(msg.data);
+                    break;
             }
         })
     }
@@ -32,7 +45,72 @@ export class LobbyScreen implements OnInit {
     }
 
     private onGetRoomInfo(data) {
-        [this.team1, this.team2] = data.playerlist;
+        this.totalPlayers = [];
+        var teams = [];
+        for (let teamId in data.playerlist) {
+            if (data.playerlist.hasOwnProperty(teamId)) {
+                let team = data.playerlist[teamId];
+                this.totalPlayers = this.totalPlayers.concat(team);
+                teams.push({id: teamId, members: team});
+            }
+        }
 
+        [this.team1, this.team2] = teams;
+    }
+
+    private onUserReady(data) {
+        var status = data[KeyExchange.KEY_DATA.READY_STATUS];
+        var playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        var myUser = this.userService.myUser();
+        if (myUser.playerInfo[KeyExchange.KEY_DATA.PLAYER_ID] == playerId && status) {
+            this.disableButtons = true;
+        }
+        for (let player of this.totalPlayers) {
+            if (player[KeyExchange.KEY_DATA.PLAYER_ID] == playerId) {
+                player.readystatus = status;
+            }
+        }
+    }
+
+    private onReadyClick(data) {
+        this.commandService.userReady();
+    }
+
+    private onUserJoinLobby(data) {
+        var teamId = data[KeyExchange.KEY_DATA.TEAM_ID];
+        if (this.team1.id == teamId) {
+            this.team1.members.push(data);
+        } else if (this.team2.id == teamId) {
+            this.team2.members.push(data);
+        }
+
+        this.totalPlayers.push(data);
+    }
+
+    private onUserChangeTeam(data) {
+        var playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        var status = data[KeyExchange.KEY_DATA.STATUS];
+        if (!status) return;
+
+        var changeTeam = (team1, team2) => {
+            for(let member of team1.members) {
+                if (member[KeyExchange.KEY_DATA.PLAYER_ID] == playerId) {
+                    team1.members.splice(this.team1.members.indexOf(member), 1);
+                    this.totalPlayers.splice(this.totalPlayers.indexOf(member), 1);
+                    team2.members.push(data);
+                    this.totalPlayers.push(data);
+                    return true;
+                }
+            }
+        };
+
+        var changed = changeTeam(this.team1, this.team2);
+        if (!changed) {
+            changeTeam(this.team2, this.team1);
+        }
+    }
+
+    private onChangeTeamClick() {
+        this.commandService.changeTeam();
     }
 }

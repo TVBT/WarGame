@@ -1,8 +1,9 @@
 import {UserManager} from "./manager/usermanager";
 import {RoomManager} from "./manager/roommanager";
-import {UserInfo} from "./model/userinfo";
 import {KeyExchange} from "../share/keyexchange";
-import {RoomInfo} from "./model/roominfo";
+import {Room} from "./model/room";
+import {User} from "./model/user";
+import {UserInfo} from "./model/userinfo";
 
 /**
  * Created by thuctvd on 2/6/2017.
@@ -15,7 +16,6 @@ class Main {
     public io;
     public userManager = UserManager.getInstance();
     public roomManager = RoomManager.getInstance();
-    private automicId = 1000;
 
     constructor(httpPort, socketPort) {
         if(httpPort !== undefined && socketPort !== undefined){
@@ -40,11 +40,11 @@ class Main {
         io.on('connection', (client) => {
             console.log('client:'+ client);
 
-            var userInfo = new UserInfo();
-            userInfo.client = client;
-            userInfo.userId = this.automicId;
-            this.automicId++;
-            this.userManager.addUser(client.id, userInfo);
+            var user = new User();
+            user.client = client;
+            var userInfo:UserInfo = new UserInfo();
+            user.setUserInfo(userInfo);
+            this.userManager.addUser(client.id, user);
 
             client.on('event', function(msg) {
                 console.log("receive msg client: " + msg);
@@ -56,9 +56,10 @@ class Main {
             client.on('disconnect', function(){
                 console.log("client disconnected!");
 
-                var userInfo = this.userManager.getUserById(client.id);
+                var user:User = this.userManager.getUserById(client.id);
+                this.roomManager.leaveRoom(user);
                 this.userManager.removeUser(client.id);
-                this.userManager.removeUserName(userInfo.userName);
+                this.userManager.removeUserName(user.userInfo.userName);
             }.bind(this));
         });
 
@@ -95,10 +96,19 @@ class Main {
             case KeyExchange.KEY_COMMAND.GET_ROOM_INFO:
                 this.handleGetRoomInfo(msg.data, client);
                 break;
+
+            case KeyExchange.KEY_COMMAND.USER_READY:
+                this.handleUserReady(msg.data, client);
+                break;
+
+            case KeyExchange.KEY_COMMAND.CHANGE_TEAM:
+                this.handleUserChangeTeam(msg.data, client);
+                break;
         }
     }
 
     handleCheckUserNameExist(data, client) {
+        var user:User = this.userManager.getUserById(client.id);
         var userName = data[KeyExchange.KEY_DATA.USER_NAME];
         var isValid = this.userManager.checkValidNickName(userName);
         var status = isValid ? 1 : 0;
@@ -109,38 +119,34 @@ class Main {
             }
         };
 
-        this.sendUser(object, client);
+        this.sendUser(object, user);
     }
 
     handleAutoJoin(data, client) {
-        var userInfo:UserInfo = this.userManager.getUserById(client.id);
-        userInfo.userName = data[KeyExchange.KEY_DATA.USER_NAME];
-        var status = this.userManager.checkValidNickName(userInfo.userName)?1:0;
+        var user:User = this.userManager.getUserById(client.id);
+        user.userInfo.userName = data[KeyExchange.KEY_DATA.USER_NAME];
+        var status = this.userManager.checkValidNickName(user.userInfo.userName) ? 1 : 0;
         var object:{};
 
-        if(status == 1) {
-            this.userManager.addUserName(userInfo.userName);
-            var roomInfo:RoomInfo = this.roomManager.joinRoom(userInfo);
+        if (status == 1) {
+            this.userManager.addUserName(user.userInfo.userName);
+            var room:Room = this.roomManager.joinRoom(user);
             object = {
                 command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
                 data : {
                     [KeyExchange.KEY_DATA.STATUS] : 1,
-                    [KeyExchange.KEY_DATA.ROOM_ID] : roomInfo.roomId,
-                    [KeyExchange.KEY_DATA.TEAM_ID] : userInfo.teamId
+                    [KeyExchange.KEY_DATA.ROOM_ID] : room.roomId,
+                    [KeyExchange.KEY_DATA.PLAYER_INFO] : user.parseJsonDataPlayer()
                 }
             };
-            this.sendUser(object, client);
+            this.sendUser(object, user);
 
             var objectToOtherUser = {
                 command: KeyExchange.KEY_COMMAND.USER_JOIN_LOBBY_ROOM,
-                data : {
-                    [KeyExchange.KEY_DATA.USER_ID] : client.id,
-                    [KeyExchange.KEY_DATA.USER_NAME] : userInfo.userName,
-                    [KeyExchange.KEY_DATA.TEAM_ID] : userInfo.teamId
-                }
+                data : user.parseJsonDataPlayer()
             };
-            //this.sendToOtherUserInRoom(objectToOtherUser, roomInfo.getListUserExceptPlayerId());
 
+            this.sendListUser(objectToOtherUser, user.room.getListUserExceptUserId(user.userInfo.userId));
         } else {
             object = {
                 command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
@@ -149,36 +155,79 @@ class Main {
                     [KeyExchange.KEY_DATA.MESSAGE] : "User này đã tồn tại, ko thể tham gia!"
                 }
             };
-            this.sendUser(object, client);
+            this.sendUser(object, user);
         }
-
     }
 
     handleGetRoomInfo(data, client) {
-        var roomId = data[KeyExchange.KEY_DATA.ROOM_ID];
-        var roomInfo:RoomInfo = this.roomManager.getRoomById(roomId);
+        var user:User = this.userManager.getUserById(client.id);
+        var roomId:number = data[KeyExchange.KEY_DATA.ROOM_ID];
+        var room:Room = this.roomManager.getRoomById(roomId);
 
         var object;
-        if (roomInfo) {
-          object = roomInfo.parseJsonData();
+        if (room) {
+          object = room.parseJsonData();
         }
 
         object["command"] = KeyExchange.KEY_COMMAND.GET_ROOM_INFO;
-        object.data[KeyExchange.KEY_DATA.STATUS] = roomInfo ? 1 : 0;
+        object.data[KeyExchange.KEY_DATA.STATUS] = room ? 1 : 0;
 
-        this.sendUser(object, client);
+        this.sendUser(object, user);
     }
 
-    sendUser(object, recipient) {
-        recipient.emit('event', object);
+    handleUserReady(data, client) {
+        var user:User = this.userManager.getUserById(client.id);
+        if (user.player.isReady) {
+            return;
+        }
+
+        user.player.isReady = true;
+        var object = {
+            command: KeyExchange.KEY_COMMAND.USER_READY,
+            data : {
+                [KeyExchange.KEY_DATA.READY_STATUS] : user.player.isReady,
+                [KeyExchange.KEY_DATA.PLAYER_ID] : user.player.playerId,
+            }
+        };
+
+        this.sendListUser(object, user.room.getListUsers());
     }
 
-    sendListUser(object, recipients) {
+    handleUserChangeTeam(data, client) {
+        var user:User = this.userManager.getUserById(client.id);
+        if (user.player.isReady) {
+            let object = {
+                command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
+                data : {
+                    [KeyExchange.KEY_DATA.STATUS] : 0
+                }
+            };
+            this.sendUser(object, user);
+        } else {
+            var room:Room = user.room;
+            room.changeTeam(user);
+
+            var objPlayer = user.parseJsonDataPlayer();
+            objPlayer[KeyExchange.KEY_DATA.STATUS] = 1;
+
+            let object = {
+                command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
+                data : objPlayer
+            };
+            this.sendListUser(object, user.room.getListUsers());
+        }
+    }
+
+    sendUser(object, user:User) {
+        user.client.emit('event', object);
+    }
+
+    sendListUser(object, user:Array<User>) {
         var i = 0;
-        var num = recipients.length;
+        var num = user.length;
 
         for (i; i < num; i++) {
-            recipients[i].emit('event', object);
+            user[i].client.emit('event', object);
         }
     }
 

@@ -154,3 +154,107 @@ export class Concrete implements MapItem{
         return {};
     }
 }
+
+/**
+ * Item Đại Bàng - top left
+ */
+export class EagleTopLeft implements MapItem{
+    id:number
+    name:string;
+    x:number;
+    y:number;
+    index:number;
+    isCanHit:boolean;
+    constructor(){
+        this.id = 6;
+        this.name = "egale-top-left";
+        this.x = 0;
+        this.y = 0;
+        this.index = 1;
+        this.isCanHit = true;
+    }
+    setPos(x:number, y:number):void {
+
+    }
+    getPos() {
+        return {};
+    }
+}
+
+/**
+ * Item Đại Bàng - top right
+ */
+export class EagleTopRight implements MapItem{
+    id:number
+    name:string;
+    x:number;
+    y:number;
+    index:number;
+    isCanHit:boolean;
+    constructor(){
+        this.id = 7;
+        this.name = "egale-top-right";
+        this.x = 0;
+        this.y = 0;
+        this.index = 1;
+        this.isCanHit = true;
+    }
+    setPos(x:number, y:number):void {
+
+    }
+    getPos() {
+        return {};
+    }
+}
+
+/**
+ * Item Đại Bàng - bottom left
+ */
+export class EagleBotLeft implements MapItem{
+    id:number
+    name:string;
+    x:number;
+    y:number;
+    index:number;
+    isCanHit:boolean;
+    constructor(){
+        this.id = 8;
+        this.name = "egale-bot-left";
+        this.x = 0;
+        this.y = 0;
+        this.index = 1;
+        this.isCanHit = true;
+    }
+    setPos(x:number, y:number):void {
+
+    }
+    getPos() {
+        return {};
+    }
+}
+
+/**
+ * Item Đại Bàng - bottom right
+ */
+export class EagleBotRight implements MapItem{
+    id:number
+    name:string;
+    x:number;
+    y:number;
+    index:number;
+    isCanHit:boolean;
+    constructor(){
+        this.id = 9;
+        this.name = "egale-bot-right";
+        this.x = 0;
+        this.y = 0;
+        this.index = 1;
+        this.isCanHit = true;
+    }
+    setPos(x:number, y:number):void {
+
+    }
+    getPos() {
+        return {};
+    }
+}

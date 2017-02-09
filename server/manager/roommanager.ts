@@ -1,6 +1,7 @@
-import {PlayerInfo} from "../game/playerinfo";
-import {RoomInfo} from "../model/roominfo";
+import {Player} from "../game/player";
+import {Room} from "../model/room";
 import {UserInfo} from "../model/userinfo";
+import {User} from "../model/user";
 /**
  * Created by vutp on 2/7/2017.
  */
@@ -19,17 +20,23 @@ export class RoomManager {
         return RoomManager._instance;
     }
 
-    joinRoom(userInfo:UserInfo) {
-        var roomInfo:RoomInfo = this.getRoomValid();
-        if (roomInfo == null) {
-            roomInfo = this.createRoom();
+    joinRoom(user:User) {
+        var room:Room = this.getRoomValid();
+        if (room == null) {
+            room = this.createRoom();
         }
 
-        var playerInfo = new PlayerInfo(userInfo);
-        var teamId = roomInfo.addPlayer(playerInfo);
-        userInfo.teamId = teamId;
+        room.addUser(user);
+        user.room = room;
 
-        return roomInfo;
+        return room;
+    }
+
+    leaveRoom(user:User) {
+        var room:Room = user.room;
+        if (room) {
+            room.removeUser(user);
+        }
     }
 
     getRoomValid() {
@@ -37,9 +44,9 @@ export class RoomManager {
         var len = this.rooms.length;
 
         for (i; i < len; i++) {
-            var roomInfo = this.rooms[i];
-            if (!roomInfo.isFull) {
-                return roomInfo;
+            var room:Room = this.rooms[i];
+            if (!room.isFull()) {
+                return room;
             }
         }
 
@@ -47,13 +54,13 @@ export class RoomManager {
     }
 
     createRoom() {
-        var roomInfo = new RoomInfo();
-        roomInfo.roomId = this.automicRoomId;
-        roomInfo.roomName = "Default_" + this.automicRoomId;
-        this.rooms.push(roomInfo);
+        var room:Room = new Room();
+        room.roomId = this.automicRoomId;
+        room.roomName = "Default_" + this.automicRoomId;
+        this.rooms.push(room);
         this.automicRoomId++;
 
-        return roomInfo;
+        return room;
     }
 
     removeRoom(roomId) {

@@ -5,4 +5,5 @@
 export class User {
     name:string;
     roomId:number;
+    playerInfo;
 }

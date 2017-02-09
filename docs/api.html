@@ -49,6 +49,7 @@
 	<code>
 		<p>status:int (1=thành công, 0=thất bại)</p>
 		<p>roomid:int (roomid hiện tại user đang vào)</p>
+		<p>playerinfo:object (thông tin của player trong room)</p>
 	</code>
 </ul>
 </div>
@@ -71,12 +72,81 @@
 	<li><p><strong>Output:</strong></p>
 	<code>
 		<p>status:int (1=thành công, 0=thất bại)</p>
-		<p>playerlist:[ playersteam1:[], playersteam2:[] ] (playerlist chứa 2 mảng player hiện tại của 2 team)</p>
+		<p>playerlist:[ playersteam1:[Object Player], playersteam2:[] ] (playerlist chứa 2 mảng player hiện tại của 2 team)</p>
 		<p>roomname:string (tên phòng)</p>
 		<p>totalplayer:int (tổng số user đang trong phòng)</p>
 	</code>
 </ul>
 </div>
- 
- 
+
+
+	<div id="item">
+		<h2>* <strong>USER JOIN LOBBY ROOM</strong> *</h2>
+		<p>&lt;<em>Trả về thông tin user vừa join cho các users có trong room.</em>&gt;</p>
+
+		<ul>
+			<li><p><strong>IdCommand</strong></p>
+				<code>
+					<p>USER_JOIN_LOBBY_ROOM:int = 4</p>
+				</code>
+
+			<li><p><strong>Input:</strong></p>
+				<code>
+				</code>
+
+			<li><p><strong>Output:</strong></p>
+				<code>
+					<p>username:string (username của user)</p>
+					<p>playerId:int (playerId của user)</p>
+					<p>teamid:int (teamid hiện tại của user)</p>
+				</code>
+		</ul>
+	</div>
+
+	<div id="item">
+		<h2>* <strong>USER_READY</strong> *</h2>
+		<p>&lt;<em>Trả về trạng thái sẵn sàng cho user.</em>&gt;</p>
+
+		<ul>
+			<li><p><strong>IdCommand</strong></p>
+				<code>
+					<p>USER_READY:int = 5</p>
+				</code>
+
+			<li><p><strong>Input:</strong></p>
+				<code>
+				</code>
+
+			<li><p><strong>Output:</strong></p>
+				<code>
+					<p>isready:int (1=sẵn sàng, 0=không sẵn sàng)</p>
+					<p>playerId:int (playerId của user)</p>
+				</code>
+		</ul>
+	</div>
+
+	<div id="item">
+		<h2>* <strong>CHANGE TEAM</strong> *</h2>
+		<p>&lt;<em>Trả về thông tin change team cho user.</em>&gt;</p>
+
+		<ul>
+			<li><p><strong>IdCommand</strong></p>
+				<code>
+					<p>CHANGE_TEAM:int = 6</p>
+				</code>
+
+			<li><p><strong>Input:</strong></p>
+				<code>
+				</code>
+
+			<li><p><strong>Output:</strong></p>
+				<code>
+					<p>status:int (1=thành công, 0=thất bại)</p>
+					<p>username:string (username của user)</p>
+					<p>playerId:int (playerId của user)</p>
+					<p>teamid:int (teamid hiện tại của user)</p>
+				</code>
+		</ul>
+	</div>
+
 </div>

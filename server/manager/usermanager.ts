@@ -1,3 +1,4 @@
+import {User} from "../model/user";
 /**
  * Created by vutp on 2/7/2017.
  */
@@ -5,6 +6,7 @@
 export class UserManager {
     public clients = {};
     public userNameArr = [];
+    public automicId = 1000;
 
     static _instance: UserManager;
 
@@ -16,8 +18,11 @@ export class UserManager {
         return UserManager._instance;
     }
 
-    addUser(clientId, userInfo) {
-        this.clients[clientId] = userInfo;
+    addUser(clientId, user:User) {
+        user.userInfo.userId = this.automicId;
+        this.automicId++;
+
+        this.clients[clientId] = user;
     }
 
     removeUser(clientId) {
@@ -38,14 +43,14 @@ export class UserManager {
         }
     }
 
-    removeUserName(userName) {
+    removeUserName(userName:string) {
         var index = this.userNameArr.indexOf(userName);
         if (index >= 0) {
             this.userNameArr.splice(index, 1);
         }
     }
 
-    checkValidNickName(userName) {
+    checkValidNickName(userName:string) {
         var i = 0;
         var len = this.userNameArr.length;
 
