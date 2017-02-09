@@ -26,12 +26,6 @@ class KeyData {
     MESSAGE = "message";
 }
 
-export class KeyExchange {
-    static KEY_COMMAND = new KeyCommand();
-    static KEY_DATA = new KeyData();
-    static MAP_ITEM = new MapItem();
-}
-
 class MapItem {
     SNOW = 1; // nền tuyết
     RIVER = 2; // sông
@@ -43,3 +37,11 @@ class MapItem {
     EAGLE_BOT_LEFT = 8; //góc dưới trái đại bàng
     EAGLE_BOT_RIGHT = 9; //góc dưới phải đại bàng
 }
+
+export class KeyExchange {
+    static KEY_COMMAND = new KeyCommand();
+    static KEY_DATA = new KeyData();
+    static MAP_ITEM = new MapItem();
+}
+
+

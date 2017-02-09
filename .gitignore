@@ -5,3 +5,5 @@ client/app/**/*.js
 client/app/**/*.js.map
 server/**/*.js
 server/**/*.js.map
+share/**/*.js
+share/**/*.js.map
