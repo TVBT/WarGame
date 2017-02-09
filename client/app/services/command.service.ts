@@ -59,6 +59,13 @@ export class CommandService {
         });
     }
 
+    userReady() {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.USER_READY,
+            data: {}
+        });
+    }
+
     handleMessage(msg) {
         if (this.socketReady) {
             this.onMessage.emit(msg);

@@ -13,8 +13,10 @@ import {KeyExchange} from "../../../../share/keyexchange";
     styleUrls: ['./lobby.screen.css']
 })
 export class LobbyScreen implements OnInit {
-    team1 = [];
-    team2 = [];
+    team1 = {id: 0, members: []};
+    team2 = {id: 1, members: []};
+
+    totalPlayers = [];
 
     constructor(private userService:UserService,
                 private commandService:CommandService) {
@@ -22,6 +24,13 @@ export class LobbyScreen implements OnInit {
             switch (msg.command) {
                 case KeyExchange.KEY_COMMAND.GET_ROOM_INFO:
                     this.onGetRoomInfo(msg.data);
+                    break;
+                case KeyExchange.KEY_COMMAND.USER_READY:
+                    this.onUserReady(msg.data);
+                    break;
+                case KeyExchange.KEY_COMMAND.USER_JOIN_LOBBY_ROOM:
+                    this.onUserJoinLobby(msg.data);
+                    break;
             }
         })
     }
@@ -32,7 +41,41 @@ export class LobbyScreen implements OnInit {
     }
 
     private onGetRoomInfo(data) {
-        [this.team1, this.team2] = data.playerlist;
+        this.totalPlayers = [];
+        var teams = [];
+        for (let teamId in data.playerlist) {
+            if (data.playerlist.hasOwnProperty(teamId)) {
+                let team = data.playerlist[teamId];
+                this.totalPlayers = this.totalPlayers.concat(team);
+                teams.push({id: teamId, members: team});
+            }
+        }
 
+        [this.team1, this.team2] = teams;
+    }
+
+    private onUserReady(data) {
+        var status = data[KeyExchange.KEY_DATA.READY_STATUS];
+        var playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        for (let player of this.totalPlayers) {
+            if (player[KeyExchange.KEY_DATA.PLAYER_ID] == playerId) {
+                player.readystatus = status;
+            }
+        }
+    }
+
+    private onReadyClick(data) {
+        this.commandService.userReady();
+    }
+
+    private onUserJoinLobby(data) {
+        var teamId = data[KeyExchange.KEY_DATA.TEAM_ID];
+        if (this.team1.id == teamId) {
+            this.team1.members.push(data);
+        } else if (this.team2.id == teamId) {
+            this.team2.members.push(data);
+        }
+
+        this.totalPlayers.push(data);
     }
 }

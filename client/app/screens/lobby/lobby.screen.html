@@ -6,8 +6,9 @@
                 <div class="panel-body">
                     <table class="table">
                         <tbody>
-                        <tr *ngFor="let member of team1">
-                            <td [class.success]="member.readystatus">{{member.playerid}}</td>
+                        <tr *ngFor="let member of team1.members">
+                            <td [class.success]="member.readystatus">{{member.username}}
+                                <div *ngIf="member.readystatus == 1" class="glyphicon glyphicon-ok pull-left"></div></td>
                         </tr>
                         <!--<tr>-->
                             <!--<td>cục shit ma thuật</td>-->
@@ -29,8 +30,9 @@
                 <div class="panel-heading">Team 2</div>
                 <div class="panel-body"><table class="table">
                     <tbody>
-                    <tr *ngFor="let member of team2">
-                        <td [class.success]="member.readystatus">{{member.playerid}}</td>
+                    <tr *ngFor="let member of team2.members">
+                        <td [class.success]="member.readystatus">{{member.username}}
+                            <div *ngIf="member.readystatus == 1" class="glyphicon glyphicon-ok pull-left"></div></td>
                     </tr>
                     </tbody>
                 </table></div>
@@ -39,6 +41,6 @@
     </div>
     <div class="button-con">
         <button type="button" class="btn-lg btn-info">Change Team</button>
-        <button type="button" class="btn-lg btn-warning">READY</button>
+        <button type="button" class="btn-lg btn-warning" (click)="onReadyClick()">READY</button>
     </div>
 </div>
