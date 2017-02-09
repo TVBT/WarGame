@@ -32,6 +32,11 @@ export class RoomManager {
         return room;
     }
 
+    leaveRoom(user:User) {
+        var room:Room = user.room;
+        room.removeUser(user);
+    }
+
     getRoomValid() {
         var i = 0;
         var len = this.rooms.length;

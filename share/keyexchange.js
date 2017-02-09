@@ -9,6 +9,7 @@ var KeyCommand = (function () {
         this.GET_ROOM_INFO = 3;
         this.USER_JOIN_LOBBY_ROOM = 4;
         this.USER_READY = 5;
+        this.CHANGE_TEAM = 6;
     }
     return KeyCommand;
 }());

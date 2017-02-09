@@ -3,8 +3,8 @@
  */
 
 export class UserInfo {
-    public userId: number;
-    public userName: string;
+    public userId:number;
+    public userName:string;
 
     constructor() {
         this.userId = -1;

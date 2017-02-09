@@ -54,6 +54,7 @@ class Main {
                 console.log("client disconnected!");
 
                 var user = this.userManager.getUserById(client.id);
+                this.roomManager.leaveRoom(user);
                 this.userManager.removeUser(client.id);
                 this.userManager.removeUserName(user.userName);
             }.bind(this));
@@ -96,6 +97,10 @@ class Main {
             case KeyExchange.KEY_COMMAND.USER_READY:
                 this.handleUserReady(msg.data, client);
                 break;
+
+            case KeyExchange.KEY_COMMAND.CHANGE_TEAM:
+                this.handleUserChangeTeam(msg.data, client);
+                break;
         }
     }
 
@@ -135,13 +140,9 @@ class Main {
 
             var objectToOtherUser = {
                 command: KeyExchange.KEY_COMMAND.USER_JOIN_LOBBY_ROOM,
-                data : {
-                    [KeyExchange.KEY_DATA.USER_ID] : client.id,
-                    [KeyExchange.KEY_DATA.USER_NAME] : user.userInfo.userName,
-                    [KeyExchange.KEY_DATA.PLAYER_ID] : user.player.playerId,
-                    [KeyExchange.KEY_DATA.TEAM_ID] : user.player.teamId
-                }
+                data : user.parseJsonDataPlayer()
             };
+
             this.sendListUser(objectToOtherUser, user.room.getListUserExceptUserId(user.userInfo.userId));
         } else {
             object = {
@@ -177,6 +178,20 @@ class Main {
 
         var object = {
             command: KeyExchange.KEY_COMMAND.USER_READY,
+            data : {
+                [KeyExchange.KEY_DATA.READY_STATUS] : user.player.isReady,
+                [KeyExchange.KEY_DATA.PLAYER_ID] : user.player.playerId,
+            }
+        };
+
+        this.sendListUser(object, user.room.getListUsers());
+    }
+
+    handleUserChangeTeam(data, client) {
+        var user:User = this.userManager.getUserById(client.id);
+
+        var object = {
+            command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
             data : {
                 [KeyExchange.KEY_DATA.READY_STATUS] : user.player.isReady,
                 [KeyExchange.KEY_DATA.PLAYER_ID] : user.player.playerId,

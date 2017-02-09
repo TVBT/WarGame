@@ -1,6 +1,7 @@
 import {UserInfo} from "./userinfo";
 import {Player} from "../game/player";
 import {Room} from "./room";
+import {KeyExchange} from "../../share/keyexchange";
 /**
  * Created by vutp on 2/9/2017.
  */
@@ -21,5 +22,12 @@ export class User {
 
     setPlayer(player:Player) {
         this.player = player;
+    }
+
+    parseJsonDataPlayer() {
+        var obj:any = this.player.parseJsonData();
+        obj[KeyExchange.KEY_DATA.USER_NAME] = this.userInfo.userName;
+
+        return obj;
     }
 }

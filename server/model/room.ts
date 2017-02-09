@@ -47,7 +47,15 @@ export class Room {
     }
 
     removeUser(user) {
+        var index = this.team1.indexOf(user);
+        if (index >= 0) {
+            this.team1.splice(index, 1);
+        }
 
+        index = this.team2.indexOf(user);
+        if (index >= 0) {
+            this.team2.splice(index, 1);
+        }
     }
 
     isFull() {
@@ -61,11 +69,14 @@ export class Room {
     parseJsonData() {
         var playerTeam1 = this.parseJsonDataPlayers(this.team1);
         var playerTeam2 = this.parseJsonDataPlayers(this.team2);
-        var playerInfos = [playerTeam1, playerTeam2];
+        var objectPlayer = {
+            1 : playerTeam1,
+            2 : playerTeam2
+        };
 
         var object = {
             data : {
-                [KeyExchange.KEY_DATA.PLAYER_LIST] : playerInfos,
+                [KeyExchange.KEY_DATA.PLAYER_LIST] : objectPlayer,
                 [KeyExchange.KEY_DATA.ROOM_NAME] : this.roomName,
                 [KeyExchange.KEY_DATA.TOTAL_PLAYER] : this.getTotalPlayer()
             }
@@ -83,8 +94,7 @@ export class Room {
 
         for (i; i < len; i++) {
             user = users[i];
-            obj = user.player.parseJsonData();
-            obj[KeyExchange.KEY_DATA.USER_NAME] = user.userInfo.userName;
+            obj = user.parseJsonDataPlayer();
             playerInfos.push(obj);
         }
 

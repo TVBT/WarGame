@@ -8,6 +8,7 @@ class KeyCommand {
     GET_ROOM_INFO = 3;
     USER_JOIN_LOBBY_ROOM = 4;
     USER_READY = 5;
+    CHANGE_TEAM = 6;
 }
 
 class KeyData {
