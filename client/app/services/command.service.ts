@@ -66,6 +66,13 @@ export class CommandService {
         });
     }
 
+    changeTeam() {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
+            data: {}
+        });
+    }
+
     handleMessage(msg) {
         if (this.socketReady) {
             this.onMessage.emit(msg);

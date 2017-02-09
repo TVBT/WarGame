@@ -31,6 +31,9 @@ export class LobbyScreen implements OnInit {
                 case KeyExchange.KEY_COMMAND.USER_JOIN_LOBBY_ROOM:
                     this.onUserJoinLobby(msg.data);
                     break;
+                case KeyExchange.KEY_COMMAND.CHANGE_TEAM:
+                    this.onUserChangeTeam(msg.data);
+                    break;
             }
         })
     }
@@ -77,5 +80,27 @@ export class LobbyScreen implements OnInit {
         }
 
         this.totalPlayers.push(data);
+    }
+
+    private onUserChangeTeam(data) {
+        var playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        var changeTeam = (team1, team2) => {
+            for(let member of team1.members) {
+                if (member[KeyExchange.KEY_DATA.PLAYER_ID] == playerId) {
+                    team2.members.push(data);
+                    team1.members.splice(this.team1.members.indexOf(member), 1);
+                    return true;
+                }
+            }
+        }
+
+        var changed = changeTeam(this.team1, this.team2);
+        if (!changed) {
+            changeTeam(this.team2, this.team1);
+        }
+    }
+
+    private onChangeTeamClick() {
+        this.commandService.changeTeam();
     }
 }
