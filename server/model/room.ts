@@ -2,6 +2,7 @@ import {KeyExchange} from "../../share/keyexchange";
 import {Player} from "../game/player";
 import {User} from "./user";
 import {TankGameLogic} from "../game/tankgamelogic";
+import {ConfigManager} from "../manager/configmanager";
 /**
  * Created by vutp on 2/7/2017.
  */
@@ -9,7 +10,7 @@ import {TankGameLogic} from "../game/tankgamelogic";
 export class Room {
     public roomId:number;
     public roomName:string;
-    public roomType:number;                 // 0: room lobby, 1 : room game
+    public roomType:number;                         // 0: room lobby, 1 : room game
     public maxPlayer:number;
     public team1:Array<User>;                       // Danh sách user ở đội 1
     public team2:Array<User>;                       // Danh sách user ở đội 2
@@ -21,11 +22,11 @@ export class Room {
         this.roomName = "";
         this.roomType = 0;
         this.maxPlayer = 50;
-
         this.team1 = [];
         this.team2 = [];
-
         this.automicPlayerId = 1;
+
+        this.gameLogic = new TankGameLogic(this);
     }
 
     addUser(user:User) {
@@ -64,16 +65,24 @@ export class Room {
         return (this.team1.length + this.team2.length == this.maxPlayer);
     }
 
+    getListUserByTeamId(teamId) {
+        switch (teamId) {
+            case 1:
+                return this.team1;
+
+            case 2:
+                return this.team2;
+        }
+    }
+
     getTotalPlayer() {
         return (this.team1.length + this.team2.length);
     }
 
     parseJsonData() {
-        var playerTeam1 = this.parseJsonDataPlayers(this.team1);
-        var playerTeam2 = this.parseJsonDataPlayers(this.team2);
         var objectPlayer = {
-            1 : playerTeam1,
-            2 : playerTeam2
+            1 : this.parseJsonDataPlayers(this.team1),
+            2 : this.parseJsonDataPlayers(this.team2)
         };
 
         var object = {
@@ -104,7 +113,7 @@ export class Room {
     }
 
     startGame() {
-        this.gameLogic.startGame();
+        this.gameLogic.startGame(0);
     }
 
     getListUserExceptUserId(userId:number) {
@@ -140,4 +149,61 @@ export class Room {
             }
         }
     }
+
+    checkAllReady() {
+        var readyNumTeam1 = this.getCountPlayerReady(1);
+        var readyNumTeam2 = this.getCountPlayerReady(2);
+
+        if (readyNumTeam1 == 0 || readyNumTeam2 == 0) {
+            return false;
+        }
+
+        if (readyNumTeam1 < this.team1.length || readyNumTeam2 < this.team2.length) {
+            return false;
+        }
+
+        return true;
+    }
+
+    getCountPlayerReady(teamId:number) {
+        var users = this.getListUserByTeamId(teamId);
+        var i = 0;
+        var len = users.length;
+        var count = 0;
+
+        for (i; i < len; i++) {
+            if (users[i].player.isReady) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    getPostionPlayers() {
+        var i = 0;
+        var len = this.team1.length;
+        var objPlayerPosArr = [];
+        var objPlayerPos:any;
+
+        for (i = 0; i < len; i++) {
+            objPlayerPos = {
+                [KeyExchange.KEY_DATA.PLAYER_ID] : this.team1[i].player.playerId,
+                [KeyExchange.KEY_DATA.PLAYER_POSITION] : ConfigManager.getInstance().getPosIndexPlayerBy(1, i)
+            };
+            objPlayerPosArr.push(objPlayerPos);
+        }
+
+        len = this.team2.length;
+        for (i = 0; i < len; i++) {
+            objPlayerPos = {
+                [KeyExchange.KEY_DATA.PLAYER_ID] : this.team2[i].player.playerId,
+                [KeyExchange.KEY_DATA.PLAYER_POSITION] : ConfigManager.getInstance().getPosIndexPlayerBy(2, i)
+            };
+            objPlayerPosArr.push(objPlayerPos);
+        }
+
+        return objPlayerPosArr;
+    }
+
 }

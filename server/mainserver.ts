@@ -3,30 +3,34 @@ import {RoomManager} from "./manager/roommanager";
 import {KeyExchange} from "../share/keyexchange";
 import {Room} from "./model/room";
 import {User} from "./model/user";
+import {ConfigManager} from "./manager/configmanager";
 import {UserInfo} from "./model/userinfo";
+import {MapManager} from "./game/map/mapmanager";
 
 /**
  * Created by thuctvd on 2/6/2017.
  */
 
-class Main {
+export class Main {
     private HTTP_PORT = 9090;
     private SOCKET_PORT = 9191;
 
     public io;
-    public userManager = UserManager.getInstance();
-    public roomManager = RoomManager.getInstance();
+    public userManager:UserManager = UserManager.getInstance();
+    public roomManager:RoomManager = RoomManager.getInstance();
+    public configManager:ConfigManager = ConfigManager.getInstance();
+    public mapManager:MapManager = new MapManager();
 
-    constructor(httpPort, socketPort) {
-        if(httpPort !== undefined && socketPort !== undefined){
-            this.HTTP_PORT = httpPort;
-            this.SOCKET_PORT = socketPort;
+    static _instance: Main;
+    static getInstance() : Main {
+        if (!Main._instance) {
+            Main._instance = new Main();
         }
 
-        this.startServer();
+        return Main._instance;
     }
 
-    startServer() {
+    startServer(httpPort,socketPort) {
         var app = require('express')();
         var server = require('http').createServer(app);
         this.io = require('socket.io')(server);
@@ -38,17 +42,15 @@ class Main {
 
     startSocket(server, io, port) {
         io.on('connection', (client) => {
-            console.log('client:'+ client);
-
             var user = new User();
             user.client = client;
             var userInfo:UserInfo = new UserInfo();
             user.setUserInfo(userInfo);
             this.userManager.addUser(client.id, user);
 
-            client.on('event', function(msg) {
-                console.log("receive msg client: " + msg);
+            this.mapManager.createMap(0);
 
+            client.on('event', function(msg) {
                 this.receiveMessageHandler(msg, client);
 
             }.bind(this));
@@ -56,10 +58,10 @@ class Main {
             client.on('disconnect', function(){
                 console.log("client disconnected!");
 
-                var user:User = this.userManager.getUserById(client.id);
+                var user = this.userManager.getUserById(client.id);
                 this.roomManager.leaveRoom(user);
                 this.userManager.removeUser(client.id);
-                this.userManager.removeUserName(user.userInfo.userName);
+                this.userManager.removeUserName(user.userName);
             }.bind(this));
         });
 
@@ -84,6 +86,8 @@ class Main {
     }
 
     receiveMessageHandler(msg, client) {
+        console.log("receive msg client --- cmd: " + msg.command + " --- data: " + JSON.stringify(msg.data));
+
         switch (msg.command) {
             case KeyExchange.KEY_COMMAND.CHECK_NICK_NAME:
                 this.handleCheckUserNameExist(msg.data, client);
@@ -166,7 +170,7 @@ class Main {
 
         var object;
         if (room) {
-          object = room.parseJsonData();
+            object = room.parseJsonData();
         }
 
         object["command"] = KeyExchange.KEY_COMMAND.GET_ROOM_INFO;
@@ -177,11 +181,8 @@ class Main {
 
     handleUserReady(data, client) {
         var user:User = this.userManager.getUserById(client.id);
-        if (user.player.isReady) {
-            return;
-        }
-
         user.player.isReady = true;
+
         var object = {
             command: KeyExchange.KEY_COMMAND.USER_READY,
             data : {
@@ -191,43 +192,55 @@ class Main {
         };
 
         this.sendListUser(object, user.room.getListUsers());
+
+        var room:Room = user.room;
+        if (room.checkAllReady()) {
+            this.userJoinGame(user);
+        }
     }
 
     handleUserChangeTeam(data, client) {
         var user:User = this.userManager.getUserById(client.id);
-        if (user.player.isReady) {
-            let object = {
-                command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
-                data : {
-                    [KeyExchange.KEY_DATA.STATUS] : 0
-                }
-            };
-            this.sendUser(object, user);
-        } else {
-            var room:Room = user.room;
-            room.changeTeam(user);
 
-            var objPlayer = user.parseJsonDataPlayer();
-            objPlayer[KeyExchange.KEY_DATA.STATUS] = 1;
+        var object = {
+            command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
+            data : {
+                [KeyExchange.KEY_DATA.READY_STATUS] : user.player.isReady,
+                [KeyExchange.KEY_DATA.PLAYER_ID] : user.player.playerId,
+            }
+        };
 
-            let object = {
-                command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
-                data : objPlayer
-            };
-            this.sendListUser(object, user.room.getListUsers());
-        }
+        this.sendListUser(object, user.room.getListUsers());
+    }
+
+    userJoinGame(user) {
+        var room:Room = user.room;
+
+        var object = {
+            command: KeyExchange.KEY_COMMAND.JOIN_GAME,
+            data : {
+                [KeyExchange.KEY_DATA.START_GAME_TIME] : 3,
+                [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : 300,
+                [KeyExchange.KEY_DATA.MAP_INFO] : this.mapManager.parseJsonDataMapInfo(),
+                [KeyExchange.KEY_DATA.LIST_PLAYER_POSITION] : room.getPostionPlayers()
+            }
+        };
+
+        this.sendUser(object, user);
+
+        console.log("send msg userJoinGame --- cmd: " + KeyExchange.KEY_COMMAND.JOIN_GAME + " --- data: " + JSON.stringify(object));
     }
 
     sendUser(object, user:User) {
         user.client.emit('event', object);
     }
 
-    sendListUser(object, user:Array<User>) {
+    sendListUser(object, users:Array<User>) {
         var i = 0;
-        var num = user.length;
+        var num = users.length;
 
         for (i; i < num; i++) {
-            user[i].client.emit('event', object);
+            users[i].client.emit('event', object);
         }
     }
 
@@ -236,4 +249,5 @@ class Main {
     }
 }
 
-var main = new Main(9090, 9191);
+let main = Main.getInstance();
+main.startServer(9090,9191);
