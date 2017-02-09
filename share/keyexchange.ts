@@ -19,6 +19,7 @@ class KeyData {
     ROOM_NAME = "roomname";
     PLAYER_LIST = "playerlist";
     TOTAL_PLAYER = "totalplayer";
+    PLAYER_INFO = "playerinfo";
     PLAYER_ID = "playerid";
     READY_STATUS = "readystatus";
     TEAM_ID = "teamid";

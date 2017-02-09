@@ -136,7 +136,7 @@ class Main {
                 data : {
                     [KeyExchange.KEY_DATA.STATUS] : 1,
                     [KeyExchange.KEY_DATA.ROOM_ID] : room.roomId,
-                    [KeyExchange.KEY_DATA.TEAM_ID] : user.player.teamId
+                    [KeyExchange.KEY_DATA.PLAYER_INFO] : user.parseJsonDataPlayer()
                 }
             };
             this.sendUser(object, user);
