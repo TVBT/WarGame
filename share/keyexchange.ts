@@ -7,6 +7,7 @@ class KeyCommand {
     AUTO_JOIN_ROOM = 2;
     GET_ROOM_INFO = 3;
     USER_JOIN_LOBBY_ROOM = 4;
+    USER_READY = 5;
 }
 
 class KeyData {

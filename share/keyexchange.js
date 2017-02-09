@@ -8,6 +8,7 @@ var KeyCommand = (function () {
         this.AUTO_JOIN_ROOM = 2;
         this.GET_ROOM_INFO = 3;
         this.USER_JOIN_LOBBY_ROOM = 4;
+        this.USER_READY = 5;
     }
     return KeyCommand;
 }());
