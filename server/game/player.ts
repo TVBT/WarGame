@@ -16,7 +16,7 @@ export class Player {
     }
 
     parseJsonData() {
-        var object = {
+        var object:any = {
             [KeyExchange.KEY_DATA.PLAYER_ID] : this.playerId,
             [KeyExchange.KEY_DATA.TEAM_ID] : this.teamId,
             [KeyExchange.KEY_DATA.READY_STATUS] : this.isReady ? 1 : 0

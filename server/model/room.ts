@@ -91,13 +91,9 @@ export class Room {
         var i = 0;
         var len = users.length;
         var playerInfos = [];
-        var user:User;
-        var obj:{};
 
         for (i; i < len; i++) {
-            user = users[i];
-            obj = user.parseJsonDataPlayer();
-            playerInfos.push(obj);
+            playerInfos.push(users[i].parseJsonDataPlayer());
         }
 
         return playerInfos;
@@ -129,7 +125,7 @@ export class Room {
         return users;
     }
 
-    changeTeam(user) {
+    changeTeam(user:User) {
         var index = this.team1.indexOf(user);
         if (index >= 0) {
             user.player.teamId = 2;

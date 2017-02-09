@@ -56,10 +56,10 @@ class Main {
             client.on('disconnect', function(){
                 console.log("client disconnected!");
 
-                var user = this.userManager.getUserById(client.id);
+                var user:User = this.userManager.getUserById(client.id);
                 this.roomManager.leaveRoom(user);
                 this.userManager.removeUser(client.id);
-                this.userManager.removeUserName(user.userName);
+                this.userManager.removeUserName(user.userInfo.userName);
             }.bind(this));
         });
 
@@ -177,8 +177,11 @@ class Main {
 
     handleUserReady(data, client) {
         var user:User = this.userManager.getUserById(client.id);
-        user.player.isReady = true;
+        if (user.player.isReady) {
+            return;
+        }
 
+        user.player.isReady = true;
         var object = {
             command: KeyExchange.KEY_COMMAND.USER_READY,
             data : {
@@ -192,15 +195,27 @@ class Main {
 
     handleUserChangeTeam(data, client) {
         var user:User = this.userManager.getUserById(client.id);
-        var room:Room = user.room;
-        room.changeTeam(user);
+        if (user.player.isReady) {
+            var object = {
+                command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
+                data : {
+                    [KeyExchange.KEY_DATA.STATUS] : 0
+                }
+            };
+            this.sendUser(object, user);
+        } else {
+            var room:Room = user.room;
+            room.changeTeam(user);
 
-        var object = {
-            command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
-            data : user.parseJsonDataPlayer()
-        };
+            var objPlayer = user.parseJsonDataPlayer();
+            objPlayer[KeyExchange.KEY_DATA.STATUS] = 1;
 
-        this.sendListUser(object, user.room.getListUsers());
+            var object = {
+                command: KeyExchange.KEY_COMMAND.CHANGE_TEAM,
+                data : objPlayer
+            };
+            this.sendListUser(object, user.room.getListUsers());
+        }
     }
 
     sendUser(object, user:User) {
