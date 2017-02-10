@@ -1,0 +1,46 @@
+{ "height":3,
+ "layers":[
+        {
+         "data":[0, 1, 0, 0,0 , 0, 0, 0, 0],
+         "height":40,
+         "name":"floor",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":80,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[2, 0, 0, 0 ,0 , 0, 0, 0, 0],
+         "height":40,
+         "name":"grass",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":80,
+         "x":0,
+         "y":0
+        }],
+ "nextobjectid":6,
+ "orientation":"orthogonal",
+ "renderorder":"right-down",
+ "tileheight":16,
+ "tilesets":[
+        {
+         "columns":10,
+         "firstgid":1,
+         "image":"..\/..\/..\/design\/assetmap.png",
+         "imageheight":160,
+         "imagewidth":160,
+         "margin":0,
+         "name":"assetmap",
+         "spacing":0,
+         "tilecount":100,
+         "tileheight":16,
+         "tilewidth":16
+        }],
+ "tilewidth":16,
+ "version":1,
+ "width":3
+}
