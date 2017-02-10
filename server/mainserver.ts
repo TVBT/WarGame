@@ -58,10 +58,19 @@ export class Main {
             client.on('disconnect', function(){
                 console.log("client disconnected!");
 
-                var user = this.userManager.getUserById(client.id);
+                var user:User = this.userManager.getUserById(client.id);
+                if(user.player) {
+                    var objectToOtherUser = {
+                        command: KeyExchange.KEY_COMMAND.USER_LEAVE_LOBBY_ROOM,
+                        data : user.parseJsonDataPlayer()
+                    };
+
+                    this.sendListUser(objectToOtherUser, user.room.getListUserExceptUserId(user.userInfo.userId));
+                }
+
                 this.roomManager.leaveRoom(user);
                 this.userManager.removeUser(client.id);
-                this.userManager.removeUserName(user.userName);
+                this.userManager.removeUserName(user.userInfo.userName);
             }.bind(this));
         });
 

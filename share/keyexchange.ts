@@ -11,6 +11,7 @@ class KeyCommand {
     CHANGE_TEAM = 6;
     JOIN_GAME = 7;
     ACTION_IN_GAME = 8;
+    USER_LEAVE_LOBBY_ROOM = 9;
 
     // sub command
     START_GAME = 1;
