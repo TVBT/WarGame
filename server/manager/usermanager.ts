@@ -44,6 +44,8 @@ export class UserManager {
     }
 
     removeUserName(userName:string) {
+        if(!userName || userName == "")
+            return ;
         var index = this.userNameArr.indexOf(userName);
         if (index >= 0) {
             this.userNameArr.splice(index, 1);
