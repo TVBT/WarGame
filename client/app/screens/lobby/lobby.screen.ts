@@ -35,6 +35,9 @@ export class LobbyScreen implements OnInit {
                 case KeyExchange.KEY_COMMAND.CHANGE_TEAM:
                     this.onUserChangeTeam(msg.data);
                     break;
+                case KeyExchange.KEY_COMMAND.USER_LEAVE_LOBBY_ROOM:
+                    this.onUserLeaveLobby(msg.data);
+                    break;
             }
         })
     }
@@ -85,6 +88,21 @@ export class LobbyScreen implements OnInit {
         }
 
         this.totalPlayers.push(data);
+    }
+
+    private onUserLeaveLobby(data) {
+        var playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        var clearMember = (team) => {
+            for (let member of team.members) {
+                if (member[KeyExchange.KEY_DATA.PLAYER_ID] == playerId) {
+                    team.members.splice(team.members.indexOf(member), 1);
+                    this.totalPlayers.splice(this.totalPlayers.indexOf(member), 1);
+                }
+            }
+        };
+
+        clearMember(this.team1);
+        clearMember(this.team2);
     }
 
     private onUserChangeTeam(data) {
