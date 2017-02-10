@@ -4,24 +4,12 @@
 
 
 export class MapLoader {
-
     private filepath:string;
     private jsonMap;
 
-    /**
-     * @param filepath json file
-     */
-    constructor(filepath:string) {
-        this.filepath = filepath;
-        this.readFile();
-    }
-
-    private readFile() {
-        var fs = require('fs');
-        var data = fs.readFileSync(this.filepath, 'utf8');
-        if (data) {
-            this.jsonMap = JSON.parse(data);
-        }
+    // Client side call
+    loadString(str) {
+        this.jsonMap = JSON.parse(str);
     }
 
     public getArrayData() {
@@ -54,10 +42,10 @@ export class MapLoader {
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
                 let index = i * cols + j;
-                mapData[index] = 0;
+                mapData[index] = -1;
                 for (let layer of this.jsonMap.layers) {
                     if (layer.data[index]) {
-                        mapData[index] = layer.data[index];
+                        mapData[index] = layer.data[index] - 1;
                         break;
                     }
                 }
