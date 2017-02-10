@@ -24,6 +24,7 @@ export class PlayScreen implements AfterViewInit {
             game.load.image('map', 'assets/map/map.png');
             game.load.spritesheet('tank', 'assets/images/tank1.png', 32, 32);
             game.load.image('bullet_up', 'assets/images/bullet_up.png');
+            game.load.spritesheet('explosion', 'assets/images/explosion.png', 32, 32);
         }
 
         var map;
@@ -32,6 +33,7 @@ export class PlayScreen implements AfterViewInit {
         var sprite;
         var bullet;
         var bullets;
+        var explosion;
 
         function create() {
             game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -63,6 +65,11 @@ export class PlayScreen implements AfterViewInit {
             bullets.createMultiple(1, "bullet_up");
             bullets.setAll("checkWorldBounds", true);
             bullets.setAll("outOfBoundsKill", true);
+
+            explosion = game.add.sprite(0, 0, 'explosion');
+            explosion.anchor.set(0.5, 0.5);
+            explosion.animations.add("bum", [0, 1, 2], 10, false);
+            explosion.kill();
         }
 
         function update() {
@@ -118,6 +125,8 @@ export class PlayScreen implements AfterViewInit {
             if (bullet) {
                 game.physics.arcade.collide(bullet, layer, () => {
                     bullet.kill();
+                    explosion.reset(bullet.centerX, bullet.centerY);
+                    explosion.animations.play('bum', 10, false, true);
                 });
             }
         }
