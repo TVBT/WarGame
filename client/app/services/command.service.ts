@@ -22,7 +22,7 @@ export class CommandService {
         this.socket = io(url);
         this.socket.on('connect', () => {
             this.socketReady = true;
-            this.stateService.showLogin();
+            this.stateService.showPlay();
         });
         this.socket.on('event', this.handleMessage.bind(this));
         this.socket.on('disconnect', () => {
