@@ -19,7 +19,7 @@ export class UserManager {
     }
 
     addUser(clientId, user:User) {
-        user.userInfo.userId = this.automicId;
+        user.userId = this.automicId;
         this.automicId++;
 
         this.clients[clientId] = user;

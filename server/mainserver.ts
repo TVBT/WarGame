@@ -4,12 +4,11 @@ import {KeyExchange} from "../share/keyexchange";
 import {Room} from "./model/room";
 import {User} from "./model/user";
 import {ConfigManager} from "./manager/configmanager";
-import {UserInfo} from "./model/userinfo";
 import {MapManager} from "./game/map/mapmanager";
 
 /**
  * Created by thuctvd on 2/6/2017.
- */
+*/
 
 export class Main {
     private HTTP_PORT = 9090;
@@ -44,8 +43,6 @@ export class Main {
         io.on('connection', (client) => {
             var user = new User();
             user.client = client;
-            var userInfo:UserInfo = new UserInfo();
-            user.setUserInfo(userInfo);
             this.userManager.addUser(client.id, user);
 
             this.mapManager.createMap(0);
@@ -65,12 +62,12 @@ export class Main {
                         data : user.parseJsonDataPlayer()
                     };
 
-                    this.sendListUser(objectToOtherUser, user.room.getListUserExceptUserId(user.userInfo.userId));
+                    this.sendListUser(objectToOtherUser, user.room.getListUserExceptUserId(user.userId));
                 }
 
                 this.roomManager.leaveRoom(user);
                 this.userManager.removeUser(client.id);
-                this.userManager.removeUserName(user.userInfo.userName);
+                this.userManager.removeUserName(user.userName);
             }.bind(this));
         });
 
@@ -137,12 +134,12 @@ export class Main {
 
     handleAutoJoin(data, client) {
         var user:User = this.userManager.getUserById(client.id);
-        user.userInfo.userName = data[KeyExchange.KEY_DATA.USER_NAME];
-        var status = this.userManager.checkValidNickName(user.userInfo.userName) ? 1 : 0;
+        user.userName = data[KeyExchange.KEY_DATA.USER_NAME];
+        var status = this.userManager.checkValidNickName(user.userName) ? 1 : 0;
         var object:{};
 
         if (status == 1) {
-            this.userManager.addUserName(user.userInfo.userName);
+            this.userManager.addUserName(user.userName);
             var room:Room = this.roomManager.joinRoom(user);
             object = {
                 command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
@@ -159,7 +156,7 @@ export class Main {
                 data : user.parseJsonDataPlayer()
             };
 
-            this.sendListUser(objectToOtherUser, user.room.getListUserExceptUserId(user.userInfo.userId));
+            this.sendListUser(objectToOtherUser, user.room.getListUserExceptUserId(user.userId));
         } else {
             object = {
                 command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
@@ -235,7 +232,7 @@ export class Main {
             }
         };
 
-        this.sendUser(object, user);
+        this.sendListUser(object, user.room.getListUsers());
 
         console.log("send msg userJoinGame --- cmd: " + KeyExchange.KEY_COMMAND.JOIN_GAME + " --- data: " + JSON.stringify(object));
     }

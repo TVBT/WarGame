@@ -1,4 +1,3 @@
-import {UserInfo} from "../model/userinfo";
 import {KeyExchange} from "../../share/keyexchange";
 /**
  * Created by vutp on 2/7/2017.

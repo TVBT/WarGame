@@ -1,6 +1,5 @@
 import {Player} from "../game/player";
 import {Room} from "../model/room";
-import {UserInfo} from "../model/userinfo";
 import {User} from "../model/user";
 /**
  * Created by vutp on 2/7/2017.

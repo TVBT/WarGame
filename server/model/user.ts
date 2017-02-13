@@ -1,4 +1,3 @@
-import {UserInfo} from "./userinfo";
 import {Player} from "../game/player";
 import {Room} from "./room";
 import {KeyExchange} from "../../share/keyexchange";
@@ -8,15 +7,14 @@ import {KeyExchange} from "../../share/keyexchange";
 
 export class User {
     public client:any;
-    public userInfo:UserInfo;
+    public userId:number;
+    public userName:string;
     public player:Player;
     public room:Room;
 
     constructor() {
-    }
-
-    setUserInfo(userInfo) {
-        this.userInfo = userInfo;
+        this.userId = -1;
+        this.userName = "";
     }
 
     setPlayer(player:Player) {
@@ -25,7 +23,7 @@ export class User {
 
     parseJsonDataPlayer() {
         var obj:any = this.player.parseJsonData();
-        obj[KeyExchange.KEY_DATA.USER_NAME] = this.userInfo.userName;
+        obj[KeyExchange.KEY_DATA.USER_NAME] = this.userName;
 
         return obj;
     }
