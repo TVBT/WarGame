@@ -113,7 +113,11 @@ export class Room {
     }
 
     startGame() {
-        this.gameLogic.startGame(0);
+        this.gameLogic.startGame();
+    }
+
+    handleActionInGame(subId, data, client) {
+        this.gameLogic.handleActionInGame(subId, data, client);
     }
 
     getListUserExceptUserId(userId:number) {
@@ -189,7 +193,7 @@ export class Room {
         for (i = 0; i < len; i++) {
             objPlayerPos = {
                 [KeyExchange.KEY_DATA.PLAYER_ID] : this.team1[i].player.playerId,
-                [KeyExchange.KEY_DATA.PLAYER_POSITION] : ConfigManager.getInstance().getPosIndexPlayerBy(1, i)
+                [KeyExchange.KEY_DATA.PLAYER_POSITION] : ConfigManager.getInstance().getPosPlayerBy(1, i)
             };
             objPlayerPosArr.push(objPlayerPos);
         }
@@ -198,7 +202,7 @@ export class Room {
         for (i = 0; i < len; i++) {
             objPlayerPos = {
                 [KeyExchange.KEY_DATA.PLAYER_ID] : this.team2[i].player.playerId,
-                [KeyExchange.KEY_DATA.PLAYER_POSITION] : ConfigManager.getInstance().getPosIndexPlayerBy(2, i)
+                [KeyExchange.KEY_DATA.PLAYER_POSITION] : ConfigManager.getInstance().getPosPlayerBy(2, i)
             };
             objPlayerPosArr.push(objPlayerPos);
         }

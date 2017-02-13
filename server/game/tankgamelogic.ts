@@ -5,6 +5,9 @@
 import {GameController} from './gamecontroller';
 import {Room} from "../model/room";
 import {MapManager} from "./map/mapmanager";
+import {Main} from "../mainserver";
+import {ConfigManager} from "../manager/configmanager";
+import {KeyExchange} from "../../share/keyexchange";
 
 export class TankGameLogic {
     public controller: GameController;
@@ -17,8 +20,27 @@ export class TankGameLogic {
         this.currentRoom = room;
     };
 
-    public startGame(mapId:number) {
-        this.initMapInfo(mapId);
+    public startGame() {
+        setTimeout(function () {
+            var data = {
+
+            };
+
+            this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.START_GAME, this.currentRoom.getListUsers());
+        }.bind(this), ConfigManager.getInstance().startGameTime * 1000);
+    }
+
+    handleActionInGame(subId, data, client) {
+        switch (subId) {
+            case KeyExchange.KEY_COMMAND.MOVE:
+                this.handlePlayerMove(data, client);
+                break;
+        }
+
+    }
+
+    handlePlayerMove(data, client) {
+
     }
 
     private initMapInfo(mapId: number) {
@@ -37,4 +59,25 @@ export class TankGameLogic {
         return [];
     }
 
+    sendResponseToUser(data, cmd, user) {
+        var object = {
+            command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
+            sub: cmd,
+            data: data
+        }
+
+        Main.getInstance().sendUser(object, user);
+        console.log("send msg in game startGame --- " + JSON.stringify(object));
+    }
+
+    sendResponseToUsers(data, cmd, users) {
+        var object = {
+            command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
+            sub: cmd,
+            data: data
+        }
+
+        Main.getInstance().sendListUser(object, users);
+        console.log("send msg in game startGame --- " + JSON.stringify(object));
+    }
 }

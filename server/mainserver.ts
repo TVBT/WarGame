@@ -114,6 +114,11 @@ export class Main {
             case KeyExchange.KEY_COMMAND.CHANGE_TEAM:
                 this.handleUserChangeTeam(msg.data, client);
                 break;
+
+            case KeyExchange.KEY_COMMAND.ACTION_IN_GAME:
+                var room:Room = this.userManager.getUserById(client.id).room;
+                room.handleActionInGame(msg.sub, msg.data, client);
+                break;
         }
     }
 
@@ -225,16 +230,18 @@ export class Main {
         var object = {
             command: KeyExchange.KEY_COMMAND.JOIN_GAME,
             data : {
-                [KeyExchange.KEY_DATA.START_GAME_TIME] : 3,
-                [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : 300,
+                [KeyExchange.KEY_DATA.START_GAME_TIME] : this.configManager.startGameTime,
+                [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : this.configManager.playGameTime,
                 [KeyExchange.KEY_DATA.MAP_INFO] : this.mapManager.parseJsonDataMapInfo(),
                 [KeyExchange.KEY_DATA.LIST_PLAYER_POSITION] : room.getPostionPlayers()
             }
         };
 
-        this.sendListUser(object, user.room.getListUsers());
+        var room:Room = user.room;
+        this.sendListUser(object, room.getListUsers());
+        room.startGame();
 
-        console.log("send msg userJoinGame --- cmd: " + KeyExchange.KEY_COMMAND.JOIN_GAME + " --- data: " + JSON.stringify(object));
+        console.log("send msg userJoinGame --- " + JSON.stringify(object));
     }
 
     sendUser(object, user:User) {

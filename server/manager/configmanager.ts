@@ -1,3 +1,4 @@
+import {Point} from "../../share/math/primitive";
 /**
  * Created by thuctvd on 2/9/2017.
  */
@@ -16,8 +17,11 @@ export class ConfigManager {
     readonly MAP_LIST = [this.MAP1];
 
     //vị trí xuất hiện của 2 team khi start game (dựa vào index của MAP)
-    readonly TEAM1_POS_INDEX = [241, 1760, 2881];
-    readonly TEAM2_POS_INDEX = [320, 1840, 2960];
+    readonly TEAM1_POS = [new Point(10, 100), new Point(10, 400), new Point(10, 600)];
+    readonly TEAM2_POS = [new Point(1260, 100), new Point(1260, 400), new Point(1260, 600)];
+
+    readonly startGameTime = 3;
+    readonly playGameTime = 300;
 
     static _instance: ConfigManager;
     static getInstance() : ConfigManager {
@@ -28,13 +32,13 @@ export class ConfigManager {
         return ConfigManager._instance;
     }
 
-    getPosIndexPlayerBy(teamId:number, index:number) {
+    getPosPlayerBy(teamId:number, index:number) {
         switch (teamId) {
             case 1:
-                return this.TEAM1_POS_INDEX[index];
+                return this.TEAM1_POS[index];
 
             case 2:
-                return this.TEAM2_POS_INDEX[index];
+                return this.TEAM2_POS[index];
         }
     }
 }
