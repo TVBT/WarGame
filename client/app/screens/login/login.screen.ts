@@ -1,7 +1,7 @@
 /**
  * Created by thinhth2 on 2/6/2017.
  */
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {CommandService} from "../../services/command.service";
 import {KeyExchange} from "../../../../share/keyexchange";
 import {StateService} from "../../services/state.service";
@@ -15,6 +15,8 @@ import {UserService} from "../../services/user.service";
     styleUrls: ['./login.screen.css']
 })
 export class LoginScreen implements OnInit {
+    @Input()
+    data;
 
     username = "";
     errorMsg = "";

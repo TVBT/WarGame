@@ -20,19 +20,19 @@ class StateService {
         return this.screenState;
     }
 
-    showLogin() {
+    showLogin(data?) {
         this.screenState = SCREEN_STATE.LOGIN;
-        this.screenStateChange.emit(this.screenState);
+        this.screenStateChange.emit({state: this.screenState, data: data});
     }
 
-    showLobby() {
+    showLobby(data?) {
         this.screenState = SCREEN_STATE.LOBBY;
-        this.screenStateChange.emit(this.screenState);
+        this.screenStateChange.emit({state: this.screenState, data: data});
     }
 
-    showPlay() {
+    showPlay(data?) {
         this.screenState = SCREEN_STATE.PLAY;
-        this.screenStateChange.emit(this.screenState);
+        this.screenStateChange.emit({state: this.screenState, data: data});
     }
 }
 

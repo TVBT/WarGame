@@ -1,10 +1,11 @@
 /**
  * Created by thinhth2 on 2/6/2017.
  */
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {CommandService} from "../../services/command.service";
 import {KeyExchange} from "../../../../share/keyexchange";
+import {StateService} from "../../services/state.service";
 
 @Component({
     moduleId: module.id,
@@ -13,6 +14,9 @@ import {KeyExchange} from "../../../../share/keyexchange";
     styleUrls: ['./lobby.screen.css']
 })
 export class LobbyScreen implements OnInit {
+    @Input()
+    data;
+
     team1 = {id: 0, members: []};
     team2 = {id: 1, members: []};
 
@@ -20,7 +24,8 @@ export class LobbyScreen implements OnInit {
     disableButtons = false;
 
     constructor(private userService:UserService,
-                private commandService:CommandService) {
+                private commandService:CommandService,
+                private stateService:StateService) {
         this.commandService.onMessage.subscribe((msg) => {
             switch (msg.command) {
                 case KeyExchange.KEY_COMMAND.GET_ROOM_INFO:
@@ -37,6 +42,9 @@ export class LobbyScreen implements OnInit {
                     break;
                 case KeyExchange.KEY_COMMAND.USER_LEAVE_LOBBY_ROOM:
                     this.onUserLeaveLobby(msg.data);
+                    break;
+                case KeyExchange.KEY_COMMAND.JOIN_GAME:
+                    this.onUserJoinGame(msg.data);
                     break;
             }
         })
@@ -111,7 +119,7 @@ export class LobbyScreen implements OnInit {
         if (!status) return;
 
         var changeTeam = (team1, team2) => {
-            for(let member of team1.members) {
+            for (let member of team1.members) {
                 if (member[KeyExchange.KEY_DATA.PLAYER_ID] == playerId) {
                     team1.members.splice(this.team1.members.indexOf(member), 1);
                     this.totalPlayers.splice(this.totalPlayers.indexOf(member), 1);
@@ -130,5 +138,9 @@ export class LobbyScreen implements OnInit {
 
     private onChangeTeamClick() {
         this.commandService.changeTeam();
+    }
+
+    private onUserJoinGame(data:any) {
+        this.stateService.showPlay(data);
     }
 }

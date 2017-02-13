@@ -9,9 +9,9 @@ import {CommandService} from "./services/command.service";
     <div>
         <div *ngIf="screenState=='${SCREEN_STATE.WAIT_SERVER}'"
              class="waiting">Connecting To Server...</div>
-        <login-screen *ngIf="screenState=='${SCREEN_STATE.LOGIN}'"></login-screen>
-        <lobby-screen *ngIf="screenState=='${SCREEN_STATE.LOBBY}'"></lobby-screen>
-        <play-screen *ngIf="screenState=='${SCREEN_STATE.PLAY}'"></play-screen>
+        <login-screen *ngIf="screenState=='${SCREEN_STATE.LOGIN}'" [data]='data' ></login-screen>
+        <lobby-screen *ngIf="screenState=='${SCREEN_STATE.LOBBY}'" [data]='data' ></lobby-screen>
+        <play-screen *ngIf="screenState=='${SCREEN_STATE.PLAY}'" [data]='data' ></play-screen>
     </div>
   `,
     styles: [
@@ -29,12 +29,14 @@ export class AppComponent implements OnInit {
     name = 'Angular';
 
     screenState;
+    data;
 
     constructor(private stateService:StateService,
                 private commandService:CommandService) {
         this.screenState = this.stateService.getScreenState();
-        this.stateService.screenStateChange.subscribe((state) => {
-            this.screenState = state;
+        this.stateService.screenStateChange.subscribe((msg) => {
+            this.screenState = msg.state;
+            this.data = msg.data;
         });
     }
 

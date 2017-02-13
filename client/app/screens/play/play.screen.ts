@@ -1,7 +1,8 @@
 /**
  * Created by thinhth2 on 2/6/2017.
  */
-import {Component, AfterViewInit} from '@angular/core';
+import {Component, AfterViewInit, Input, OnInit} from '@angular/core';
+import {KeyExchange} from "../../../../share/keyexchange";
 
 @Component({
     moduleId: module.id,
@@ -9,7 +10,20 @@ import {Component, AfterViewInit} from '@angular/core';
     templateUrl: './play.screen.html',
     styleUrls: ['./play.screen.css']
 })
-export class PlayScreen implements AfterViewInit {
+export class PlayScreen implements AfterViewInit, OnInit {
+    @Input()
+    data = {
+        [KeyExchange.KEY_DATA.START_GAME_TIME] : 3,
+        [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : 300,
+
+    };
+
+    startTime;
+
+    ngOnInit() {
+        this.startTime = 3;
+    }
+
     ngAfterViewInit() {
 
         var game = new Phaser.Game(1280, 768, Phaser.AUTO, 'game-content', {
@@ -40,7 +54,6 @@ export class PlayScreen implements AfterViewInit {
             game.physics.startSystem(Phaser.Physics.ARCADE);
 
 
-
             //  Because we're loading CSV map data we have to specify the tile size here or we can't render it
             map = game.add.tilemap('tilemap');
             //  Now add in the tileset
@@ -63,10 +76,10 @@ export class PlayScreen implements AfterViewInit {
 
             cursors = game.input.keyboard.createCursorKeys();
 
-            sprite.animations.add("down", [0,3], 10, false);
-            sprite.animations.add("left", [1,4], 10, false);
-            sprite.animations.add("right", [6,7], 10, false);
-            sprite.animations.add("up", [2,5], 10, false);
+            sprite.animations.add("down", [0, 3], 10, false);
+            sprite.animations.add("left", [1, 4], 10, false);
+            sprite.animations.add("right", [6, 7], 10, false);
+            sprite.animations.add("up", [2, 5], 10, false);
 
             bullets = game.add.group();
             bullets.enableBody = true;

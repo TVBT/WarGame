@@ -1,6 +1,17 @@
+.clock {
+    width: 66px;
+    height: 30px;
+    background: #2f2f2f;
+    display: block;
+    margin: 4% auto 0 auto;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #4a4949;
+}
 
 .game-content {
-    margin: 4% auto;
+    margin: 0 auto;
     width: 1280px;
     height: 768px;
     background: #000;
