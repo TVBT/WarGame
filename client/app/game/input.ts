@@ -8,6 +8,7 @@ export class GameInput {
     game;
     cursors;
     myTank: Tank;
+    stopped = false;
 
     constructor(game, tank) {
         this.game = game;
@@ -19,6 +20,8 @@ export class GameInput {
         this.myTank.sprite.body.velocity.x = 0;
         this.myTank.sprite.body.velocity.y = 0;
         this.myTank.sprite.body.angularVelocity = 0;
+
+        if (this.stopped) return;
 
         if (this.cursors.left.isDown) {
             this.myTank.sprite.body.velocity.x = -100;

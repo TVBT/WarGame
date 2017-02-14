@@ -21,13 +21,18 @@ export class PlayScreen implements AfterViewInit, OnInit {
 
     startTime;
 
-    constructor(private userService: UserService,
-                private commandService: CommandService,
-                private stateService: StateService,
-                private game: TankGame) {
+    constructor(private userService:UserService,
+                private commandService:CommandService,
+                private stateService:StateService,
+                private game:TankGame) {
         this.commandService.onMessage.subscribe((msg) => {
-            switch (msg.command) {
-
+            if (msg.command == KeyExchange.KEY_COMMAND.ACTION_IN_GAME) {
+                let subCommand = msg.sub;
+                switch (subCommand) {
+                    case KeyExchange.KEY_COMMAND.START_GAME:
+                        this.game.resumeGame();
+                        break;
+                }
             }
         })
     }
@@ -43,6 +48,9 @@ export class PlayScreen implements AfterViewInit, OnInit {
     }
 
     ngAfterViewInit() {
-        this.game.setGameData(this.data);
+        this.game.setGameData(this.data, () => {
+            this.game.stopGame();
+            this.game.startCountdown(seconds => this.startTime = seconds, this.startTime);
+        });
     }
 }
