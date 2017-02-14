@@ -68,7 +68,7 @@ export  class GameController {
         }
 
         Main.getInstance().sendUser(object, user);
-        console.log("send msg in game --- " + JSON.stringify(object));
+        console.log("SEND msg ingame --- " + JSON.stringify(object));
     }
 
     public sendResponseToUsers(data, cmd, users) {
@@ -79,6 +79,6 @@ export  class GameController {
         }
 
         Main.getInstance().sendListUser(object, users);
-        console.log("send msg in game --- " + JSON.stringify(object));
+        console.log("SEND msg ingame --- " + JSON.stringify(object));
     }
 }
