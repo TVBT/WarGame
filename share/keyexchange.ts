@@ -44,6 +44,9 @@ class KeyData {
     MAP_ID = "mapid";
     MAP_DATA = "mapdata";
     LIST_PLAYER_POSITION = "listplayerposition";
+    ROW_ID = "rowid";
+    COL_ID = "colid";
+    ACTION_TIME = "actiontime";
 
 }
 
