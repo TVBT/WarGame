@@ -1,6 +1,6 @@
-import {Player} from "./player";
 import {Room} from "./room";
 import {KeyExchange} from "../../share/keyexchange";
+import {Player} from "./player";
 /**
  * Created by vutp on 2/9/2017.
  */
