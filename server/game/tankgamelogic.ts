@@ -59,25 +59,4 @@ export class TankGameLogic {
         return [];
     }
 
-    sendResponseToUser(data, cmd, user) {
-        var object = {
-            command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
-            sub: cmd,
-            data: data
-        }
-
-        Main.getInstance().sendUser(object, user);
-        console.log("send msg in game startGame --- " + JSON.stringify(object));
-    }
-
-    sendResponseToUsers(data, cmd, users) {
-        var object = {
-            command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
-            sub: cmd,
-            data: data
-        }
-
-        Main.getInstance().sendListUser(object, users);
-        console.log("send msg in game startGame --- " + JSON.stringify(object));
-    }
 }

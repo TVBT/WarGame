@@ -4,9 +4,15 @@ import {KeyExchange} from "../../share/keyexchange";
  */
 
 export class Player {
+    //general info
     public playerId:number;
     public teamId:number;
     public isReady:boolean;
+
+    //game info
+    public x:number;
+    public y:number;
+    public status:string;
 
     constructor() {
         this.playerId = -1;

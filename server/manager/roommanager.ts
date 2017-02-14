@@ -1,4 +1,4 @@
-import {Player} from "../game/player";
+import {Player} from "../model/player";
 import {Room} from "../model/room";
 import {User} from "../model/user";
 /**
