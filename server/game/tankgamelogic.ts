@@ -21,7 +21,8 @@ export class TankGameLogic {
     };
 
     public startGame() {
-        // setTimeout(this.controller.startGame, ConfigManager.getInstance().startGameTime * 1000);
+        this.mapManager.createMap(0);
+
         setTimeout(function() {
             this.controller.startGame();
         }.bind(this), ConfigManager.getInstance().startGameTime * 1000);

@@ -15,7 +15,7 @@ export class Room {
     public team1:Array<User>;                       // Danh sách user ở đội 1
     public team2:Array<User>;                       // Danh sách user ở đội 2
     private automicPlayerId:number;
-    private gameLogic:TankGameLogic;
+    public gameLogic:TankGameLogic;
 
     constructor() {
         this.roomId = -1;

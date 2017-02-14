@@ -4,7 +4,6 @@ import {KeyExchange} from "../share/keyexchange";
 import {Room} from "./model/room";
 import {User} from "./model/user";
 import {ConfigManager} from "./manager/configmanager";
-import {MapManager} from "./game/map/mapmanager";
 
 /**
  * Created by thuctvd on 2/6/2017.
@@ -18,7 +17,6 @@ export class Main {
     public userManager:UserManager = UserManager.getInstance();
     public roomManager:RoomManager = RoomManager.getInstance();
     public configManager:ConfigManager = ConfigManager.getInstance();
-    public mapManager:MapManager = new MapManager();
 
     static _instance: Main;
     static getInstance() : Main {
@@ -44,8 +42,6 @@ export class Main {
             var user = new User();
             user.client = client;
             this.userManager.addUser(client.id, user);
-
-            this.mapManager.createMap(0);
 
             client.on('event', function(msg) {
                 this.receiveMessageHandler(msg, client);
@@ -229,20 +225,18 @@ export class Main {
 
     userJoinGame(user) {
         var room:Room = user.room;
-
         var object = {
             command: KeyExchange.KEY_COMMAND.JOIN_GAME,
             data : {
                 [KeyExchange.KEY_DATA.START_GAME_TIME] : this.configManager.startGameTime,
                 [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : this.configManager.playGameTime,
-                [KeyExchange.KEY_DATA.MAP_INFO] : this.mapManager.parseJsonDataMapInfo(),
+                [KeyExchange.KEY_DATA.MAP_INFO] : room.gameLogic.mapManager.parseJsonDataMapInfo(),
                 [KeyExchange.KEY_DATA.LIST_PLAYER_POSITION] : room.getPostionPlayers()
             }
         };
 
-        var room:Room = user.room;
-        this.sendListUser(object, room.getListUsers());
         room.startGame();
+        this.sendListUser(object, room.getListUsers());
 
         console.log("send msg userJoinGame --- " + JSON.stringify(object));
     }
