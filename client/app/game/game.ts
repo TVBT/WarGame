@@ -49,6 +49,7 @@ export class TankGame {
     }
 
     preload() {
+        this.game.stage.disableVisibilityChange = true;
         this.game.load.tilemap('tilemap', 'assets/map/map1.json?v=1', null, Phaser.Tilemap.TILED_JSON);
         this.game.load.image('assetmap', 'assets/map/assetmap.png');
         this.game.load.spritesheet('tank', 'assets/images/tank1.png', 32, 32);
@@ -58,7 +59,6 @@ export class TankGame {
 
     create() {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
-        this.game.stage.disableVisibilityChange = true;
 
         this.map = new MapGame(this.game, this.commandService);
         this.map.createFloor();
