@@ -32,11 +32,13 @@ export class MapGame {
         this.grass = this.map.createLayer('grass');
     }
 
-    removeBrick(iCol, iRow) {
+    hitBrick(iCol, iRow) {
         var tile = this.map.getTile(iCol, iRow, this.floor);
         if (tile && tile.index == KeyExchange.MAP_ITEM.BRICK) {
             this.map.removeTile(iCol, iRow, this.floor);
+            return true;
         }
+        return false;
     }
 
     tilePosFromPoint(point) {
@@ -45,11 +47,29 @@ export class MapGame {
         return [iCol, iRow];
     }
 
+    hitHomeTown(iCol, iRow) {
+        var neightboor = [0, -2, -1, +1, +2];
+        for (let padx of neightboor) {
+            for (let pady of neightboor) {
+                let tile = this.map.getTile(iCol + padx, iRow + pady, this.floor);
+                if (tile && tile.index >= KeyExchange.MAP_ITEM.EAGLE_TOP_LEFT
+                    && tile.index <= KeyExchange.MAP_ITEM.EAGLE_BOT_RIGHT) {
+                    this.map.removeTile(iCol + padx, iRow + pady, this.floor);
+                }
+            }
+        }
+
+    }
+
     hitBullet(x, y) {
-        var rect = new Rect(x-8, y-8, 16, 16);
-        this.removeBrick.apply(this, this.tilePosFromPoint(rect.topLeft));
-        this.removeBrick.apply(this, this.tilePosFromPoint(rect.topRight));
-        this.removeBrick.apply(this, this.tilePosFromPoint(rect.bottomLeft));
-        this.removeBrick.apply(this, this.tilePosFromPoint(rect.bottomRight));
+        var rect = new Rect(x - 8, y - 8, 16, 16);
+        var isHitted = false;
+        isHitted = this.hitBrick.apply(this, this.tilePosFromPoint(rect.topLeft)) || isHitted;
+        isHitted = this.hitBrick.apply(this, this.tilePosFromPoint(rect.topRight)) || isHitted;
+        isHitted = this.hitBrick.apply(this, this.tilePosFromPoint(rect.bottomLeft)) || isHitted;
+        isHitted = this.hitBrick.apply(this, this.tilePosFromPoint(rect.bottomRight)) || isHitted;
+        if (!isHitted) {
+            this.hitHomeTown.apply(this, this.tilePosFromPoint(rect.center));
+        }
     }
 }
