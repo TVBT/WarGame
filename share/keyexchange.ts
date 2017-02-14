@@ -17,6 +17,10 @@ class KeyCommand {
     START_GAME = 1;
     MOVE = 2;
     STOP_MOVE = 3;
+    SHOOT = 4;
+    HIT_MAP_ITEM = 5;
+    HIT_TANK = 6;
+    HIT_TOWER = 7;
 }
 
 class KeyData {
