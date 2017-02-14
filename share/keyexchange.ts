@@ -53,10 +53,17 @@ class MapItem {
     EAGLE_BOT_RIGHT = 10; //góc dưới phải đại bàng
 }
 
+class TankPlayerStatus {
+    ALIVE = "alive";
+    DEAD = "dead";
+    AFK = "AFK";
+}
+
 export class KeyExchange {
     static KEY_COMMAND = new KeyCommand();
     static KEY_DATA = new KeyData();
     static MAP_ITEM = new MapItem();
+    static TANK_PLAYER_STATUS = new TankPlayerStatus();
 }
 
 

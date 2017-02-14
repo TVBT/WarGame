@@ -25,6 +25,9 @@ class Ticker {
         return this._fps;
     }
 
+    get currentTime() {
+        return new Date().getTime();
+    }
     constructor(fps = 60) {
         this.fps = fps;
     }
