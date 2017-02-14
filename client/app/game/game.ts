@@ -46,7 +46,7 @@ export class TankGame {
     create() {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        this.map = new MapGame(this.game);
+        this.map = new MapGame(this.game, this.commandService);
         this.map.createFloor();
 
         let listPos = this.gameData[KeyExchange.KEY_DATA.LIST_PLAYER_POSITION];
