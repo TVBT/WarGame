@@ -1,20 +1,30 @@
+import {Injectable} from "@angular/core";
 import {Tank} from "./tank";
 import {GameInput} from "./input";
 import {MapGame} from "./map";
+import {KeyExchange} from "../../../share/keyexchange";
+import {UserService} from "../services/user.service";
 /**
  * Created by binhlt on 13/02/2017.
  */
 
+@Injectable()
 export class TankGame {
 
-    game;
+    game; //Phaser
+    gameData;
     map: MapGame;
     explosion;
-    listTank = {};
+    listTank = [];
     myTank: Tank;
     playController: GameInput;
 
-    constructor(data) {
+    constructor(private userService:UserService) {
+
+    }
+
+    setGameData(data) {
+        this.gameData = data;
         this.game = new Phaser.Game(1280, 640, Phaser.AUTO, 'game-content', {
             preload: this.preload.bind(this),
             create: this.create.bind(this),
@@ -36,7 +46,17 @@ export class TankGame {
 
         this.map = new MapGame(this.game);
         this.map.createFloor();
-        this.myTank = new Tank(this.game);
+
+        let listPos = this.gameData[KeyExchange.KEY_DATA.LIST_PLAYER_POSITION];
+        for (let i = 0; i < listPos.length; i++) {
+            let posObj = listPos[i];
+            let tank = new Tank(this.game, posObj[KeyExchange.KEY_DATA.PLAYER_ID], posObj[KeyExchange.KEY_DATA.PLAYER_POSITION]);
+            if (tank.playerId == this.userService.getMyPlayerId()) {
+                this.myTank = tank;
+            }
+            this.listTank.push(tank);
+        }
+
         this.map.createGrass();
 
         this.playController = new GameInput(this.game, this.myTank);
@@ -51,22 +71,63 @@ export class TankGame {
         this.game.physics.arcade.collide(this.myTank.sprite, this.map.floor);
         this.game.physics.arcade.collide(this.myTank.sprite, this.map.sea);
         this.playController.update();
+        for (let tank of this.listTank) {
+            this.checkCollision(tank);
+        }
+    }
 
-        let bullets = this.myTank.getBullets();
+    checkCollision(tank: Tank) {
+        let bullets = tank.getBullets();
         for (let bullet of bullets) {
             if (bullet) {
                 // check collision with map
                 this.game.physics.arcade.collide(bullet, this.map.floor, () => {
                     bullet.kill();
-                    this.explosion.reset(bullet.centerX, bullet.centerY);
-                    this.explosion.animations.play('bum', 10, false, true);
+                    this.playExplosion(bullet.centerX, bullet.centerY);
                     this.map.hitBullet(bullet.centerX, bullet.centerY);
                 });
+                // check collision with other tanks
+                for (let otherTank: Tank of this.listTank) {
+                    if (otherTank.playerId != tank.playerId) {
+                        this.game.physics.arcade.collide(bullet, otherTank.sprite, () => {
+                            bullet.kill();
+                            this.playExplosion(bullet.centerX, bullet.centerY);
+                            otherTank.sprite.kill();
+                            //TODO send shoot tank command
+                        })
+                    }
+                }
             }
         }
     }
 
+    playExplosion(x, y) {
+        this.explosion.reset(x, y);
+        this.explosion.animations.play('bum', 10, false, true);
+    }
+
     render() {
 
+    }
+
+    startCountdown(callback, seconds) {
+        var timer = this.game.time.events.loop(Phaser.Timer.SECOND, () => {
+            callback(seconds);
+            seconds--;
+            if (seconds <= 0) {
+                this.game.time.events.remove(timer);
+            }
+        }, this);
+    }
+
+    startClock(callback, limitSeconds=-1) {
+        var seconds = 0;
+        var timer = this.game.time.events.loop(Phaser.Timer.SECOND, () => {
+            callback(seconds);
+            seconds++;
+            if (limitSeconds > -1 && seconds >= limitSeconds) {
+                this.game.time.events.remove(timer);
+            }
+        }, this);
     }
 }

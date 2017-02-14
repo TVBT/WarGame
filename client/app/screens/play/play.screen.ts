@@ -12,18 +12,19 @@ import {StateService} from "../../services/state.service";
     moduleId: module.id,
     selector: 'play-screen',
     templateUrl: './play.screen.html',
-    styleUrls: ['./play.screen.css']
+    styleUrls: ['./play.screen.css'],
+    providers: [TankGame]
 })
 export class PlayScreen implements AfterViewInit, OnInit {
     @Input()
     data;
 
     startTime;
-    game;
 
     constructor(private userService: UserService,
                 private commandService: CommandService,
-                private stateService: StateService) {
+                private stateService: StateService,
+                private game: TankGame) {
         this.commandService.onMessage.subscribe((msg) => {
             switch (msg.command) {
 
@@ -33,15 +34,15 @@ export class PlayScreen implements AfterViewInit, OnInit {
 
     ngOnInit() {
         //code test
-        this.data = {
-            [KeyExchange.KEY_DATA.START_GAME_TIME] : 3,
-            [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : 300,
-        };
+        // this.data = {
+        //     [KeyExchange.KEY_DATA.START_GAME_TIME] : 3,
+        //     [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : 300,
+        // };
 
         this.startTime = this.data[KeyExchange.KEY_DATA.START_GAME_TIME];
     }
 
     ngAfterViewInit() {
-        this.game = new TankGame(this.data);
+        this.game.setGameData(this.data);
     }
 }

@@ -1,8 +1,9 @@
 /**
  * Created by thinhth2 on 2/6/2017.
  */
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from "../model/user";
+import {KeyExchange} from "../../../share/keyexchange";
 
 @Injectable()
 export class UserService {
@@ -13,5 +14,10 @@ export class UserService {
             this._myUser = new User();
         }
         return this._myUser;
+    }
+
+    getMyPlayerId() {
+        let playerInfo = this.myUser().playerInfo;
+        return playerInfo ? playerInfo[KeyExchange.KEY_DATA.PLAYER_ID] : -1;
     }
 }
