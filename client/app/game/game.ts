@@ -15,7 +15,7 @@ export class TankGame {
     playController: GameInput;
 
     constructor(data) {
-        this.game = new Phaser.Game(1280, 768, Phaser.AUTO, 'game-content', {
+        this.game = new Phaser.Game(1280, 640, Phaser.AUTO, 'game-content', {
             preload: this.preload.bind(this),
             create: this.create.bind(this),
             update: this.update.bind(this),
@@ -59,6 +59,7 @@ export class TankGame {
                     bullet.kill();
                     this.explosion.reset(bullet.centerX, bullet.centerY);
                     this.explosion.animations.play('bum', 10, false, true);
+                    this.map.hitBullet(bullet.centerX, bullet.centerY);
                 });
             }
         }

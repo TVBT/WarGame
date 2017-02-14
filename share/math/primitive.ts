@@ -1,5 +1,3 @@
-import {isNullOrUndefined} from "util";
-
 /**
  * Created by thinhth2 on 2/10/2017.
  */
@@ -47,7 +45,7 @@ class Vector {
 
     set(x, y?) {
         this.x = x;
-        if (!isNullOrUndefined(y)) {
+        if (y === null || y === undefined) {
             this.y = y;
         }
     }

@@ -42,15 +42,15 @@ class KeyData {
 }
 
 class MapItem {
-    SNOW = 1; // nền tuyết
-    RIVER = 2; // sông
-    GRASS = 3; // bụi cỏ
-    BRICK = 4; // gạch
-    CONCRETE = 5; // bê tông
-    EAGLE_TOP_LEFT = 6; //góc trên trái đại bàng
-    EAGLE_TOP_RIGHT = 7; //góc trên phải đại bàng
-    EAGLE_BOT_LEFT = 8; //góc dưới trái đại bàng
-    EAGLE_BOT_RIGHT = 9; //góc dưới phải đại bàng
+    SNOW = 2; // nền tuyết
+    RIVER = 3; // sông
+    GRASS = 4; // bụi cỏ
+    BRICK = 5; // gạch
+    CONCRETE = 6; // bê tông
+    EAGLE_TOP_LEFT = 7; //góc trên trái đại bàng
+    EAGLE_TOP_RIGHT = 8; //góc trên phải đại bàng
+    EAGLE_BOT_LEFT = 9; //góc dưới trái đại bàng
+    EAGLE_BOT_RIGHT = 10; //góc dưới phải đại bàng
 }
 
 export class KeyExchange {

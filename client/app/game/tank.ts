@@ -14,7 +14,7 @@ export class Tank {
         this.sprite = this.game.add.sprite(240, 100, 'tank');
         this.sprite.anchor.set(0.5);
         this.game.physics.enable(this.sprite);
-        this.sprite.body.setSize(32, 32, 0, 0);
+        this.sprite.body.setSize(25, 30, 3.5, 1);
 
         this.sprite.animations.add("down", [0, 3], 10, false);
         this.sprite.animations.add("left", [1, 4], 10, false);
@@ -38,6 +38,7 @@ export class Tank {
         bullet.anchor.setTo(0.5, 0.5);
         bullet.reset(this.sprite.centerX, this.sprite.centerY);
         this.game.physics.enable(bullet);
+        bullet.body.setSize(4, 4, 2, 2);
 
         let aniName = this.sprite.animations.name;
         let speed = 300;

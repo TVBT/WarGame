@@ -6,5 +6,6 @@
       "/assets": "client/assets",
       "/share": "share"
     }
-  }
+  },
+  "online": true
 }
