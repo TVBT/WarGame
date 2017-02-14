@@ -76,13 +76,16 @@ export class Main {
     }
 
     startHttp(app, port) {
+        var path    = require("path");
         app.get('/', function (req, res) {
             res.send('Welcome to WarGame!')
         })
 
         app.get('/api', function (req, res) {
-            var path    = require("path");
             res.sendFile(path.join(__dirname+'/../docs/api.html'));
+        })
+        app.get('/assets/*', function (req, res) {
+            res.sendFile(path.join(__dirname+ '/../docs/'+req.url));
         })
 
         app.listen(port, function () {
