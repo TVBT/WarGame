@@ -1,4 +1,4 @@
-import {Player} from "../game/player";
+import {Player} from "./player";
 import {Room} from "./room";
 import {KeyExchange} from "../../share/keyexchange";
 /**

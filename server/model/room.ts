@@ -1,5 +1,5 @@
 import {KeyExchange} from "../../share/keyexchange";
-import {Player} from "../game/player";
+import {Player} from "./player";
 import {User} from "./user";
 import {TankGameLogic} from "../game/tankgamelogic";
 import {ConfigManager} from "../manager/configmanager";

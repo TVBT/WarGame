@@ -32,4 +32,14 @@ export class MapManager {
 
         return object;
     }
+
+    /**
+     * Remove 1 item ra khỏi Map
+     * @param row
+     * @param col
+     */
+    removeMapItem(row:number, col:number) {
+        let idx = this.getIndexByRowAndCol(row,col);
+        this.mapData[idx] = KeyExchange.MAP_ITEM.NONE;
+    }
 }
