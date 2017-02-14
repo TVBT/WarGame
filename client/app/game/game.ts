@@ -69,4 +69,25 @@ export class TankGame {
     render() {
 
     }
+
+    startCountdown(callback, seconds) {
+        var timer = this.game.time.events.loop(Phaser.Timer.SECOND, () => {
+            callback(seconds);
+            seconds--;
+            if (seconds <= 0) {
+                this.game.time.events.remove(timer);
+            }
+        }, this);
+    }
+
+    startClock(callback, limitSeconds=-1) {
+        var seconds = 0;
+        var timer = this.game.time.events.loop(Phaser.Timer.SECOND, () => {
+            callback(seconds);
+            seconds++;
+            if (limitSeconds > -1 && seconds >= limitSeconds) {
+                this.game.time.events.remove(timer);
+            }
+        }, this);
+    }
 }
