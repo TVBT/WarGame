@@ -41,6 +41,7 @@
             <li><a href="#sub2">Move</a></li>
 			<li><a href="#sub3">StopMove</a></li>
             <li><a href="#sub4">HitMapItem</a></li>
+			<li><a href="#sub5">Shoot</a></li>
         </ul>
     </div>
     <nav class="navbar-collapse collapse in navbar-inverse navbar-fixed-top" id="bs-navbar" aria-expanded="true">
@@ -357,6 +358,35 @@
                 </code>
         </ul>
     </div>
+
+	<div id="item">
+		<h2 id="sub5" class="anchor">* <strong>SHOOT</strong> *</h2>
+		<p>&lt;<em>Player phát lệnh bắn.</em>&gt;</p>
+
+		<ul>
+			<li><p><strong>IdCommand</strong></p>
+				<code>
+					<p>ACTION_IN_GAME:int = 9</p>
+				</code>
+			<li><p><strong>IdSubCommand</strong></p>
+				<code>
+					<p>SHOOT:int = 4</p>
+				</code>
+			<li><p><strong>Input:</strong></p>
+				<code>
+					<p>playerpos:Point (vị trí player khi bắn)</p>
+					<p>actiontime:number (thời điểm (milisecond) xảy ra action)</p>
+				</code>
+
+			<li><p><strong>Output:</strong></p>
+				<code>
+					<p>playerpos:Point (vị trí player khi bắn)</p>
+					<p>playeridaction:number (playerid thực hiện action)</p>
+					<p>actiontime:number (thời điểm (milisecond) xảy ra action)</p>
+				</code>
+		</ul>
+	</div>
+
 
 </div>
 

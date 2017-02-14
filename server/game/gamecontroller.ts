@@ -60,6 +60,15 @@ export  class GameController {
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.HIT_MAP_ITEM, this.currentRoom.getListUsers());
     }
 
+    public playerShoot(playerIdAction, playerPos, actionTime) {
+        let data = {
+            [KeyExchange.KEY_DATA.PLAYERID_ACTION] : playerIdAction,
+            [KeyExchange.KEY_DATA.PLAYER_POSITION] : playerPos,
+            [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime
+        }
+        this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.SHOOT, this.currentRoom.getListUsers());
+    }
+
     public sendResponseToUser(data, cmd, user) {
         var object = {
             command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
