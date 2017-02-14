@@ -14,25 +14,38 @@ export class TankGame {
 
     game; //Phaser
     gameData;
-    map: MapGame;
+    map:MapGame;
     explosion;
     listTank = [];
-    myTank: Tank;
-    playController: GameInput;
+    myTank:Tank;
+    playController:GameInput;
 
     constructor(private userService:UserService,
                 private commandService:CommandService) {
 
     }
 
-    setGameData(data) {
+    setGameData(data, callback) {
         this.gameData = data;
         this.game = new Phaser.Game(1280, 640, Phaser.AUTO, 'game-content', {
             preload: this.preload.bind(this),
-            create: this.create.bind(this),
+            create: () => {
+                this.create();
+                if (callback) {
+                    callback()
+                }
+            },
             update: this.update.bind(this),
             render: this.render.bind(this)
         });
+    }
+
+    stopGame() {
+        this.playController.stopped = true;
+    }
+
+    resumeGame() {
+        this.playController.stopped = false;
     }
 
     preload() {
@@ -78,7 +91,7 @@ export class TankGame {
         }
     }
 
-    checkCollision(tank: Tank) {
+    checkCollision(tank:Tank) {
         let bullets = tank.getBullets();
         for (let bullet of bullets) {
             if (bullet) {
@@ -89,7 +102,7 @@ export class TankGame {
                     this.map.hitBullet(bullet.centerX, bullet.centerY);
                 });
                 // check collision with other tanks
-                for (let otherTank: Tank of this.listTank) {
+                for (let otherTank:Tank of this.listTank) {
                     if (otherTank.playerId != tank.playerId) {
                         this.game.physics.arcade.collide(bullet, otherTank.sprite, () => {
                             bullet.kill();
@@ -114,19 +127,19 @@ export class TankGame {
 
     startCountdown(callback, seconds) {
         var timer = this.game.time.events.loop(Phaser.Timer.SECOND, () => {
-            callback(seconds);
             seconds--;
+            callback(seconds);
             if (seconds <= 0) {
                 this.game.time.events.remove(timer);
             }
         }, this);
     }
 
-    startClock(callback, limitSeconds=-1) {
+    startClock(callback, limitSeconds = -1) {
         var seconds = 0;
         var timer = this.game.time.events.loop(Phaser.Timer.SECOND, () => {
-            callback(seconds);
             seconds++;
+            callback(seconds);
             if (limitSeconds > -1 && seconds >= limitSeconds) {
                 this.game.time.events.remove(timer);
             }
