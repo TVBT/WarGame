@@ -91,7 +91,7 @@ export class Main {
     }
 
     receiveMessageHandler(msg, client) {
-        console.log("receive msg client --- cmd: " + msg.command + " --- data: " + JSON.stringify(msg.data));
+        console.log("RECEIVE Client msg --- cmd: " + msg.command + " --- data: " + JSON.stringify(msg.data));
 
         switch (msg.command) {
             case KeyExchange.KEY_COMMAND.CHECK_NICK_NAME:
@@ -238,7 +238,7 @@ export class Main {
         room.startGame();
         this.sendListUser(object, room.getListUsers());
 
-        console.log("send msg userJoinGame --- " + JSON.stringify(object));
+        console.log("SEND msg userJoinGame --- " + JSON.stringify(object));
     }
 
     sendUser(object, user:User) {
