@@ -18,6 +18,7 @@ export class TankGameLogic {
     constructor (room:Room) {
         this.controller = new GameController(this, room);
         this.currentRoom = room;
+        this.mapManager = new MapManager();
     };
 
     public startGame() {
