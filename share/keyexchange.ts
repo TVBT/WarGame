@@ -43,6 +43,7 @@ class KeyData {
     MAP_INFO = "mapinfo";
     MAP_ID = "mapid";
     MAP_DATA = "mapdata";
+    MAP_ITEM_ID = "mapitemid";
     LIST_PLAYER_POSITION = "listplayerposition";
     ROW_ID = "rowid";
     COL_ID = "colid";

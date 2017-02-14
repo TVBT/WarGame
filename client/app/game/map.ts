@@ -6,13 +6,15 @@ import {Rect} from "../../../share/math/primitive";
 export class MapGame {
 
     game;
+    commandService;
     map;
     floor;
     grass;
     sea;
 
-    constructor(game) {
+    constructor(game, commandService) {
         this.game = game;
+        this.commandService = commandService;
 
         //  Because we're loading CSV map data we have to specify the tile size here or we can't render it
         this.map = this.game.add.tilemap('tilemap');
@@ -40,6 +42,7 @@ export class MapGame {
     hitBrick(iCol, iRow) {
         var tile = this.map.getTile(iCol, iRow, this.floor);
         if (tile && tile.index == KeyExchange.MAP_ITEM.BRICK) {
+            this.commandService.hitMapItem(iCol, iRow, tile.index);
             this.map.removeTile(iCol, iRow, this.floor);
             return true;
         }

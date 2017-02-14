@@ -4,6 +4,7 @@ import {GameInput} from "./input";
 import {MapGame} from "./map";
 import {KeyExchange} from "../../../share/keyexchange";
 import {UserService} from "../services/user.service";
+import {CommandService} from "../services/command.service";
 /**
  * Created by binhlt on 13/02/2017.
  */
@@ -19,7 +20,8 @@ export class TankGame {
     myTank: Tank;
     playController: GameInput;
 
-    constructor(private userService:UserService) {
+    constructor(private userService:UserService,
+                private commandService:CommandService) {
 
     }
 

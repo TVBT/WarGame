@@ -73,6 +73,18 @@ export class CommandService {
         });
     }
 
+    hitMapItem(iRow, iCol, itemId) {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.HIT_MAP_ITEM,
+            data: {
+                [KeyExchange.KEY_DATA.ROW_ID]: iRow,
+                [KeyExchange.KEY_DATA.COL_ID]: iCol,
+                [KeyExchange.KEY_DATA.MAP_ITEM_ID]: itemId,
+                [KeyExchange.KEY_DATA.ACTION_TIME]: Date.now()
+            }
+        });
+    }
+
     handleMessage(msg) {
         if (this.socketReady) {
             this.onMessage.emit(msg);
