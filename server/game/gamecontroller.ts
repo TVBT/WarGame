@@ -6,6 +6,8 @@ import {TankGameLogic} from "./tankgamelogic";
 import {Room} from "../model/room";
 import {KeyExchange} from "../../share/keyexchange";
 import {Main} from "../mainserver";
+import {Point} from "../../share/math/primitive";
+import {User} from "../model/user";
 
 export  class GameController {
     private gameLogic:TankGameLogic;
@@ -16,7 +18,7 @@ export  class GameController {
         this.currentRoom = room;
     };
 
-    startGame() {
+    public startGame() {
         var data = {
 
         };
@@ -24,27 +26,29 @@ export  class GameController {
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.START_GAME, this.currentRoom.getListUsers());
     }
 
-    move() {
+    public move(playerId:number, posPoint:Point, direction:number) {
+        var userMove:User = this.currentRoom.getUserByPlayerId(playerId);
+        userMove.player.posPoint = posPoint;
+
         var data = {
-            //x,y
-            //hướng
-            //playerId
+            [KeyExchange.KEY_DATA.PLAYER_ID] : playerId,
+            [KeyExchange.KEY_DATA.PLAYER_POSITION] : posPoint,
+            [KeyExchange.KEY_DATA.PLAYER_DIRECTION] : direction
         };
 
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.MOVE, this.currentRoom.getListUsers());
     }
 
-    stopMove() {
+    public stopMove(playerId:number, posPoint:Point) {
         var data = {
-            //x,y
-            //hướng
-            //playerId
+            [KeyExchange.KEY_DATA.PLAYER_ID] : playerId,
+            [KeyExchange.KEY_DATA.PLAYER_POSITION] : posPoint
         };
 
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.STOP_MOVE, this.currentRoom.getListUsers());
     }
 
-    sendResponseToUser(data, cmd, user) {
+    public sendResponseToUser(data, cmd, user) {
         var object = {
             command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
             sub: cmd,
@@ -55,7 +59,7 @@ export  class GameController {
         console.log("send msg in game --- " + JSON.stringify(object));
     }
 
-    sendResponseToUsers(data, cmd, users) {
+    public sendResponseToUsers(data, cmd, users) {
         var object = {
             command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
             sub: cmd,

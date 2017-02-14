@@ -20,10 +20,13 @@ export class TankGameLogic {
     };
 
     public startGame() {
-        setTimeout(this.controller.startGame, ConfigManager.getInstance().startGameTime * 1000);
+        // setTimeout(this.controller.startGame, ConfigManager.getInstance().startGameTime * 1000);
+        setTimeout(function() {
+            this.controller.startGame();
+        }.bind(this), ConfigManager.getInstance().startGameTime * 1000);
     }
 
-    handleActionInGame(subId, data, client) {
+    public handleActionInGame(subId, data, client) {
         switch (subId) {
             case KeyExchange.KEY_COMMAND.MOVE:
                 this.handlePlayerMove(data, client);
@@ -36,12 +39,19 @@ export class TankGameLogic {
 
     }
 
-    handlePlayerMove(data, client) {
-        this.controller.move();
+    public handlePlayerMove(data, client) {
+        var playerId:number = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        var posPoint = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
+        var direction = data[KeyExchange.KEY_DATA.PLAYER_DIRECTION];
+
+        this.controller.move(playerId, posPoint, direction);
     }
 
-    handlePlayerStopMove(data, client) {
-        this.controller.stopMove();
+    public handlePlayerStopMove(data, client) {
+        var playerId:number = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        var posPoint = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
+
+        this.controller.stopMove(playerId, posPoint);
     }
 
     private initMapInfo(mapId: number) {

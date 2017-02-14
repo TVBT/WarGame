@@ -34,7 +34,9 @@
             <li><a href="#cmd8">UserLeaveLobbyRoom</a></li>
             <li class="divider"></li>
             <li class="dropdown-header">INGAME CMD</li>
-            <li><a href="#">Move</a></li>
+			<li><a href="#sub1">StartGame</a></li>
+            <li><a href="#sub2">Move</a></li>
+			<li><a href="#sub3">StopMove</a></li>
         </ul>
     </div>
     <nav class="navbar-collapse collapse in navbar-inverse navbar-fixed-top" id="bs-navbar" aria-expanded="true">
@@ -216,7 +218,7 @@
 		<ul>
 			<li><p><strong>IdCommand</strong></p>
 				<code>
-					<p>USER_LEAVE_LOBBY_ROOM:int = 9</p>
+					<p>USER_LEAVE_LOBBY_ROOM:int = 8</p>
 				</code>
 
 			<li><p><strong>Input:</strong></p>
@@ -234,6 +236,87 @@
                         <li>teamid:number</li>
                         <li>username:string</li>
                     </ul>
+				</code>
+		</ul>
+	</div>
+
+	<div id="item">
+		<h2 id="sub1">* <strong>START GAME</strong> *</h2>
+		<p>&lt;<em>Bắt đầu ván chơi.</em>&gt;</p>
+
+		<ul>
+			<li><p><strong>IdCommand</strong></p>
+				<code>
+					<p>ACTION_IN_GAME:int = 9</p>
+				</code>
+			<li><p><strong>IdSubCommand</strong></p>
+				<code>
+					<p>START_GAME:int = 1</p>
+				</code>
+			<li><p><strong>Input:</strong></p>
+				<code>
+					<p></p>
+				</code>
+
+			<li><p><strong>Output:</strong></p>
+				<code>
+
+				</code>
+		</ul>
+	</div>
+
+	<div id="item">
+		<h2 id="sub2">* <strong>MOVE</strong> *</h2>
+		<p>&lt;<em>Player di chuyển.</em>&gt;</p>
+
+		<ul>
+			<li><p><strong>IdCommand</strong></p>
+				<code>
+					<p>ACTION_IN_GAME:int = 9</p>
+				</code>
+			<li><p><strong>IdSubCommand</strong></p>
+				<code>
+					<p>MOVE:int = 2</p>
+				</code>
+			<li><p><strong>Input:</strong></p>
+				<code>
+					<p>playerid:number</p>
+					<p>playerposition:Point</p>
+					<p>playerdirection:number</p>
+				</code>
+
+			<li><p><strong>Output:</strong></p>
+				<code>
+					<p>playerid:number</p>
+					<p>playerposition:Point</p>
+					<p>playerdirection:number</p>
+				</code>
+		</ul>
+	</div>
+
+	<div id="item">
+		<h2 id="sub3">* <strong>STOP MOVE</strong> *</h2>
+		<p>&lt;<em>Player ngừng di chuyển.</em>&gt;</p>
+
+		<ul>
+			<li><p><strong>IdCommand</strong></p>
+				<code>
+					<p>ACTION_IN_GAME:int = 9</p>
+				</code>
+			<li><p><strong>IdSubCommand</strong></p>
+				<code>
+					<p>STOP_MOVE:int = 3</p>
+				</code>
+			<li><p><strong>Input:</strong></p>
+				<code>
+					<p>playerid:number</p>
+					<p>playerposition:Point</p>
+				</code>
+
+			<li><p><strong>Output:</strong></p>
+				<code>
+					<p>playerid:number</p>
+					<p>playerposition:Point</p>
 				</code>
 		</ul>
 	</div>

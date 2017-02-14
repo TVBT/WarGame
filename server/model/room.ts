@@ -184,7 +184,7 @@ export class Room {
         return count;
     }
 
-    getPostionPlayers() {
+    public getPostionPlayers() {
         var i = 0;
         var len = this.team1.length;
         var objPlayerPosArr = [];
@@ -210,4 +210,17 @@ export class Room {
         return objPlayerPosArr;
     }
 
+    public getUserByPlayerId(playerId:number) {
+        var users:Array<User> = this.getListUsers();
+        var i = 0;
+        var len = users.length;
+
+        for (i; i < len; i++) {
+            if (users[i].player.playerId == playerId) {
+                return users[i];
+            }
+        }
+
+        return null;
+    }
 }

@@ -10,8 +10,8 @@ class KeyCommand {
     USER_READY = 5;
     CHANGE_TEAM = 6;
     JOIN_GAME = 7;
-    ACTION_IN_GAME = 8;
-    USER_LEAVE_LOBBY_ROOM = 9;
+    USER_LEAVE_LOBBY_ROOM = 8;
+    ACTION_IN_GAME = 9;
 
     // sub command
     START_GAME = 1;
@@ -30,6 +30,7 @@ class KeyData {
     PLAYER_INFO = "playerinfo";
     PLAYER_ID = "playerid";
     PLAYER_POSITION = "playerposition";
+    PLAYER_DIRECTION = "playerdirection";
     READY_STATUS = "readystatus";
     TEAM_ID = "teamid";
     MESSAGE = "message";
@@ -39,6 +40,7 @@ class KeyData {
     MAP_ID = "mapid";
     MAP_DATA = "mapdata";
     LIST_PLAYER_POSITION = "listplayerposition";
+
 }
 
 class MapItem {
