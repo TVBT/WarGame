@@ -92,4 +92,27 @@ export class CommandService {
             console.log(msg);
         }
     }
+
+    move(playerId, position, velocity) {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
+            sub: KeyExchange.KEY_COMMAND.MOVE,
+            data: {
+                [KeyExchange.KEY_DATA.PLAYER_ID]: playerId,
+                [KeyExchange.KEY_DATA.PLAYER_POSITION]: position,
+                [KeyExchange.KEY_DATA.PLAYER_DIRECTION]: velocity
+            }
+        });
+    }
+
+    stopMove(playerId, position) {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
+            sub: KeyExchange.KEY_COMMAND.STOP_MOVE,
+            data: {
+                [KeyExchange.KEY_DATA.PLAYER_ID]: playerId,
+                [KeyExchange.KEY_DATA.PLAYER_POSITION]: position
+            }
+        });
+    }
 }

@@ -36,6 +36,12 @@ export class PlayScreen implements AfterViewInit, OnInit {
                         this.game.map.hitBrick(msg.data[KeyExchange.KEY_DATA.COL_ID],
                             msg.data[KeyExchange.KEY_DATA.ROW_ID]);
                         break;
+                    case KeyExchange.KEY_COMMAND.MOVE:
+                        this.game.onPlayerMove(msg.data);
+                        break;
+                    case KeyExchange.KEY_COMMAND.STOP_MOVE:
+                        this.game.onPlayerStopMove(msg.data);
+                        break;
                 }
             }
         })

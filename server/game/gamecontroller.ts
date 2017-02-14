@@ -26,7 +26,7 @@ export  class GameController {
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.START_GAME, this.currentRoom.getListUsers());
     }
 
-    public move(playerId:number, posPoint:Point, direction:number) {
+    public move(playerId:number, posPoint, direction) {
         var userMove:User = this.currentRoom.getUserByPlayerId(playerId);
         userMove.player.posPoint = posPoint;
 

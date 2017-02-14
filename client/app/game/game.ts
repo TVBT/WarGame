@@ -20,8 +20,8 @@ export class TankGame {
     myTank:Tank;
     playController:GameInput;
 
-    constructor(private userService:UserService,
-                private commandService:CommandService) {
+    constructor(public userService:UserService,
+                public commandService:CommandService) {
 
     }
 
@@ -75,7 +75,7 @@ export class TankGame {
 
         this.map.createGrass();
 
-        this.playController = new GameInput(this.game, this.myTank);
+        this.playController = new GameInput(this, this.myTank);
 
         this.explosion = this.game.add.sprite(0, 0, 'explosion');
         this.explosion.anchor.set(0.5, 0.5);
@@ -145,5 +145,31 @@ export class TankGame {
                 this.game.time.events.remove(timer);
             }
         }, this);
+    }
+
+    getTankById(playerId): Tank {
+        for (let tank of this.listTank) {
+            if (tank.playerId == playerId) {
+                return tank;
+            }
+        }
+        return null;
+    }
+
+    onPlayerMove(data) {
+        let playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        let tank: Tank = this.getTankById(playerId);
+        if (tank) {
+            tank.setPosition(data[KeyExchange.KEY_DATA.PLAYER_POSITION]);
+            tank.setVelocity(data[KeyExchange.KEY_DATA.PLAYER_DIRECTION]);
+        }
+    }
+
+    onPlayerStopMove(data) {
+        let playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        let tank: Tank = this.getTankById(playerId);
+        if (tank) {
+            tank.setPosition(data[KeyExchange.KEY_DATA.PLAYER_POSITION]);
+        }
     }
 }

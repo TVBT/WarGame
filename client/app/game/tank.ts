@@ -69,4 +69,32 @@ export class Tank {
     getBullets() {
         return this.bullets.children.filter((child) => child.alive);
     }
+
+    setPosition(point) {
+        this.sprite.reset(point.x, point.y);
+    }
+
+    setVelocity(velocity) {
+        if (velocity.x == 0) {
+            if (velocity.y > 0) {
+                this.sprite.animations.play("down");
+                this.sprite.body.setSize(25, 30, 3.5, 1);
+            } else if (velocity.y < 0) {
+                this.sprite.animations.play("up");
+                this.sprite.body.setSize(25, 30, 3.5, 1);
+            }
+        } else if (velocity.y == 0) {
+            if (velocity.x > 0) {
+                this.sprite.animations.play("right");
+                this.sprite.body.setSize(30, 25, 1, 3.5);
+            } else if (velocity.x < 0) {
+                this.sprite.animations.play("left");
+                this.sprite.body.setSize(30, 25, 1, 3.5);
+            }
+        } else {
+            return;
+        }
+        this.sprite.body.angularVelocity = 0;
+        this.sprite.body.velocity.set(velocity.x, velocity.y);
+    }
 }
