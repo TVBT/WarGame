@@ -30,7 +30,11 @@ export class PlayScreen implements AfterViewInit, OnInit {
                 let subCommand = msg.sub;
                 switch (subCommand) {
                     case KeyExchange.KEY_COMMAND.START_GAME:
-                        this.game.resumeGame();
+                        // this.game.resumeGame();
+                        break;
+                    case KeyExchange.KEY_COMMAND.HIT_MAP_ITEM:
+                        this.game.map.hitBrick(msg.data[KeyExchange.KEY_DATA.COL_ID],
+                            msg.data[KeyExchange.KEY_DATA.ROW_ID]);
                         break;
                 }
             }
@@ -49,7 +53,7 @@ export class PlayScreen implements AfterViewInit, OnInit {
 
     ngAfterViewInit() {
         this.game.setGameData(this.data, () => {
-            this.game.stopGame();
+            // this.game.stopGame();
             this.game.startCountdown(seconds => this.startTime = seconds, this.startTime);
         });
     }

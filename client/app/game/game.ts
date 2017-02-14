@@ -58,6 +58,7 @@ export class TankGame {
 
     create() {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
+        this.game.stage.disableVisibilityChange = true;
 
         this.map = new MapGame(this.game, this.commandService);
         this.map.createFloor();
@@ -102,7 +103,7 @@ export class TankGame {
                     this.map.hitBullet(bullet.centerX, bullet.centerY);
                 });
                 // check collision with other tanks
-                for (let otherTank:Tank of this.listTank) {
+                for (let otherTank of this.listTank) {
                     if (otherTank.playerId != tank.playerId) {
                         this.game.physics.arcade.collide(bullet, otherTank.sprite, () => {
                             bullet.kill();
