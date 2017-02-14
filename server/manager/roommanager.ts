@@ -1,9 +1,9 @@
-import {Player} from "../model/player";
-import {Room} from "../model/room";
-import {User} from "../model/user";
 /**
  * Created by vutp on 2/7/2017.
  */
+
+import {Room} from "../model/room";
+import {User} from "../model/user";
 
 export class RoomManager {
     public rooms = [];

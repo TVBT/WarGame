@@ -16,7 +16,7 @@ class KeyCommand {
     // sub command
     START_GAME = 1;
     MOVE = 2;
-
+    STOP_MOVE = 3;
 }
 
 class KeyData {

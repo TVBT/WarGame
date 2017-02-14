@@ -1,8 +1,8 @@
 import {KeyExchange} from "../../share/keyexchange";
-import {Player} from "./player";
 import {User} from "./user";
 import {TankGameLogic} from "../game/tankgamelogic";
 import {ConfigManager} from "../manager/configmanager";
+import {Player} from "./player";
 /**
  * Created by vutp on 2/7/2017.
  */
