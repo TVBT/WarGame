@@ -4,14 +4,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
         #mainContent {
-            margin: 50px 10px 10px 10px;
+            margin: 0px 10px 10px 10px;
 
         }
         #item {
-            margin-bottom: 50px;
+            margin-bottom: 0px;
         }
         code {
             padding: 0 0 !important;
+        }
+        .anchor {
+            padding-top: 50px;
         }
     </style>
 </head>
@@ -20,7 +23,7 @@
 
 <div class="container">
     <div class="dropdown navbar-fixed-top navbar-inverse" style="padding: 5px 0px;">
-        <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">API LIST
+        <button style="margin-left: 5px;" class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">API LIST
             <span class="caret"></span></button>
         <ul class="dropdown-menu">
             <li class="dropdown-header">GENERAL CMD</li>
@@ -47,7 +50,7 @@
 <div id="mainContent">
 
     <div id="item">
-    <h2 id="cmd1">* <strong>CHECK NICK NAME</strong> *</h2>
+    <h2 id="cmd1" class="anchor">* <strong>CHECK NICK NAME</strong> *</h2>
     <p>&lt;<em>Kiểm tra nickname đã tồn tại hay chưa.</em>&gt;</p>
 
     <ul>
@@ -69,7 +72,7 @@
     </div>
 
     <div id="item">
-    <h2 id="cmd2">* <strong>AUTO JOIN ROOM</strong> *</h2>
+    <h2 id="cmd2" class="anchor">* <strong>AUTO JOIN ROOM</strong> *</h2>
     <p>&lt;<em>User nhấn tham gia, server tự đẩy vào 1 room phù hợp.</em>&gt;</p>
 
     <ul>
@@ -93,7 +96,7 @@
     </div>
 
     <div id="item">
-    <h2 id="cmd3">* <strong>GET ROOM INFO</strong> *</h2>
+    <h2 id="cmd3" class="anchor">* <strong>GET ROOM INFO</strong> *</h2>
     <p>&lt;<em>Trả về thông tin room mà user đang tham gia.</em>&gt;</p>
 
     <ul>
@@ -119,7 +122,7 @@
 
 
 	<div id="item">
-		<h2 id="cmd4">* <strong>USER JOIN LOBBY ROOM</strong> *</h2>
+		<h2 id="cmd4" class="anchor">* <strong>USER JOIN LOBBY ROOM</strong> *</h2>
 		<p>&lt;<em>Trả về thông tin user vừa join cho các users có trong room.</em>&gt;</p>
 
 		<ul>
@@ -142,7 +145,7 @@
 	</div>
 
 	<div id="item">
-		<h2 id="cmd5">* <strong>USER_READY</strong> *</h2>
+		<h2 id="cmd5" class="anchor">* <strong>USER_READY</strong> *</h2>
 		<p>&lt;<em>Trả về trạng thái sẵn sàng cho user.</em>&gt;</p>
 
 		<ul>
@@ -164,7 +167,7 @@
 	</div>
 
 	<div id="item">
-		<h2 id="cmd6">* <strong>CHANGE TEAM</strong> *</h2>
+		<h2 id="cmd6" class="anchor">* <strong>CHANGE TEAM</strong> *</h2>
 		<p>&lt;<em>Trả về thông tin change team cho user.</em>&gt;</p>
 
 		<ul>
@@ -188,7 +191,7 @@
 	</div>
 
 	<div id="item">
-		<h2 id="cmd7">* <strong>JOIN_GAME</strong> *</h2>
+		<h2 id="cmd7" class="anchor">* <strong>JOIN_GAME</strong> *</h2>
 		<p>&lt;<em>Trả về thông tin trong game.</em>&gt;</p>
 
 		<ul>
@@ -212,7 +215,7 @@
 	</div>
 
 	<div id="item">
-		<h2 id="cmd8">* <strong>USER LEAVE LOBBY ROOM</strong> *</h2>
+		<h2 id="cmd8" class="anchor">* <strong>USER LEAVE LOBBY ROOM</strong> *</h2>
 		<p>&lt;<em>User thoát khỏi phòng chờ. (client tự thoát thì gửi command này. Hoặc trong room có người thoát, client sẽ nhận dc command này.</em>&gt;</p>
 
 		<ul>
