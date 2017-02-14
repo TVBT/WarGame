@@ -15,6 +15,7 @@ export class Tank {
         this.sprite.anchor.set(0.5);
         this.game.physics.enable(this.sprite);
         this.sprite.body.setSize(25, 30, 3.5, 1);
+        this.sprite.body.collideWorldBounds=true;
 
         this.sprite.animations.add("down", [0, 3], 10, false);
         this.sprite.animations.add("left", [1, 4], 10, false);

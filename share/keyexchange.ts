@@ -16,7 +16,7 @@ class KeyCommand {
     // sub command
     START_GAME = 1;
     MOVE = 2;
-
+    STOP_MOVE = 3;
 }
 
 class KeyData {
@@ -42,7 +42,7 @@ class KeyData {
 }
 
 class MapItem {
-    NONE = 0 //nền rỗng
+    NONE = 0; //nền rỗng
     SNOW = 2; // nền tuyết
     RIVER = 3; // sông
     GRASS = 4; // bụi cỏ

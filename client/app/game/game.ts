@@ -49,6 +49,7 @@ export class TankGame {
 
     update() {
         this.game.physics.arcade.collide(this.myTank.sprite, this.map.floor);
+        this.game.physics.arcade.collide(this.myTank.sprite, this.map.sea);
         this.playController.update();
 
         let bullets = this.myTank.getBullets();

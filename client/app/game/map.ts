@@ -9,6 +9,7 @@ export class MapGame {
     map;
     floor;
     grass;
+    sea;
 
     constructor(game) {
         this.game = game;
@@ -17,8 +18,6 @@ export class MapGame {
         this.map = this.game.add.tilemap('tilemap');
         //  Now add in the tileset
         this.map.addTilesetImage('assetmap');
-        this.map.setCollisionBetween(KeyExchange.MAP_ITEM.SNOW, KeyExchange.MAP_ITEM.RIVER);
-        this.map.setCollisionBetween(KeyExchange.MAP_ITEM.BRICK, KeyExchange.MAP_ITEM.EAGLE_BOT_RIGHT);
     }
 
     createFloor() {
@@ -26,6 +25,12 @@ export class MapGame {
         this.floor = this.map.createLayer('floor');
         //  Resize the world
         this.floor.resizeWorld();
+        this.sea = this.map.createLayer('sea');
+
+        this.map.setCollisionBetween(KeyExchange.MAP_ITEM.SNOW, KeyExchange.MAP_ITEM.EAGLE_BOT_RIGHT, true, this.floor);
+        this.map.setCollisionBetween(KeyExchange.MAP_ITEM.BRICK, KeyExchange.MAP_ITEM.EAGLE_BOT_RIGHT, true, this.floor);
+        this.map.setCollisionBetween(KeyExchange.MAP_ITEM.RIVER, KeyExchange.MAP_ITEM.RIVER, true, this.sea);
+
     }
 
     createGrass() {

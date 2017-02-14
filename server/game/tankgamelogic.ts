@@ -5,7 +5,6 @@
 import {GameController} from './gamecontroller';
 import {Room} from "../model/room";
 import {MapManager} from "./map/mapmanager";
-import {Main} from "../mainserver";
 import {ConfigManager} from "../manager/configmanager";
 import {KeyExchange} from "../../share/keyexchange";
 
@@ -21,13 +20,7 @@ export class TankGameLogic {
     };
 
     public startGame() {
-        setTimeout(function () {
-            var data = {
-
-            };
-
-            this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.START_GAME, this.currentRoom.getListUsers());
-        }.bind(this), ConfigManager.getInstance().startGameTime * 1000);
+        setTimeout(this.controller.startGame, ConfigManager.getInstance().startGameTime * 1000);
     }
 
     handleActionInGame(subId, data, client) {
@@ -35,12 +28,20 @@ export class TankGameLogic {
             case KeyExchange.KEY_COMMAND.MOVE:
                 this.handlePlayerMove(data, client);
                 break;
+
+            case KeyExchange.KEY_COMMAND.STOP_MOVE:
+                this.handlePlayerStopMove(data, client);
+                break;
         }
 
     }
 
     handlePlayerMove(data, client) {
+        this.controller.move();
+    }
 
+    handlePlayerStopMove(data, client) {
+        this.controller.stopMove();
     }
 
     private initMapInfo(mapId: number) {
