@@ -8,10 +8,11 @@ export class Tank {
     bullets;
     playerId;
 
-    constructor(game) {
+    constructor(game, playerId, playerPos) {
         this.game = game;
+        this.playerId = playerId;
 
-        this.sprite = this.game.add.sprite(240, 100, 'tank');
+        this.sprite = this.game.add.sprite(playerPos.x, playerPos.y, 'tank');
         this.sprite.anchor.set(0.5);
         this.game.physics.enable(this.sprite);
         this.sprite.body.setSize(25, 30, 3.5, 1);
