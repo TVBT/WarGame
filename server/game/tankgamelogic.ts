@@ -7,6 +7,7 @@ import {Room} from "../model/room";
 import {MapManager} from "./map/mapmanager";
 import {ConfigManager} from "../manager/configmanager";
 import {KeyExchange} from "../../share/keyexchange";
+import {User} from "../model/user";
 
 export class TankGameLogic {
     public controller: GameController;
@@ -31,15 +32,17 @@ export class TankGameLogic {
             case KeyExchange.KEY_COMMAND.MOVE:
                 this.handlePlayerMove(data, client);
                 break;
-
             case KeyExchange.KEY_COMMAND.STOP_MOVE:
                 this.handlePlayerStopMove(data, client);
+                break;
+            case KeyExchange.KEY_COMMAND.HIT_MAP_ITEM:
+                this.handlePlayerHitMapItem(data, client);
                 break;
         }
 
     }
 
-    public handlePlayerMove(data, client) {
+    private handlePlayerMove(data, client) {
         var playerId:number = data[KeyExchange.KEY_DATA.PLAYER_ID];
         var posPoint = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
         var direction = data[KeyExchange.KEY_DATA.PLAYER_DIRECTION];
@@ -47,11 +50,21 @@ export class TankGameLogic {
         this.controller.move(playerId, posPoint, direction);
     }
 
-    public handlePlayerStopMove(data, client) {
+    private handlePlayerStopMove(data, client) {
         var playerId:number = data[KeyExchange.KEY_DATA.PLAYER_ID];
         var posPoint = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
 
         this.controller.stopMove(playerId, posPoint);
+    }
+
+    private handlePlayerHitMapItem(data, client) {
+        let rowId:number = data[KeyExchange.KEY_DATA.ROW_ID];
+        let colId:number = data[KeyExchange.KEY_DATA.COL_ID];
+        let itemId:number = data[KeyExchange.KEY_DATA.MAP_ITEM_ID];
+        let actionTime:number = data[KeyExchange.KEY_DATA.ACTION_TIME];
+        let userAction:User = this.currentRoom.getUserByClientId(client.id);
+
+        this.controller.playerHitMapItem(1, userAction.player.playerId, rowId, colId, itemId, actionTime);
     }
 
     private initMapInfo(mapId: number) {

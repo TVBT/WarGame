@@ -48,7 +48,7 @@ class KeyData {
     ROW_ID = "rowid";
     COL_ID = "colid";
     ACTION_TIME = "actiontime";
-
+    PLAYERID_ACTION = "playeridaction";
 }
 
 class MapItem {

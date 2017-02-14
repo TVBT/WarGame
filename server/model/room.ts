@@ -223,4 +223,18 @@ export class Room {
 
         return null;
     }
+
+    public getUserByClientId(clientId:string) {
+        var users:Array<User> = this.getListUsers();
+        var i = 0;
+        var len = users.length;
+
+        for (i; i < len; i++) {
+            if (users[i].client.id == clientId) {
+                return users[i];
+            }
+        }
+
+        return null;
+    }
 }
