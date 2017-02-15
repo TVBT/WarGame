@@ -72,7 +72,10 @@ export  class GameController {
     }
 
     public playerHitTank(playerIdShoot, playerIdBeShoot, actionTime) {
+        let status = 1;
+
         let data = {
+            [KeyExchange.KEY_DATA.STATUS] : status,
             [KeyExchange.KEY_DATA.PLAYERID_SHOOT] : playerIdShoot,
             [KeyExchange.KEY_DATA.PLAYERID_BE_SHOOT] : playerIdBeShoot,
             [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime
