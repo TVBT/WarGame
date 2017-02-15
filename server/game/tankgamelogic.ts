@@ -108,10 +108,11 @@ export class TankGameLogic {
 
     private handlePlayerHitTank(data, client) {
         let playerIdBeShoot = data[KeyExchange.KEY_DATA.PLAYERID_BE_SHOOT];
+        let idBullet:number = data[KeyExchange.KEY_DATA.BULLET_ID];
         let actionTime:number = data[KeyExchange.KEY_DATA.ACTION_TIME];
         let userShoot:User = this.currentRoom.getUserByClientId(client.id);
 
-        this.controller.playerHitTank(userShoot.player.playerId, playerIdBeShoot, actionTime);
+        this.controller.playerHitTank(userShoot.player.playerId, playerIdBeShoot, actionTime, idBullet);
     }
 
     private handlePlayerReborn(data, client) {

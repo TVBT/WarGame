@@ -74,7 +74,7 @@ export  class GameController {
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.SHOOT, this.currentRoom.getListUsers());
     }
 
-    public playerHitTank(playerIdShoot, playerIdBeShoot, actionTime) {
+    public playerHitTank(playerIdShoot, playerIdBeShoot, actionTime, idBullet) {
         var userBeShoot:User = this.currentRoom.getUserByPlayerId(playerIdBeShoot);
         userBeShoot.player.status = KeyExchange.TANK_PLAYER_STATUS.DEAD;
 
@@ -83,6 +83,7 @@ export  class GameController {
         let data = {
             [KeyExchange.KEY_DATA.STATUS] : status,
             [KeyExchange.KEY_DATA.PLAYERID_SHOOT] : playerIdShoot,
+            [KeyExchange.KEY_DATA.BULLET_ID] : idBullet,
             [KeyExchange.KEY_DATA.PLAYERID_BE_SHOOT] : playerIdBeShoot,
             [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime,
             [KeyExchange.KEY_DATA.REBORN_TIME] : ConfigManager.getInstance().rebornTime
