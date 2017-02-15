@@ -13,6 +13,7 @@ export class Player {
     //game info
     public posPoint:Point;
     public status:string;
+    private listBullet = [];
 
     constructor() {
         this.playerId = -1;
@@ -36,5 +37,18 @@ export class Player {
         };
 
         return object;
+    }
+
+    fireBullet(id:number) {
+        this.listBullet.push(id);
+    }
+
+    destroyBullet(id:number) {
+        var index = this.listBullet.indexOf(id, 0);
+        if (index > -1) {
+            this.listBullet.splice(index, 1);
+            return true;
+        }
+        return false;
     }
 }

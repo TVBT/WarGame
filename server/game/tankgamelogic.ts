@@ -69,24 +69,37 @@ export class TankGameLogic {
         this.controller.stopMove(playerId, posPoint);
     }
 
+    /**
+     * Khi đạn của chính mình gây bể map item, Player bắn đạn ra sẽ gửi command này
+     * @param data
+     * @param client
+     */
     private handlePlayerHitMapItem(data, client) {
         let rowId:number = data[KeyExchange.KEY_DATA.ROW_ID];
         let colId:number = data[KeyExchange.KEY_DATA.COL_ID];
         let itemId:number = data[KeyExchange.KEY_DATA.MAP_ITEM_ID];
+        let idBullet:number = data[KeyExchange.KEY_DATA.ID_BULLET];
         let actionTime:number = data[KeyExchange.KEY_DATA.ACTION_TIME];
         let userAction:User = this.currentRoom.getUserByClientId(client.id);
-        let status:number = 1;
+        let status:number = (userAction.player.destroyBullet(idBullet) == true)?1:0;
 
-        this.controller.playerHitMapItem(status, userAction.player.playerId, rowId, colId, itemId, actionTime);
+        this.controller.playerHitMapItem(status, userAction.player.playerId, rowId, colId, itemId, actionTime, idBullet);
     }
 
+    /**
+     * Player gửi lệnh bắn ra viên đạn
+     * @param data
+     * @param client
+     */
     private handlePlayerShoot(data, client) {
         let playerPos = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
         var direction = data[KeyExchange.KEY_DATA.BULLET_DIRECTION];
         let actionTime:number = data[KeyExchange.KEY_DATA.ACTION_TIME];
+        let idBullet:number = data[KeyExchange.KEY_DATA.ID_BULLET];
         let userAction:User = this.currentRoom.getUserByClientId(client.id);
+        userAction.player.fireBullet(idBullet);
 
-        this.controller.playerShoot(userAction.player.playerId, playerPos, direction, actionTime);
+        this.controller.playerShoot(userAction.player.playerId, playerPos, direction, actionTime, idBullet);
     }
 
     private handlePlayerHitTank(data, client) {

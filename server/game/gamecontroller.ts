@@ -48,23 +48,25 @@ export  class GameController {
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.STOP_MOVE, this.currentRoom.getListUsers());
     }
 
-    public playerHitMapItem(status, playerIdAction, rowId, colId, itemId, actionTime) {
+    public playerHitMapItem(status, playerIdAction, rowId, colId, itemId, actionTime, idBullet) {
         let data = {
             [KeyExchange.KEY_DATA.STATUS] : status,
             [KeyExchange.KEY_DATA.MAP_ITEM_ID] : itemId,
             [KeyExchange.KEY_DATA.ROW_ID] : rowId,
             [KeyExchange.KEY_DATA.COL_ID] : colId,
+            [KeyExchange.KEY_DATA.ID_BULLET] : idBullet,
             [KeyExchange.KEY_DATA.PLAYERID_ACTION] : playerIdAction,
             [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime
         };
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.HIT_MAP_ITEM, this.currentRoom.getListUsers());
     }
 
-    public playerShoot(playerIdAction, playerPos, direction, actionTime) {
+    public playerShoot(playerIdAction, playerPos, direction, actionTime, idBullet) {
         let data = {
             [KeyExchange.KEY_DATA.PLAYERID_ACTION] : playerIdAction,
             [KeyExchange.KEY_DATA.PLAYER_POSITION] : playerPos,
             [KeyExchange.KEY_DATA.BULLET_DIRECTION] : direction,
+            [KeyExchange.KEY_DATA.ID_BULLET] : idBullet,
             [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime
         };
 
