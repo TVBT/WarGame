@@ -50,6 +50,8 @@ class KeyData {
     COL_ID = "colid";
     ACTION_TIME = "actiontime";
     PLAYERID_ACTION = "playeridaction";
+    PLAYERID_SHOOT = "playeridshoot";
+    PLAYERID_BE_SHOOT = "playeridbeshoot";
 }
 
 class MapItem {

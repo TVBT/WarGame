@@ -34,25 +34,24 @@ export class TankGameLogic {
             case KeyExchange.KEY_COMMAND.MOVE:
                 this.handlePlayerMove(data, client);
                 break;
+
             case KeyExchange.KEY_COMMAND.STOP_MOVE:
                 this.handlePlayerStopMove(data, client);
                 break;
+
             case KeyExchange.KEY_COMMAND.HIT_MAP_ITEM:
                 this.handlePlayerHitMapItem(data, client);
                 break;
+
             case KeyExchange.KEY_COMMAND.SHOOT:
                 this.handlePlayerShoot(data, client);
                 break;
+
+            case KeyExchange.KEY_COMMAND.HIT_TANK:
+                this.handlePlayerHitTank(data, client);
+                break;
         }
 
-    }
-
-    private handlePlayerShoot(data, client) {
-        let playerPos = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
-        let actionTime:number = data[KeyExchange.KEY_DATA.ACTION_TIME];
-        let userAction:User = this.currentRoom.getUserByClientId(client.id);
-
-        this.controller.playerShoot(userAction.player.playerId,playerPos, actionTime);
     }
 
     private handlePlayerMove(data, client) {
@@ -79,6 +78,22 @@ export class TankGameLogic {
         let status:number = 1;
 
         this.controller.playerHitMapItem(status, userAction.player.playerId, rowId, colId, itemId, actionTime);
+    }
+
+    private handlePlayerShoot(data, client) {
+        let playerPos = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
+        let actionTime:number = data[KeyExchange.KEY_DATA.ACTION_TIME];
+        let userAction:User = this.currentRoom.getUserByClientId(client.id);
+
+        this.controller.playerShoot(userAction.player.playerId, playerPos, actionTime);
+    }
+
+    private handlePlayerHitTank(data, client) {
+        let playerIdBeShoot = data[KeyExchange.KEY_DATA.PLAYERID_BE_SHOOT];
+        let actionTime:number = data[KeyExchange.KEY_DATA.ACTION_TIME];
+        let userShoot:User = this.currentRoom.getUserByClientId(client.id);
+
+        this.controller.playerHitTank(userShoot.player.playerId, playerIdBeShoot, actionTime);
     }
 
     private initMapInfo(mapId: number) {

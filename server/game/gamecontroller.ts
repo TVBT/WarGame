@@ -19,7 +19,7 @@ export  class GameController {
     };
 
     public startGame() {
-        var data = {
+        let data = {
 
         };
 
@@ -27,7 +27,7 @@ export  class GameController {
     }
 
     public move(playerId:number, posPoint, direction) {
-        var userMove:User = this.currentRoom.getUserByPlayerId(playerId);
+        let userMove:User = this.currentRoom.getUserByPlayerId(playerId);
         userMove.player.posPoint = posPoint;
 
         var data = {
@@ -40,7 +40,7 @@ export  class GameController {
     }
 
     public stopMove(playerId:number, posPoint:Point) {
-        var data = {
+        let data = {
             [KeyExchange.KEY_DATA.PLAYER_ID] : playerId,
             [KeyExchange.KEY_DATA.PLAYER_POSITION] : posPoint
         };
@@ -65,12 +65,23 @@ export  class GameController {
             [KeyExchange.KEY_DATA.PLAYERID_ACTION] : playerIdAction,
             [KeyExchange.KEY_DATA.PLAYER_POSITION] : playerPos,
             [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime
-        }
+        };
+
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.SHOOT, this.currentRoom.getListUsers());
     }
 
+    public playerHitTank(playerIdShoot, playerIdBeShoot, actionTime) {
+        let data = {
+            [KeyExchange.KEY_DATA.PLAYERID_SHOOT] : playerIdShoot,
+            [KeyExchange.KEY_DATA.PLAYERID_BE_SHOOT] : playerIdBeShoot,
+            [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime
+        };
+
+        this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.HIT_TANK, this.currentRoom.getListUsers());
+    }
+
     public sendResponseToUser(data, cmd, user) {
-        var object = {
+        let object = {
             command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
             sub: cmd,
             data: data
@@ -81,7 +92,7 @@ export  class GameController {
     }
 
     public sendResponseToUsers(data, cmd, users) {
-        var object = {
+        let object = {
             command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
             sub: cmd,
             data: data

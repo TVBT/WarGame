@@ -41,8 +41,9 @@
 			<li><a href="#sub1">StartGame</a></li>
             <li><a href="#sub2">Move</a></li>
 			<li><a href="#sub3">StopMove</a></li>
-            <li><a href="#sub4">HitMapItem</a></li>
-			<li><a href="#sub5">Shoot</a></li>
+			<li><a href="#sub4">Shoot</a></li>
+			<li><a href="#sub5">HitMapItem</a></li>
+			<li><a href="#sub6">HitTank</a></li>
         </ul>
     </div>
     <nav class="navbar-collapse collapse in navbar-inverse navbar-fixed-top" id="bs-navbar" aria-expanded="true">
@@ -348,8 +349,36 @@
 		</ul>
 	</div>
 
+	<div id="item">
+		<h2 id="sub4" class="anchor">* <strong>SHOOT</strong> *</h2>
+		<p>&lt;<em>Player phát lệnh bắn.</em>&gt;</p>
+
+		<ul>
+			<li><p><strong>IdCommand</strong></p>
+				<code>
+					<p>ACTION_IN_GAME:int = 9</p>
+				</code>
+			<li><p><strong>IdSubCommand</strong></p>
+				<code>
+					<p>SHOOT:int = 4</p>
+				</code>
+			<li><p><strong>Input:</strong></p>
+				<code>
+					<p>playerpos:Point (vị trí player khi bắn)</p>
+					<p>actiontime:number (thời điểm (milisecond) xảy ra action)</p>
+				</code>
+
+			<li><p><strong>Output:</strong></p>
+				<code>
+					<p>playerpos:Point (vị trí player khi bắn)</p>
+					<p>playeridaction:number (playerid thực hiện action)</p>
+					<p>actiontime:number (thời điểm (milisecond) xảy ra action)</p>
+				</code>
+		</ul>
+	</div>
+
     <div id="item">
-        <h2 id="sub4" class="anchor">* <strong>HIT MAP ITEM</strong> *</h2>
+        <h2 id="sub5" class="anchor">* <strong>HIT MAP ITEM</strong> *</h2>
         <p>&lt;<em>Đạn trúng item trên MAP.</em>&gt;</p>
 
         <ul>
@@ -382,8 +411,8 @@
     </div>
 
 	<div id="item">
-		<h2 id="sub5" class="anchor">* <strong>SHOOT</strong> *</h2>
-		<p>&lt;<em>Player phát lệnh bắn.</em>&gt;</p>
+		<h2 id="sub6" class="anchor">* <strong>HIT TANK</strong> *</h2>
+		<p>&lt;<em>Player bắn trúng player khác.</em>&gt;</p>
 
 		<ul>
 			<li><p><strong>IdCommand</strong></p>
@@ -392,22 +421,24 @@
 				</code>
 			<li><p><strong>IdSubCommand</strong></p>
 				<code>
-					<p>SHOOT:int = 4</p>
+					<p>HIT_TANK:int = 6</p>
 				</code>
 			<li><p><strong>Input:</strong></p>
 				<code>
-					<p>playerpos:Point (vị trí player khi bắn)</p>
+					<p>playeridbeshoot:number (playerid của player bị bắn)</p>
 					<p>actiontime:number (thời điểm (milisecond) xảy ra action)</p>
 				</code>
 
 			<li><p><strong>Output:</strong></p>
 				<code>
-					<p>playerpos:Point (vị trí player khi bắn)</p>
-					<p>playeridaction:number (playerid thực hiện action)</p>
+					<p>playeridshoot:number (playerid của player bắn)</p>
+					<p>playeridbeshoot:number (playerid của player bị bắn)</p>
 					<p>actiontime:number (thời điểm (milisecond) xảy ra action)</p>
 				</code>
 		</ul>
 	</div>
+
+
 
 
 </div>

@@ -16,6 +16,7 @@ export class Room {
     public team2:Array<User>;                       // Danh sách user ở đội 2
     private automicPlayerId:number;
     public gameLogic:TankGameLogic;
+    public isPlaying:boolean;
 
     constructor() {
         this.roomId = -1;
@@ -114,6 +115,7 @@ export class Room {
 
     startGame() {
         this.gameLogic.startGame();
+        this.isPlaying = true;
     }
 
     handleActionInGame(subId, data, client) {

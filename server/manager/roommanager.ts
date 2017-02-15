@@ -44,7 +44,7 @@ export class RoomManager {
 
         for (i; i < len; i++) {
             var room:Room = this.rooms[i];
-            if (!room.isFull()) {
+            if (!room.isPlaying && !room.isFull()) {
                 return room;
             }
         }
