@@ -13,6 +13,7 @@ import {UserService} from "./services/user.service";
 import {CommandService} from "./services/command.service";
 import {StateService} from "./services/state.service";
 import {ClockPipe} from "./app.pipe";
+import {PingComponent} from "./components/ping.component";
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import {ClockPipe} from "./app.pipe";
         LoginScreen,
         LobbyScreen,
         PlayScreen,
+        PingComponent,
 
         //Pipes
         ClockPipe

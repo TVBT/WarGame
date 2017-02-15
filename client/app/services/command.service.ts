@@ -10,6 +10,7 @@ export class CommandService {
     socket;
     socketReady = false;
     onMessage = new EventEmitter();
+    socketReadyListener = new EventEmitter();
 
     constructor(private stateService:StateService) {
 
@@ -23,6 +24,7 @@ export class CommandService {
         this.socket.on('connect', () => {
             this.socketReady = true;
             this.stateService.showLogin();
+            this.socketReadyListener.emit();
         });
         this.socket.on('event', this.handleMessage.bind(this));
         this.socket.on('disconnect', () => {
@@ -113,6 +115,13 @@ export class CommandService {
                 [KeyExchange.KEY_DATA.PLAYER_ID]: playerId,
                 [KeyExchange.KEY_DATA.PLAYER_POSITION]: position
             }
+        });
+    }
+
+    ping() {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.PING_PONG,
+            data: {}
         });
     }
 }

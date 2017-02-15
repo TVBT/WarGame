@@ -13,6 +13,7 @@ import {CommandService} from "./services/command.service";
         <lobby-screen *ngIf="screenState=='${SCREEN_STATE.LOBBY}'" [data]='data' ></lobby-screen>
         <play-screen *ngIf="screenState=='${SCREEN_STATE.PLAY}'" [data]='data' ></play-screen>
     </div>
+    <ping class="ping"></ping>
   `,
     styles: [
         `
@@ -21,6 +22,11 @@ import {CommandService} from "./services/command.service";
             margin: 8% auto;
             display: block;
             text-align: center;
+        }
+        .ping {
+            position: fixed;
+            top: 0;
+            right: 0;
         }
         `
     ]
