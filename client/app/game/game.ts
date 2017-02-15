@@ -84,15 +84,14 @@ export class TankGame {
     }
 
     update() {
-        this.playController.update();
         for (let tank of this.listTank) {
             this.game.physics.arcade.collide(tank.sprite, this.map.floor);
             this.game.physics.arcade.collide(tank.sprite, this.map.sea);
-            this.checkCollision(tank);
+            this.checkBulletsCollision(tank);
         }
     }
 
-    checkCollision(tank:Tank) {
+    checkBulletsCollision(tank:Tank) {
         let bullets = tank.getBullets();
         for (let bullet of bullets) {
             if (bullet) {
@@ -184,6 +183,15 @@ export class TankGame {
                 this.playExplosion(tank.sprite.centerX, tank.sprite.centerY);
                 tank.sprite.kill();
             }
+        }
+    }
+
+    onPlayerShoot(data) {
+        let playerId = data[KeyExchange.KEY_DATA.PLAYERID_ACTION];
+        let tank: Tank = this.getTankById(playerId);
+        if (tank && tank.playerId != this.userService.getMyPlayerId()) {
+            tank.setPosition(data[KeyExchange.KEY_DATA.PLAYER_POSITION]);
+            tank.fire(data[KeyExchange.KEY_DATA.BULLET_DIRECTION]);
         }
     }
 }
