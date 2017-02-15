@@ -6,12 +6,12 @@ import {TankGame} from "./game";
 
 export class GameInput {
 
-    tankGame: TankGame;
+    tankGame:TankGame;
     cursors;
-    myTank: Tank;
-    stopped: boolean = false;
-    tankSpeed :number = 100;
-    bulletSpeed: number = 300;
+    myTank:Tank;
+    stopped:boolean = false;
+    tankSpeed:number = 100;
+    bulletSpeed:number = 300;
 
     constructor(gameTank, tank) {
         this.tankGame = gameTank;
@@ -25,10 +25,9 @@ export class GameInput {
         this.initKeyEvents(Phaser.Keyboard.DOWN);
         this.initKeyEvents(Phaser.Keyboard.LEFT);
         this.initKeyEvents(Phaser.Keyboard.RIGHT);
-        this.initKeyEvents(Phaser.Keyboard.SPACEBAR);
     }
 
-    private initKeyEvents(keyCode: number) {
+    private initKeyEvents(keyCode:number) {
         let key = this.tankGame.game.input.keyboard.addKey(keyCode);
         if (key) {
             key.onDown.add(this.onKeyDown, this);
@@ -38,7 +37,6 @@ export class GameInput {
 
     private onKeyDown(key) {
         this.checkMove();
-        this.checkFire();
     }
 
     private onKeyUp(key) {
@@ -65,14 +63,14 @@ export class GameInput {
     }
 
     private checkFire() {
-        if(this.stopped) {
+        if (this.stopped) {
             return;
         }
         if (this.tankGame.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
             if (this.myTank.canFire()) {
                 let position = {x: this.myTank.sprite.centerX, y: this.myTank.sprite.centerY};
                 let velocity = {x: 0, y: 0};
-                let direction :string = this.myTank.getDirection();
+                let direction:string = this.myTank.getDirection();
                 switch (direction) {
                     case "left":
                         velocity.x = -this.bulletSpeed;
@@ -91,5 +89,9 @@ export class GameInput {
                 this.tankGame.commandService.shoot(this.tankGame.userService.getMyPlayerId(), position, velocity);
             }
         }
+    }
+
+    update() {
+        this.checkFire();
     }
 }
