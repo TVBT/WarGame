@@ -99,7 +99,7 @@ export class TankGame {
             let bullet = tank.getBulletById(bulletId);
             if (bullet) {
                 bullet.kill();
-                this.playExplosion(bullet.centerX, bullet.centerY);
+                this.playExplosion(bullet.x, bullet.y);
             }
         }
     }
@@ -114,7 +114,7 @@ export class TankGame {
                     this.playExplosion(bullet.centerX, bullet.centerY);
                     if (tank === this.myTank) {
                         // only clear map item when my tank is firing
-                        this.map.hitBullet(bullet.centerX, bullet.centerY);
+                        this.map.hitBullet(bullet);
                     }
                 });
                 // check collision with other tanks
@@ -211,7 +211,7 @@ export class TankGame {
             let delayTime = Date.now() - data[KeyExchange.KEY_DATA.ACTION_TIME];
             serverPos = new Vector(serverPos.x, serverPos.y);
             serverVel = new Vector(serverVel.x, serverVel.y);
-            let bulletStartPos = serverVel.mul(delayTime * 1.2);
+            let bulletStartPos = serverVel.mul(delayTime/1000);
             tank.setPosition(serverPos);
             tank.fire(serverVel, bulletStartPos, data[KeyExchange.KEY_DATA.BULLET_ID]);
         }

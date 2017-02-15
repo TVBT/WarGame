@@ -75,7 +75,7 @@ export class CommandService {
         });
     }
 
-    hitMapItem(iCol, iRow, itemId) {
+    hitMapItem(iCol, iRow, itemId, bulletId) {
         this.socket.emit("event", {
             command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
             sub: KeyExchange.KEY_COMMAND.HIT_MAP_ITEM,
@@ -83,6 +83,7 @@ export class CommandService {
                 [KeyExchange.KEY_DATA.ROW_ID]: iRow,
                 [KeyExchange.KEY_DATA.COL_ID]: iCol,
                 [KeyExchange.KEY_DATA.MAP_ITEM_ID]: itemId,
+                [KeyExchange.KEY_DATA.BULLET_ID]: bulletId,
                 [KeyExchange.KEY_DATA.ACTION_TIME]: Date.now()
             }
         });

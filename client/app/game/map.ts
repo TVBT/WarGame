@@ -39,10 +39,12 @@ export class MapGame {
         this.grass = this.map.createLayer('grass');
     }
 
-    hitBrick(iCol, iRow) {
+    removeBrick(iCol, iRow, bulletId?) {
         var tile = this.map.getTile(iCol, iRow, this.floor);
         if (tile && tile.index == KeyExchange.MAP_ITEM.BRICK) {
-            this.commandService.hitMapItem(iCol, iRow, tile.index);
+            if (bulletId)
+                this.commandService.hitMapItem(iCol, iRow, tile.index, bulletId);
+
             this.map.removeTile(iCol, iRow, this.floor);
             return true;
         }
@@ -69,14 +71,23 @@ export class MapGame {
 
     }
 
-    hitBullet(x, y) {
+    hitBullet(bullet) {
+        let x = bullet.centerX,
+            y = bullet.centerY;
         var rect = new Rect(x - 8, y - 8, 16, 16);
-        var isHitted = false;
-        isHitted = this.hitBrick.apply(this, this.tilePosFromPoint(rect.topLeft)) || isHitted;
-        isHitted = this.hitBrick.apply(this, this.tilePosFromPoint(rect.topRight)) || isHitted;
-        isHitted = this.hitBrick.apply(this, this.tilePosFromPoint(rect.bottomLeft)) || isHitted;
-        isHitted = this.hitBrick.apply(this, this.tilePosFromPoint(rect.bottomRight)) || isHitted;
-        if (!isHitted) {
+        var isBrickHitted = false;
+        var points = [
+            this.tilePosFromPoint(rect.topLeft),
+            this.tilePosFromPoint(rect.topRight),
+            this.tilePosFromPoint(rect.bottomLeft),
+            this.tilePosFromPoint(rect.bottomRight),
+        ];
+
+        for (let point of points) {
+            isBrickHitted = this.removeBrick(point[0], point[1], bullet.bulletId) || isBrickHitted;
+        }
+
+        if (!isBrickHitted) {
             this.hitHomeTown.apply(this, this.tilePosFromPoint(rect.center));
         }
     }

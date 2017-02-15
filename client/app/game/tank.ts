@@ -61,8 +61,7 @@ export class Tank {
             bullet.bulletId = bulletId ? bulletId : this.generateBulletId();
             bullet.anchor.setTo(0.5, 0.5);
             bullet.body.setSize(4, 4, 2, 2);
-            bullet.reset(startPos.x, startPos.y);
-            bullet.reset(this.sprite.centerX, this.sprite.centerY);
+            bullet.reset(this.sprite.centerX + startPos.x, this.sprite.centerY + startPos.y);
             this.game.physics.enable(bullet);
             if (velocity.x < 0 && velocity.y == 0) {        // left
                 bullet.angle = -90;
@@ -80,7 +79,7 @@ export class Tank {
 
     getBulletById(bulletId): any {
         for (let bullet of this.bullets.children) {
-            if (bullet.bulletId == bulletId) {
+            if (bullet.alive && bullet.bulletId == bulletId) {
                 return bullet;
             }
         }
