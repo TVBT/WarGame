@@ -20,8 +20,9 @@ export class ConfigManager {
     readonly TEAM1_POS = [new Point(10, 100), new Point(10, 400), new Point(10, 600)];
     readonly TEAM2_POS = [new Point(1260, 100), new Point(1260, 400), new Point(1260, 600)];
 
-    readonly startGameTime = 3;
-    readonly playGameTime = 300;
+    readonly startGameTime = 3000;
+    readonly playGameTime = 300000;
+    readonly rebornTime = 5000;
 
     static _instance: ConfigManager;
     static getInstance() : ConfigManager {

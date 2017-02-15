@@ -8,6 +8,7 @@ import {KeyExchange} from "../../share/keyexchange";
 import {Main} from "../mainserver";
 import {Point} from "../../share/math/primitive";
 import {User} from "../model/user";
+import {ConfigManager} from "../manager/configmanager";
 
 export  class GameController {
     private gameLogic:TankGameLogic;
@@ -74,16 +75,34 @@ export  class GameController {
     }
 
     public playerHitTank(playerIdShoot, playerIdBeShoot, actionTime) {
+        var userBeShoot:User = this.currentRoom.getUserByPlayerId(playerIdBeShoot);
+        userBeShoot.player.status = KeyExchange.TANK_PLAYER_STATUS.DEAD;
+
         let status = 1;
 
         let data = {
             [KeyExchange.KEY_DATA.STATUS] : status,
             [KeyExchange.KEY_DATA.PLAYERID_SHOOT] : playerIdShoot,
             [KeyExchange.KEY_DATA.PLAYERID_BE_SHOOT] : playerIdBeShoot,
-            [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime
+            [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime,
+            [KeyExchange.KEY_DATA.REBORN_TIME] : ConfigManager.getInstance().rebornTime
         };
 
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.HIT_TANK, this.currentRoom.getListUsers());
+    }
+
+    public playerReborn(userReborn:User) {
+        let status = userReborn.player.status == KeyExchange.TANK_PLAYER_STATUS.DEAD;
+        userReborn.player.status == KeyExchange.TANK_PLAYER_STATUS.ALIVE;
+        let playerIndex = this.currentRoom.getPlayerIndexByUserId(userReborn.player.playerId);
+
+        let data = {
+            [KeyExchange.KEY_DATA.STATUS] : status,
+            [KeyExchange.KEY_DATA.PLAYER_ID] : userReborn.player.playerId,
+            [KeyExchange.KEY_DATA.PLAYER_POSITION] : ConfigManager.getInstance().getPosPlayerBy(userReborn.player.teamId, playerIndex)
+        };
+
+        this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.REBORN, this.currentRoom.getListUsers());
     }
 
     public sendResponseToUser(data, cmd, user) {

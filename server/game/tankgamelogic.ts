@@ -26,7 +26,7 @@ export class TankGameLogic {
 
         setTimeout(function() {
             this.controller.startGame();
-        }.bind(this), ConfigManager.getInstance().startGameTime * 1000);
+        }.bind(this), ConfigManager.getInstance().startGameTime);
     }
 
     public handleActionInGame(subId, data, client) {
@@ -49,6 +49,10 @@ export class TankGameLogic {
 
             case KeyExchange.KEY_COMMAND.HIT_TANK:
                 this.handlePlayerHitTank(data, client);
+                break;
+
+            case KeyExchange.KEY_COMMAND.REBORN:
+                this.handlePlayerReborn(data, client);
                 break;
         }
 
@@ -108,6 +112,13 @@ export class TankGameLogic {
         let userShoot:User = this.currentRoom.getUserByClientId(client.id);
 
         this.controller.playerHitTank(userShoot.player.playerId, playerIdBeShoot, actionTime);
+    }
+
+    private handlePlayerReborn(data, client) {
+        let playerIdReborn = data[KeyExchange.KEY_DATA.PLAYER_ID];
+        let userReborn:User = this.currentRoom.getUserByPlayerId(playerIdReborn);
+
+        this.controller.playerReborn(userReborn);
     }
 
     private initMapInfo(mapId: number) {

@@ -22,6 +22,7 @@ class KeyCommand {
     HIT_MAP_ITEM = 5;
     HIT_TANK = 6;
     HIT_TOWER = 7;
+    REBORN = 8;
 }
 
 class KeyData {
@@ -50,6 +51,7 @@ class KeyData {
     ROW_ID = "rowid";
     COL_ID = "colid";
     ACTION_TIME = "actiontime";
+    REBORN_TIME = "reborntime";
     PLAYERID_ACTION = "playeridaction";
     PLAYERID_SHOOT = "playeridshoot";
     PLAYERID_BE_SHOOT = "playeridbeshoot";

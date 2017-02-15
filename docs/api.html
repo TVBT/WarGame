@@ -44,6 +44,7 @@
 			<li><a href="#sub4">Shoot</a></li>
 			<li><a href="#sub5">HitMapItem</a></li>
 			<li><a href="#sub6">HitTank</a></li>
+			<li><a href="#sub8">Reborn</a></li>
         </ul>
     </div>
     <nav class="navbar-collapse collapse in navbar-inverse navbar-fixed-top" id="bs-navbar" aria-expanded="true">
@@ -214,7 +215,7 @@
 	</div>
 
 	<div id="item">
-		<h2 id="cmd7" class="anchor">* <strong>JOIN_GAME</strong> *</h2>
+		<h2 id="cmd7" class="anchor">* <strong>JOIN GAME</strong> *</h2>
 		<p>&lt;<em>Trả về thông tin trong game.</em>&gt;</p>
 
 		<ul>
@@ -229,8 +230,8 @@
 
 			<li><p><strong>Output:</strong></p>
 				<code>
-					<p>startgametime:int (thời gian bắt đầu game)</p>
-					<p>playgametime:int (thời gian chơi game)</p>
+					<p>startgametime:number (thời gian (milisecond) bắt đầu game)</p>
+					<p>playgametime:number (thời gian (milisecond) chơi game)</p>
 					<p>mapinfo:object (thông tin map (mapid))</p>
 					<p>listplayerposition:array (vị trí của player trong từng đội chơi)</p>
 				</code>
@@ -439,12 +440,38 @@
 					<p>playeridshoot:number (playerid của player bắn)</p>
 					<p>playeridbeshoot:number (playerid của player bị bắn)</p>
 					<p>actiontime:number (thời điểm (milisecond) xảy ra action)</p>
+					<p>reborntime:number (thời gian (milisecond) hồi sinh của player)</p>
 				</code>
 		</ul>
 	</div>
 
 
+	<div id="item">
+		<h2 id="sub8" class="anchor">* <strong>REBORN</strong> *</h2>
+		<p>&lt;<em>Player hồi sinh.</em>&gt;</p>
 
+		<ul>
+			<li><p><strong>IdCommand</strong></p>
+				<code>
+					<p>ACTION_IN_GAME:int = 9</p>
+				</code>
+			<li><p><strong>IdSubCommand</strong></p>
+				<code>
+					<p>REBORN:int = 8</p>
+				</code>
+			<li><p><strong>Input:</strong></p>
+				<code>
+					<p>playerid:number (playerid của player được hồi sinh)</p>
+				</code>
+
+			<li><p><strong>Output:</strong></p>
+				<code>
+					<p>status:number (1=thành công, 0=thất bại)</p>
+					<p>playerid:number (playerid của player được hồi sinh)</p>
+					<p>playerposition:object (vị trí của player ban đầu)</p>
+				</code>
+		</ul>
+	</div>
 
 </div>
 

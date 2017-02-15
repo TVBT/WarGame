@@ -76,6 +76,13 @@ export class Room {
         }
     }
 
+    getPlayerIndexByUserId(playerId) {
+        let user:User = this.getUserByPlayerId(playerId);
+        let users:Array<User> = this.getListUserByTeamId(user.player.teamId);
+
+        return users.indexOf(user);
+    }
+
     getTotalPlayer() {
         return (this.team1.length + this.team2.length);
     }

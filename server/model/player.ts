@@ -19,6 +19,7 @@ export class Player {
         this.playerId = -1;
         this.teamId = -1;
         this.isReady = false;
+        this.status = KeyExchange.TANK_PLAYER_STATUS.ALIVE;
     }
 
     parseJsonData() {
