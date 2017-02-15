@@ -108,6 +108,7 @@ export class TankGame {
                             bullet.kill();
                             this.playExplosion(bullet.centerX, bullet.centerY);
                             otherTank.sprite.kill();
+                            this.commandService.hitTank(otherTank.playerId);
                         })
                     }
                 }
@@ -170,6 +171,18 @@ export class TankGame {
         if (tank && tank.playerId != this.userService.getMyPlayerId()) {
             tank.setPosition(data[KeyExchange.KEY_DATA.PLAYER_POSITION]);
             tank.setVelocity({x: 0, y: 0});
+        }
+    }
+
+    onHitTank(data:any) {
+        let status = data[KeyExchange.KEY_DATA.STATUS];
+        if (status) {
+            let shootedPlayerId = data[KeyExchange.KEY_DATA.PLAYERID_BE_SHOOT];
+            let tank = this.getTankById(shootedPlayerId);
+            if (tank && tank.sprite.alive) {
+                this.playExplosion(tank.sprite.centerX, tank.sprite.centerY);
+                tank.sprite.kill();
+            }
         }
     }
 

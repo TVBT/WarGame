@@ -126,6 +126,17 @@ export class CommandService {
         });
     }
 
+    hitTank(playerId) {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
+            sub: KeyExchange.KEY_COMMAND.HIT_TANK,
+            data: {
+                [KeyExchange.KEY_DATA.PLAYERID_BE_SHOOT]: playerId,
+                [KeyExchange.KEY_DATA.ACTION_TIME]: Date.now(),
+            }
+        });
+    }
+
     shoot(playerId, playerPosition, bulletDirection) {
         this.socket.emit("event", {
             command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
