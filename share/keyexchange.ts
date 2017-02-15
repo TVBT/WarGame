@@ -36,6 +36,7 @@ class KeyData {
     PLAYER_ID = "playerid";
     PLAYER_POSITION = "playerposition";
     PLAYER_DIRECTION = "playerdirection";
+    BULLET_DIRECTION = "bulletdirection";
     READY_STATUS = "readystatus";
     TEAM_ID = "teamid";
     MESSAGE = "message";

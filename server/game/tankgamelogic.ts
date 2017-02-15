@@ -82,10 +82,11 @@ export class TankGameLogic {
 
     private handlePlayerShoot(data, client) {
         let playerPos = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
+        var direction = data[KeyExchange.KEY_DATA.BULLET_DIRECTION];
         let actionTime:number = data[KeyExchange.KEY_DATA.ACTION_TIME];
         let userAction:User = this.currentRoom.getUserByClientId(client.id);
 
-        this.controller.playerShoot(userAction.player.playerId, playerPos, actionTime);
+        this.controller.playerShoot(userAction.player.playerId, playerPos, direction, actionTime);
     }
 
     private handlePlayerHitTank(data, client) {

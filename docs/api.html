@@ -310,14 +310,14 @@
 				<code>
 					<p>playerid:number</p>
 					<p>playerposition:Point</p>
-					<p>playerdirection:number</p>
+					<p>playerdirection: {x,y} (vector hướng)</p>
 				</code>
 
 			<li><p><strong>Output:</strong></p>
 				<code>
 					<p>playerid:number</p>
 					<p>playerposition:Point</p>
-					<p>playerdirection:number</p>
+					<p>playerdirection:{x,y} (vector hướng)</p>
 				</code>
 		</ul>
 	</div>
@@ -365,6 +365,7 @@
 			<li><p><strong>Input:</strong></p>
 				<code>
 					<p>playerpos:Point (vị trí player khi bắn)</p>
+                    <p>bulletdirection:{x,y} (vector hướng đạn bay)</p>
 					<p>actiontime:number (thời điểm (milisecond) xảy ra action)</p>
 				</code>
 
@@ -372,6 +373,7 @@
 				<code>
 					<p>playerpos:Point (vị trí player khi bắn)</p>
 					<p>playeridaction:number (playerid thực hiện action)</p>
+                    <p>bulletdirection:{x,y} (vector hướng đạn bay)</p>
 					<p>actiontime:number (thời điểm (milisecond) xảy ra action)</p>
 				</code>
 		</ul>
