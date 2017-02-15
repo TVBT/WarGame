@@ -42,6 +42,9 @@ export class PlayScreen implements AfterViewInit, OnInit {
                     case KeyExchange.KEY_COMMAND.STOP_MOVE:
                         this.game.onPlayerStopMove(msg.data);
                         break;
+                    case KeyExchange.KEY_COMMAND.SHOOT:
+                        this.game.onPlayerShoot(msg.data);
+                        break;
                 }
             }
         })

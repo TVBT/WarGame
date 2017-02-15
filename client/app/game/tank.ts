@@ -6,7 +6,7 @@ export class Tank {
     game;
     sprite;
     bullets;
-    playerId;
+    playerId: number;
 
     constructor(game, playerId, playerPos) {
         this.game = game;
@@ -35,34 +35,34 @@ export class Tank {
         return this.bullets.countDead() > 0;
     }
 
-    fire() {
-        var bullet = this.bullets.getFirstDead();
-        bullet.anchor.setTo(0.5, 0.5);
-        bullet.reset(this.sprite.centerX, this.sprite.centerY);
-        this.game.physics.enable(bullet);
-        bullet.body.setSize(4, 4, 2, 2);
+    getDirection() :string{
+        return this.sprite.animations.name;
+    }
 
-        let aniName = this.sprite.animations.name;
-        let speed = 300;
-        switch (aniName) {
-            case "left":
-                bullet.angle = -90;
-                bullet.body.velocity.x = -speed;
-                break;
-            case "right":
-                bullet.angle = 90;
-                bullet.body.velocity.x = speed;
-                break;
-            case "up":
-                bullet.angle = 0;
-                bullet.body.velocity.y = -speed;
-                break;
-            case "down":
-                bullet.angle = -180;
-                bullet.body.velocity.y = speed;
-                break;
+    fire(velocity) {
+        if (velocity.x == 0 && velocity.y == 0) {
+            return null;
         }
-
+        if (velocity.x != 0 && velocity.y != 0) {
+            return null;
+        }
+        let bullet = this.bullets.getFirstDead();
+        if (bullet) {
+            bullet.anchor.setTo(0.5, 0.5);
+            bullet.body.setSize(4, 4, 2, 2);
+            bullet.reset(this.sprite.centerX, this.sprite.centerY);
+            this.game.physics.enable(bullet);
+            if (velocity.x < 0 && velocity.y == 0) {        // left
+                bullet.angle = -90;
+            } else if (velocity.x > 0 && velocity.y == 0) { // right
+                bullet.angle = 90;
+            } else if (velocity.x == 0 && velocity.y < 0) { // up
+                bullet.angle = 0;
+            } else if (velocity.x == 0 && velocity.y > 0) { // down
+                bullet.angle = -180;
+            }
+            bullet.body.velocity.set(velocity.x, velocity.y);
+        }
         return bullet;
     }
 

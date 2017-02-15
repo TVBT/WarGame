@@ -107,6 +107,7 @@ export class CommandService {
         });
     }
 
+    // unused
     stopMove(playerId, position) {
         this.socket.emit("event", {
             command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
@@ -122,6 +123,18 @@ export class CommandService {
         this.socket.emit("event", {
             command: KeyExchange.KEY_COMMAND.PING_PONG,
             data: {}
+        });
+    }
+
+    shoot(playerId, playerPosition, bulletDirection) {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
+            sub: KeyExchange.KEY_COMMAND.SHOOT,
+            data: {
+                [KeyExchange.KEY_DATA.PLAYER_POSITION]: playerPosition,
+                [KeyExchange.KEY_DATA.BULLET_DIRECTION]: bulletDirection,
+                [KeyExchange.KEY_DATA.ACTION_TIME]: Date.now()
+            }
         });
     }
 }
