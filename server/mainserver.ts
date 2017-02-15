@@ -94,6 +94,10 @@ export class Main {
         console.log("RECEIVE Client msg --- cmd: " + msg.command + " --- data: " + JSON.stringify(msg.data));
 
         switch (msg.command) {
+            case KeyExchange.KEY_COMMAND.PING_PONG:
+                this.handlePingPong(client);
+                break;
+
             case KeyExchange.KEY_COMMAND.CHECK_NICK_NAME:
                 this.handleCheckUserNameExist(msg.data, client);
                 break;
@@ -119,6 +123,13 @@ export class Main {
                 room.handleActionInGame(msg.sub, msg.data, client);
                 break;
         }
+    }
+
+    handlePingPong (client) {
+        var object = {
+            command: KeyExchange.KEY_COMMAND.PING_PONG
+        };
+        client.emit('event', object);
     }
 
     handleCheckUserNameExist(data, client) {

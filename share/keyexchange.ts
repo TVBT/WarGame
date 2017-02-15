@@ -3,6 +3,7 @@
  */
 
 class KeyCommand {
+    PING_PONG = 0;
     CHECK_NICK_NAME = 1;
     AUTO_JOIN_ROOM = 2;
     GET_ROOM_INFO = 3;
