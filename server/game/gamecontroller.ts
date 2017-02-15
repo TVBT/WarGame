@@ -60,10 +60,11 @@ export  class GameController {
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.HIT_MAP_ITEM, this.currentRoom.getListUsers());
     }
 
-    public playerShoot(playerIdAction, playerPos, actionTime) {
+    public playerShoot(playerIdAction, playerPos, direction, actionTime) {
         let data = {
             [KeyExchange.KEY_DATA.PLAYERID_ACTION] : playerIdAction,
             [KeyExchange.KEY_DATA.PLAYER_POSITION] : playerPos,
+            [KeyExchange.KEY_DATA.BULLET_DIRECTION] : direction,
             [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime
         };
 
