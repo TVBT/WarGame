@@ -84,10 +84,10 @@ export class TankGame {
     }
 
     update() {
-        this.game.physics.arcade.collide(this.myTank.sprite, this.map.floor);
-        this.game.physics.arcade.collide(this.myTank.sprite, this.map.sea);
         this.playController.update();
         for (let tank of this.listTank) {
+            this.game.physics.arcade.collide(tank.sprite, this.map.floor);
+            this.game.physics.arcade.collide(tank.sprite, this.map.sea);
             this.checkCollision(tank);
         }
     }
@@ -159,17 +159,19 @@ export class TankGame {
     onPlayerMove(data) {
         let playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
         let tank: Tank = this.getTankById(playerId);
-        if (tank) {
+        if (tank && tank.playerId != this.userService.getMyPlayerId()) {
             tank.setPosition(data[KeyExchange.KEY_DATA.PLAYER_POSITION]);
             tank.setVelocity(data[KeyExchange.KEY_DATA.PLAYER_DIRECTION]);
         }
     }
 
+    // unused
     onPlayerStopMove(data) {
         let playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
         let tank: Tank = this.getTankById(playerId);
-        if (tank) {
+        if (tank && tank.playerId != this.userService.getMyPlayerId()) {
             tank.setPosition(data[KeyExchange.KEY_DATA.PLAYER_POSITION]);
+            tank.setVelocity({x: 0, y: 0});
         }
     }
 }

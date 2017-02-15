@@ -20,20 +20,6 @@ export class GameInput {
     }
 
     update() {
-        this.myTank.setVelocity({x: 0, y: 0});
-
-        if (this.stopped) return;
-
-        if (this.cursors.left.isDown) {
-            this.myTank.setVelocity({x: -this.speed, y: 0});
-        } else if (this.cursors.right.isDown) {
-            this.myTank.setVelocity({x: this.speed, y: 0});
-        } else if (this.cursors.up.isDown) {
-            this.myTank.setVelocity({x: 0, y: -this.speed});
-        } else if (this.cursors.down.isDown) {
-            this.myTank.setVelocity({x: 0, y: this.speed});
-        }
-
         if (this.tankGame.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
             if (this.myTank.canFire()) {
                 this.myTank.fire();
@@ -58,21 +44,29 @@ export class GameInput {
     }
 
     private onKeyDown(key) {
-        var position = {x: this.myTank.sprite.centerX, y: this.myTank.sprite.centerY};
-        var velocity = {x: 0, y: 0};
-        if (key.keyCode == Phaser.Keyboard.UP) {
-            velocity.y = -this.speed;
-        } else if (key.keyCode == Phaser.Keyboard.DOWN) {
-            velocity.y = this.speed;
-        } else if (key.keyCode == Phaser.Keyboard.LEFT) {
-            velocity.x = -this.speed;
-        } else if (key.keyCode == Phaser.Keyboard.RIGHT) {
-            velocity.x = this.speed;
-        }
-        this.tankGame.commandService.move(this.tankGame.userService.getMyPlayerId(), position, velocity);
+        this.checkMove();
     }
 
     private onKeyUp(key) {
-        this.tankGame.commandService.stopMove(this.tankGame.userService.getMyPlayerId(), {x: this.myTank.sprite.centerX, y: this.myTank.sprite.centerY});
+        this.checkMove();
+    }
+
+    private checkMove() {
+        if (this.stopped) {
+            return;
+        }
+        var position = {x: this.myTank.sprite.centerX, y: this.myTank.sprite.centerY};
+        var velocity = {x: 0, y: 0};
+        if (this.cursors.up.isDown) {
+            velocity.y = -this.speed;
+        } else if (this.cursors.down.isDown) {
+            velocity.y = this.speed;
+        } else if (this.cursors.left.isDown) {
+            velocity.x = -this.speed;
+        } else if (this.cursors.right.isDown) {
+            velocity.x = this.speed;
+        }
+        this.myTank.setVelocity(velocity);
+        this.tankGame.commandService.move(this.tankGame.userService.getMyPlayerId(), position, velocity);
     }
 }
