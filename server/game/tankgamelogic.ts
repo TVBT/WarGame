@@ -82,7 +82,7 @@ export class TankGameLogic {
         let rowId:number = data[KeyExchange.KEY_DATA.ROW_ID];
         let colId:number = data[KeyExchange.KEY_DATA.COL_ID];
         let itemId:number = data[KeyExchange.KEY_DATA.MAP_ITEM_ID];
-        let idBullet:number = data[KeyExchange.KEY_DATA.ID_BULLET];
+        let idBullet:number = data[KeyExchange.KEY_DATA.BULLET_ID];
         let actionTime:number = data[KeyExchange.KEY_DATA.ACTION_TIME];
         let userAction:User = this.currentRoom.getUserByClientId(client.id);
         let status:number = (userAction.player.destroyBullet(idBullet) == true)?1:0;
@@ -99,7 +99,7 @@ export class TankGameLogic {
         let playerPos = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
         var direction = data[KeyExchange.KEY_DATA.BULLET_DIRECTION];
         let actionTime:number = data[KeyExchange.KEY_DATA.ACTION_TIME];
-        let idBullet:number = data[KeyExchange.KEY_DATA.ID_BULLET];
+        let idBullet:number = data[KeyExchange.KEY_DATA.BULLET_ID];
         let userAction:User = this.currentRoom.getUserByClientId(client.id);
         userAction.player.fireBullet(idBullet);
 

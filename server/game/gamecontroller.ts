@@ -55,7 +55,7 @@ export  class GameController {
             [KeyExchange.KEY_DATA.MAP_ITEM_ID] : itemId,
             [KeyExchange.KEY_DATA.ROW_ID] : rowId,
             [KeyExchange.KEY_DATA.COL_ID] : colId,
-            [KeyExchange.KEY_DATA.ID_BULLET] : idBullet,
+            [KeyExchange.KEY_DATA.BULLET_ID] : idBullet,
             [KeyExchange.KEY_DATA.PLAYERID_ACTION] : playerIdAction,
             [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime
         };
@@ -67,7 +67,7 @@ export  class GameController {
             [KeyExchange.KEY_DATA.PLAYERID_ACTION] : playerIdAction,
             [KeyExchange.KEY_DATA.PLAYER_POSITION] : playerPos,
             [KeyExchange.KEY_DATA.BULLET_DIRECTION] : direction,
-            [KeyExchange.KEY_DATA.ID_BULLET] : idBullet,
+            [KeyExchange.KEY_DATA.BULLET_ID] : idBullet,
             [KeyExchange.KEY_DATA.ACTION_TIME] : actionTime
         };
 
