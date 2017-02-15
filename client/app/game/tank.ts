@@ -3,6 +3,8 @@
  */
 export class Tank {
 
+    bulletStartId = 1;
+
     game;
     sprite;
     bullets;
@@ -42,7 +44,11 @@ export class Tank {
         return this.sprite.animations.name;
     }
 
-    fire(velocity) {
+    generateBulletId() {
+        return this.bulletStartId++;
+    }
+
+    fire(velocity, startPos={x:0, y:0}, bulletId?) {
         this.lastFireTime = Date.now();
         if (velocity.x == 0 && velocity.y == 0) {
             return null;
@@ -52,8 +58,10 @@ export class Tank {
         }
         let bullet = this.bullets.getFirstDead();
         if (bullet) {
+            bullet.bulletId = bulletId ? bulletId : this.generateBulletId();
             bullet.anchor.setTo(0.5, 0.5);
             bullet.body.setSize(4, 4, 2, 2);
+            bullet.reset(startPos.x, startPos.y);
             bullet.reset(this.sprite.centerX, this.sprite.centerY);
             this.game.physics.enable(bullet);
             if (velocity.x < 0 && velocity.y == 0) {        // left
@@ -68,6 +76,14 @@ export class Tank {
             bullet.body.velocity.set(velocity.x, velocity.y);
         }
         return bullet;
+    }
+
+    getBulletById(bulletId): any {
+        for (let bullet of this.bullets.children) {
+            if (bullet.bulletId == bulletId) {
+                return bullet;
+            }
+        }
     }
 
     getBullets() {

@@ -35,7 +35,7 @@ export class PlayScreen implements AfterViewInit, OnInit {
                     case KeyExchange.KEY_COMMAND.HIT_MAP_ITEM:
                         this.game.map.hitBrick(msg.data[KeyExchange.KEY_DATA.COL_ID],
                             msg.data[KeyExchange.KEY_DATA.ROW_ID]);
-                        this.game.forceBulletExplosion(msg.data[KeyExchange.KEY_DATA.PLAYER_ID],
+                        this.game.forceBulletExplosion(msg.data[KeyExchange.KEY_DATA.PLAYERID_ACTION],
                             msg.data[KeyExchange.KEY_DATA.BULLET_ID]);
 
                         break;
@@ -47,6 +47,8 @@ export class PlayScreen implements AfterViewInit, OnInit {
                         break;
                     case KeyExchange.KEY_COMMAND.HIT_TANK:
                         this.game.onHitTank(msg.data);
+                        this.game.forceBulletExplosion(msg.data[KeyExchange.KEY_DATA.PLAYERID_SHOOT],
+                            msg.data[KeyExchange.KEY_DATA.BULLET_ID]);
                         break;
                     case KeyExchange.KEY_COMMAND.SHOOT:
                         this.game.onPlayerShoot(msg.data);

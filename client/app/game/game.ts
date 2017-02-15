@@ -124,7 +124,7 @@ export class TankGame {
                             bullet.kill();
                             this.playExplosion(bullet.centerX, bullet.centerY);
                             otherTank.sprite.kill();
-                            this.commandService.hitTank(otherTank.playerId);
+                            this.commandService.hitTank(otherTank.playerId, bullet.bulletId);
                         })
                     }
                 }
@@ -211,7 +211,7 @@ export class TankGame {
             let delayTime = Date.now() - data[KeyExchange.KEY_DATA.ACTION_TIME];
             serverPos = new Vector(serverPos.x, serverPos.y);
             serverVel = new Vector(serverVel.x, serverVel.y);
-            let bulletStartPos = serverVel.mul(delayTime);
+            let bulletStartPos = serverVel.mul(delayTime * 1.2);
             tank.setPosition(serverPos);
             tank.fire(serverVel, bulletStartPos, data[KeyExchange.KEY_DATA.BULLET_ID]);
         }

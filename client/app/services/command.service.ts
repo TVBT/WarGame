@@ -127,12 +127,13 @@ export class CommandService {
         });
     }
 
-    hitTank(playerId) {
+    hitTank(playerId, bulletId) {
         this.socket.emit("event", {
             command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
             sub: KeyExchange.KEY_COMMAND.HIT_TANK,
             data: {
                 [KeyExchange.KEY_DATA.PLAYERID_BE_SHOOT]: playerId,
+                [KeyExchange.KEY_DATA.BULLET_ID]: bulletId,
                 [KeyExchange.KEY_DATA.ACTION_TIME]: Date.now(),
             }
         });
