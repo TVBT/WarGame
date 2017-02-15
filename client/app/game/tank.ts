@@ -18,10 +18,10 @@ export class Tank {
         this.sprite.body.setSize(25, 30, 3.5, 1);
         this.sprite.body.collideWorldBounds=true;
 
-        this.sprite.animations.add("down", [0, 3], 10, false);
-        this.sprite.animations.add("left", [1, 4], 10, false);
-        this.sprite.animations.add("right", [6, 7], 10, false);
-        this.sprite.animations.add("up", [2, 5], 10, false);
+        this.sprite.animations.add("down", [0, 3], 10, true);
+        this.sprite.animations.add("left", [1, 4], 10, true);
+        this.sprite.animations.add("right", [6, 7], 10, true);
+        this.sprite.animations.add("up", [2, 5], 10, true);
 
         this.bullets = this.game.add.group();
         this.bullets.enableBody = true;
@@ -93,6 +93,9 @@ export class Tank {
             }
         } else {
             return;
+        }
+        if (velocity.x == 0 && velocity.y == 0) {
+            this.sprite.animations.stop();
         }
         this.sprite.body.angularVelocity = 0;
         this.sprite.body.velocity.set(velocity.x, velocity.y);
