@@ -16,7 +16,7 @@ export class TankGame {
     game; //Phaser
     gameData;
     map:MapGame;
-    explosion;
+    explosions;
     listTank = [];
     myTank:Tank;
     playController:GameInput;
@@ -77,11 +77,12 @@ export class TankGame {
         this.map.createGrass();
 
         this.playController = new GameInput(this, this.myTank);
-
-        this.explosion = this.game.add.sprite(0, 0, 'explosion');
-        this.explosion.anchor.set(0.5, 0.5);
-        this.explosion.animations.add("bum", [0, 1, 2], 10, false);
-        this.explosion.kill();
+        this.explosions = this.game.add.group();
+        for (let i = 0; i < listPos.length; i++) {
+            let explosion = this.explosions.create(0, 0, 'explosion', 0, false);
+            explosion.anchor.set(0.5, 0.5);
+            explosion.animations.add("bum", [0, 1, 2], 10, false);
+        }
     }
 
     update() {
@@ -133,8 +134,11 @@ export class TankGame {
     }
 
     playExplosion(x, y) {
-        this.explosion.reset(x, y);
-        this.explosion.animations.play('bum', 10, false, true);
+        let explosion = this.explosions.getFirstDead();
+        if (explosion) {
+            explosion.reset(x, y);
+            explosion.animations.play('bum', 10, false, true);
+        }
     }
 
     render() {
