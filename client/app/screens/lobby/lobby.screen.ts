@@ -116,15 +116,15 @@ export class LobbyScreen implements OnInit {
     private onUserChangeTeam(data) {
         var playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
         var status = data[KeyExchange.KEY_DATA.READY_STATUS];
-        if (!status) return;
+        if (status) return;
 
         var changeTeam = (team1, team2) => {
             for (let member of team1.members) {
                 if (member[KeyExchange.KEY_DATA.PLAYER_ID] == playerId) {
                     team1.members.splice(this.team1.members.indexOf(member), 1);
                     this.totalPlayers.splice(this.totalPlayers.indexOf(member), 1);
-                    team2.members.push(data);
-                    this.totalPlayers.push(data);
+                    team2.members.push(member);
+                    this.totalPlayers.push(member);
                     return true;
                 }
             }
