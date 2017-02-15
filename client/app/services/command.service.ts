@@ -91,7 +91,8 @@ export class CommandService {
     handleMessage(msg) {
         if (this.socketReady) {
             this.onMessage.emit(msg);
-            console.log(msg);
+            if (msg.command != KeyExchange.KEY_COMMAND.PING_PONG)
+                console.log(msg);
         }
     }
 

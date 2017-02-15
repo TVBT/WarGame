@@ -35,6 +35,9 @@ export class PlayScreen implements AfterViewInit, OnInit {
                     case KeyExchange.KEY_COMMAND.HIT_MAP_ITEM:
                         this.game.map.hitBrick(msg.data[KeyExchange.KEY_DATA.COL_ID],
                             msg.data[KeyExchange.KEY_DATA.ROW_ID]);
+                        this.game.forceBulletExplosion(msg.data[KeyExchange.KEY_DATA.PLAYER_ID],
+                            msg.data[KeyExchange.KEY_DATA.BULLET_ID]);
+
                         break;
                     case KeyExchange.KEY_COMMAND.MOVE:
                         this.game.onPlayerMove(msg.data);

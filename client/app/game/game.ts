@@ -5,6 +5,7 @@ import {MapGame} from "./map";
 import {KeyExchange} from "../../../share/keyexchange";
 import {UserService} from "../services/user.service";
 import {CommandService} from "../services/command.service";
+import {Vector} from "../../../share/math/primitive";
 /**
  * Created by binhlt on 13/02/2017.
  */
@@ -92,6 +93,17 @@ export class TankGame {
         }
     }
 
+    forceBulletExplosion(playerId, bulletId) {
+        let tank = this.getTankById(playerId);
+        if (tank) {
+            let bullet = tank.getBulletById(bulletId);
+            if (bullet) {
+                bullet.kill();
+                this.playExplosion(bullet.centerX, bullet.centerY);
+            }
+        }
+    }
+
     checkBulletsCollision(tank:Tank) {
         let bullets = tank.getBullets();
         for (let bullet of bullets) {
@@ -100,11 +112,14 @@ export class TankGame {
                 this.game.physics.arcade.collide(bullet, this.map.floor, () => {
                     bullet.kill();
                     this.playExplosion(bullet.centerX, bullet.centerY);
-                    this.map.hitBullet(bullet.centerX, bullet.centerY);
+                    if (tank === this.myTank) {
+                        // only clear map item when my tank is firing
+                        this.map.hitBullet(bullet.centerX, bullet.centerY);
+                    }
                 });
                 // check collision with other tanks
                 for (let otherTank of this.listTank) {
-                    if (otherTank.playerId != tank.playerId) {
+                    if (tank === this.myTank && otherTank.playerId != tank.playerId) {
                         this.game.physics.arcade.collide(bullet, otherTank.sprite, () => {
                             bullet.kill();
                             this.playExplosion(bullet.centerX, bullet.centerY);
@@ -191,8 +206,14 @@ export class TankGame {
         let playerId = data[KeyExchange.KEY_DATA.PLAYERID_ACTION];
         let tank: Tank = this.getTankById(playerId);
         if (tank && tank.playerId != this.userService.getMyPlayerId()) {
-            tank.setPosition(data[KeyExchange.KEY_DATA.PLAYER_POSITION]);
-            tank.fire(data[KeyExchange.KEY_DATA.BULLET_DIRECTION]);
+            let serverPos = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
+            let serverVel = data[KeyExchange.KEY_DATA.BULLET_DIRECTION];
+            let delayTime = Date.now() - data[KeyExchange.KEY_DATA.ACTION_TIME];
+            serverPos = new Vector(serverPos.x, serverPos.y);
+            serverVel = new Vector(serverVel.x, serverVel.y);
+            let bulletStartPos = serverVel.mul(delayTime);
+            tank.setPosition(serverPos);
+            tank.fire(serverVel, bulletStartPos, data[KeyExchange.KEY_DATA.BULLET_ID]);
         }
     }
 }
