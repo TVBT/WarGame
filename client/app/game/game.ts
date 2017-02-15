@@ -84,6 +84,7 @@ export class TankGame {
     }
 
     update() {
+        this.playController.update();
         for (let tank of this.listTank) {
             this.game.physics.arcade.collide(tank.sprite, this.map.floor);
             this.game.physics.arcade.collide(tank.sprite, this.map.sea);

@@ -6,7 +6,10 @@ export class Tank {
     game;
     sprite;
     bullets;
-    playerId: number;
+    playerId:number;
+    fireRate = 1; // second
+    lastFireTime = Date.now();
+    maxBullets = 10;
 
     constructor(game, playerId, playerPos) {
         this.game = game;
@@ -16,7 +19,7 @@ export class Tank {
         this.sprite.anchor.set(0.5);
         this.game.physics.enable(this.sprite);
         this.sprite.body.setSize(25, 30, 3.5, 1);
-        this.sprite.body.collideWorldBounds=true;
+        this.sprite.body.collideWorldBounds = true;
 
         this.sprite.animations.add("down", [0, 3], 10, true);
         this.sprite.animations.add("left", [1, 4], 10, true);
@@ -26,20 +29,21 @@ export class Tank {
         this.bullets = this.game.add.group();
         this.bullets.enableBody = true;
         this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-        this.bullets.createMultiple(1, "bullet_up");
+        this.bullets.createMultiple(this.maxBullets, "bullet_up");
         this.bullets.setAll("checkWorldBounds", true);
         this.bullets.setAll("outOfBoundsKill", true);
     }
 
-    canFire(): boolean {
-        return this.bullets.countDead() > 0;
+    canFire():boolean {
+         return this.bullets.countLiving() < this.maxBullets && (Date.now() - this.lastFireTime > this.fireRate*1000);
     }
 
-    getDirection() :string{
+    getDirection():string {
         return this.sprite.animations.name;
     }
 
     fire(velocity) {
+        this.lastFireTime = Date.now();
         if (velocity.x == 0 && velocity.y == 0) {
             return null;
         }
