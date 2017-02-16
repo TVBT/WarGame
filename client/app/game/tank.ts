@@ -27,6 +27,9 @@ export class Tank {
         this.sprite.animations.add("left", [1, 4], 10, true);
         this.sprite.animations.add("right", [6, 7], 10, true);
         this.sprite.animations.add("up", [2, 5], 10, true);
+        // cheat, set initial animation
+        this.sprite.animations.play("down");
+        this.sprite.animations.stop();
 
         this.bullets = this.game.add.group();
         this.bullets.enableBody = true;
@@ -90,7 +93,8 @@ export class Tank {
     }
 
     setPosition(point) {
-        this.sprite.reset(point.x, point.y);
+        this.sprite.x = point.x;
+        this.sprite.y = point.y;
     }
 
     setVelocity(velocity) {

@@ -20,6 +20,8 @@ export class PlayScreen implements AfterViewInit, OnInit {
     data;
 
     startTime;
+    isDead = false;
+    deadTime = 0;
 
     constructor(private userService:UserService,
                 private commandService:CommandService,
@@ -48,9 +50,21 @@ export class PlayScreen implements AfterViewInit, OnInit {
                         this.game.onHitTank(msg.data);
                         this.game.forceBulletExplosion(msg.data[KeyExchange.KEY_DATA.PLAYERID_SHOOT],
                             msg.data[KeyExchange.KEY_DATA.BULLET_ID]);
+
+                        if (msg.data[KeyExchange.KEY_DATA.PLAYERID_BE_SHOOT] == this.userService.getMyPlayerId()) {
+                            this.deadTime = msg.data[KeyExchange.KEY_DATA.REBORN_TIME]/1000;
+                            this.game.startCountdown(this.deadTime, seconds => this.deadTime = seconds, () => {
+                                this.commandService.reborn(this.userService.getMyPlayerId());
+                            });
+                            this.isDead = true;
+                        }
                         break;
                     case KeyExchange.KEY_COMMAND.SHOOT:
                         this.game.onPlayerShoot(msg.data);
+                        break;
+                    case KeyExchange.KEY_COMMAND.REBORN:
+                        this.isDead = false;
+                        this.game.onPlayerReborn(msg.data);
                         break;
                 }
             }
@@ -64,13 +78,13 @@ export class PlayScreen implements AfterViewInit, OnInit {
         //     [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : 300,
         // };
 
-        this.startTime = this.data[KeyExchange.KEY_DATA.START_GAME_TIME];
+        this.startTime = this.data[KeyExchange.KEY_DATA.PLAY_GAME_TIME]/1000;
     }
 
     ngAfterViewInit() {
         this.game.setGameData(this.data, () => {
             // this.game.stopGame();
-            this.game.startCountdown(seconds => this.startTime = seconds, this.startTime);
+            this.game.startCountdown(this.startTime, seconds => this.startTime = seconds);
         });
     }
 }
