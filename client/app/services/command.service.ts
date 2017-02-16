@@ -151,4 +151,14 @@ export class CommandService {
             }
         });
     }
+
+    reborn(playerId) {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
+            sub: KeyExchange.KEY_COMMAND.REBORN,
+            data: {
+                [KeyExchange.KEY_DATA.PLAYER_ID]: playerId,
+            }
+        });
+    }
 }

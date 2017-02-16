@@ -145,11 +145,12 @@ export class TankGame {
 
     }
 
-    startCountdown(callback, seconds) {
+    startCountdown(seconds, callback, endCallback?) {
         var timer = this.game.time.events.loop(Phaser.Timer.SECOND, () => {
             seconds--;
             callback(seconds);
             if (seconds <= 0) {
+                if (endCallback) endCallback();
                 this.game.time.events.remove(timer);
             }
         }, this);
@@ -218,6 +219,19 @@ export class TankGame {
             let bulletStartPos = serverVel.mul(delayTime/1000);
             tank.setPosition(serverPos);
             tank.fire(serverVel, bulletStartPos, data[KeyExchange.KEY_DATA.BULLET_ID]);
+        }
+    }
+
+    onPlayerReborn(data) {
+        let status = data[KeyExchange.KEY_DATA.STATUS];
+        if (status) {
+            let playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
+            let playerPos = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
+            let tank: Tank = this.getTankById(playerId);
+            if (tank && tank.playerId == this.userService.getMyPlayerId()) {
+                tank.setPosition(playerPos);
+                tank.sprite.revive();
+            }
         }
     }
 }
