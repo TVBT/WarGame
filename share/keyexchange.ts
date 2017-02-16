@@ -56,6 +56,7 @@ class KeyData {
     PLAYERID_SHOOT = "playeridshoot";
     PLAYERID_BE_SHOOT = "playeridbeshoot";
     BULLET_ID= "idbullet";
+    TIME = "time";
 }
 
 class MapItem {

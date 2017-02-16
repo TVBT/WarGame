@@ -127,7 +127,10 @@ export class Main {
 
     handlePingPong (client) {
         var object = {
-            command: KeyExchange.KEY_COMMAND.PING_PONG
+            command: KeyExchange.KEY_COMMAND.PING_PONG,
+            data: {
+                [KeyExchange.KEY_DATA.TIME] : new Date.now()
+            }
         };
         client.emit('event', object);
     }
