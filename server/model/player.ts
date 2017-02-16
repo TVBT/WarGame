@@ -9,15 +9,17 @@ export class Player {
     public playerId:number;
     public teamId:number;
     public isReady:boolean;
+    public deadTime:number;
 
     //game info
-    public posPoint:Point;
+    public pos:Point;
     public status:string;
     private listBullet = [];
 
     constructor() {
         this.playerId = -1;
         this.teamId = -1;
+        this.pos = new Point();
         this.isReady = false;
         this.status = KeyExchange.TANK_PLAYER_STATUS.ALIVE;
     }

@@ -35,6 +35,7 @@ class KeyData {
     TOTAL_PLAYER = "totalplayer";
     PLAYER_INFO = "playerinfo";
     PLAYER_ID = "playerid";
+    PLAYER_COLOR = "playercolor";
     PLAYER_POSITION = "playerposition";
     PLAYER_DIRECTION = "playerdirection";
     BULLET_DIRECTION = "bulletdirection";
@@ -47,7 +48,7 @@ class KeyData {
     MAP_ID = "mapid";
     MAP_DATA = "mapdata";
     MAP_ITEM_ID = "mapitemid";
-    LIST_PLAYER_POSITION = "listplayerposition";
+    LIST_PLAYER_INFO = "listplayerinfo";
     ROW_ID = "rowid";
     COL_ID = "colid";
     ACTION_TIME = "actiontime";

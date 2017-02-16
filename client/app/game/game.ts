@@ -64,7 +64,7 @@ export class TankGame {
         this.map = new MapGame(this.game, this.commandService);
         this.map.createFloor();
 
-        let listPos = this.gameData[KeyExchange.KEY_DATA.LIST_PLAYER_POSITION];
+        let listPos = this.gameData[KeyExchange.KEY_DATA.LIST_PLAYER_INFO];
         for (let i = 0; i < listPos.length; i++) {
             let posObj = listPos[i];
             let tank = new Tank(this.game, posObj[KeyExchange.KEY_DATA.PLAYER_ID], posObj[KeyExchange.KEY_DATA.PLAYER_POSITION]);

@@ -239,13 +239,15 @@ export class Main {
 
     userJoinGame(user) {
         var room:Room = user.room;
+        room.updatePositionPlayers();
+
         var object = {
             command: KeyExchange.KEY_COMMAND.JOIN_GAME,
             data : {
                 [KeyExchange.KEY_DATA.START_GAME_TIME] : this.configManager.startGameTime,
                 [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : this.configManager.playGameTime,
-                [KeyExchange.KEY_DATA.MAP_INFO] : room.gameLogic.mapManager.parseJsonDataMapInfo(),
-                [KeyExchange.KEY_DATA.LIST_PLAYER_POSITION] : room.getPostionPlayers()
+                [KeyExchange.KEY_DATA.LIST_PLAYER_INFO] : room.getPlayerInfos()
+
             }
         };
 

@@ -62,6 +62,10 @@ export class TankGameLogic {
         var playerId:number = data[KeyExchange.KEY_DATA.PLAYER_ID];
         var posPoint = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
         var direction = data[KeyExchange.KEY_DATA.PLAYER_DIRECTION];
+        var userMove:User = this.currentRoom.getUserByPlayerId(playerId);
+        if (userMove.player.status == KeyExchange.TANK_PLAYER_STATUS.DEAD) {
+            return;
+        }
 
         this.controller.move(playerId, posPoint, direction);
     }
@@ -69,6 +73,10 @@ export class TankGameLogic {
     private handlePlayerStopMove(data, client) {
         var playerId:number = data[KeyExchange.KEY_DATA.PLAYER_ID];
         var posPoint = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
+        var userMove:User = this.currentRoom.getUserByPlayerId(playerId);
+        if (userMove.player.status == KeyExchange.TANK_PLAYER_STATUS.DEAD) {
+            return;
+        }
 
         this.controller.stopMove(playerId, posPoint);
     }
@@ -101,8 +109,12 @@ export class TankGameLogic {
         let actionTime:number = data[KeyExchange.KEY_DATA.ACTION_TIME];
         let idBullet:number = data[KeyExchange.KEY_DATA.BULLET_ID];
         let userAction:User = this.currentRoom.getUserByClientId(client.id);
-        userAction.player.fireBullet(idBullet);
 
+        if (userAction.player.status == KeyExchange.TANK_PLAYER_STATUS.DEAD) {
+            return;
+        }
+
+        userAction.player.fireBullet(idBullet);
         this.controller.playerShoot(userAction.player.playerId, playerPos, direction, actionTime, idBullet);
     }
 

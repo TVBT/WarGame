@@ -29,7 +29,7 @@ export  class GameController {
 
     public move(playerId:number, posPoint, direction) {
         let userMove:User = this.currentRoom.getUserByPlayerId(playerId);
-        userMove.player.posPoint = posPoint;
+        userMove.player.pos = posPoint;
 
         var data = {
             [KeyExchange.KEY_DATA.PLAYER_ID] : playerId,
@@ -77,6 +77,7 @@ export  class GameController {
     public playerHitTank(playerIdShoot, playerIdBeShoot, actionTime, idBullet) {
         var userBeShoot:User = this.currentRoom.getUserByPlayerId(playerIdBeShoot);
         userBeShoot.player.status = KeyExchange.TANK_PLAYER_STATUS.DEAD;
+        userBeShoot.player.deadTime = Date.now();
 
         let status = 1;
 
@@ -93,12 +94,16 @@ export  class GameController {
     }
 
     public playerReborn(userReborn:User) {
+        if (Date.now() - userReborn.player.deadTime < ConfigManager.getInstance().rebornTime) {
+            return;
+        }
+
         let status = userReborn.player.status == KeyExchange.TANK_PLAYER_STATUS.DEAD;
-        userReborn.player.status == KeyExchange.TANK_PLAYER_STATUS.ALIVE;
-        let playerIndex = this.currentRoom.getPlayerIndexByUserId(userReborn.player.playerId);
+        userReborn.player.status = KeyExchange.TANK_PLAYER_STATUS.ALIVE;
+        let playerIndex = this.currentRoom.getPlayerIndexByPlayerId(userReborn.player.playerId);
 
         let data = {
-            [KeyExchange.KEY_DATA.STATUS] : status,
+            [KeyExchange.KEY_DATA.STATUS] : status ? 1 : 0,
             [KeyExchange.KEY_DATA.PLAYER_ID] : userReborn.player.playerId,
             [KeyExchange.KEY_DATA.PLAYER_POSITION] : ConfigManager.getInstance().getPosPlayerBy(userReborn.player.teamId, playerIndex)
         };

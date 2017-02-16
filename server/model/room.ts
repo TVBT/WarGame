@@ -76,7 +76,7 @@ export class Room {
         }
     }
 
-    getPlayerIndexByUserId(playerId) {
+    getPlayerIndexByPlayerId(playerId) {
         let user:User = this.getUserByPlayerId(playerId);
         let users:Array<User> = this.getListUserByTeamId(user.player.teamId);
 
@@ -193,25 +193,18 @@ export class Room {
         return count;
     }
 
-    public getPostionPlayers() {
+    public getPlayerInfos() {
+        var users:Array<User> = this.getListUsers();
         var i = 0;
-        var len = this.team1.length;
+        var len = users.length;
         var objPlayerPosArr = [];
         var objPlayerPos:any;
 
-        for (i = 0; i < len; i++) {
+        for (i; i < len; i++) {
             objPlayerPos = {
-                [KeyExchange.KEY_DATA.PLAYER_ID] : this.team1[i].player.playerId,
-                [KeyExchange.KEY_DATA.PLAYER_POSITION] : ConfigManager.getInstance().getPosPlayerBy(1, i)
-            };
-            objPlayerPosArr.push(objPlayerPos);
-        }
-
-        len = this.team2.length;
-        for (i = 0; i < len; i++) {
-            objPlayerPos = {
-                [KeyExchange.KEY_DATA.PLAYER_ID] : this.team2[i].player.playerId,
-                [KeyExchange.KEY_DATA.PLAYER_POSITION] : ConfigManager.getInstance().getPosPlayerBy(2, i)
+                [KeyExchange.KEY_DATA.PLAYER_ID] : users[i].player.playerId,
+                [KeyExchange.KEY_DATA.TEAM_ID] : users[i].player.teamId,
+                [KeyExchange.KEY_DATA.PLAYER_POSITION] : users[i].player.pos
             };
             objPlayerPosArr.push(objPlayerPos);
         }
@@ -246,4 +239,17 @@ export class Room {
 
         return null;
     }
+
+    updatePositionPlayers() {
+        var users:Array<User> = this.getListUsers();
+        var i = 0;
+        var len = users.length;
+        var playerIndex:number;
+
+        for (i; i < len; i++) {
+            playerIndex = this.getPlayerIndexByPlayerId(users[i].player.playerId);
+            users[i].player.pos = ConfigManager.getInstance().getPosPlayerBy(users[i].player.teamId, playerIndex);
+        }
+    }
+
 }
