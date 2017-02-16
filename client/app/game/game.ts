@@ -6,6 +6,7 @@ import {KeyExchange} from "../../../share/keyexchange";
 import {UserService} from "../services/user.service";
 import {CommandService} from "../services/command.service";
 import {Vector} from "../../../share/math/primitive";
+import {Resources} from "../model/resources";
 /**
  * Created by binhlt on 13/02/2017.
  */
@@ -53,7 +54,7 @@ export class TankGame {
         this.game.stage.disableVisibilityChange = true;
         this.game.load.tilemap('tilemap', 'assets/map/map1.json?v=1', null, Phaser.Tilemap.TILED_JSON);
         this.game.load.image('assetmap', 'assets/map/assetmap.png');
-        this.game.load.spritesheet('tank', 'assets/images/tank1.png', 32, 32);
+        this.game.load.spritesheet('tank', 'assets/images/tank2.png', 32, 32);
         this.game.load.image('bullet_up', 'assets/images/bullet_up.png');
         this.game.load.spritesheet('explosion', 'assets/images/explosion.png', 32, 32);
     }
@@ -63,25 +64,35 @@ export class TankGame {
 
         this.map = new MapGame(this.game, this.commandService);
         this.map.createFloor();
-
-        let listPos = this.gameData[KeyExchange.KEY_DATA.LIST_PLAYER_INFO];
-        for (let i = 0; i < listPos.length; i++) {
-            let posObj = listPos[i];
-            let tank = new Tank(this.game, posObj[KeyExchange.KEY_DATA.PLAYER_ID], posObj[KeyExchange.KEY_DATA.PLAYER_POSITION]);
-            if (tank.playerId == this.userService.getMyPlayerId()) {
-                this.myTank = tank;
-            }
-            this.listTank.push(tank);
-        }
-
+        this.createListTank();
         this.map.createGrass();
 
         this.playController = new GameInput(this, this.myTank);
         this.explosions = this.game.add.group();
-        for (let i = 0; i < listPos.length; i++) {
+        for (let i = 0; i < this.listTank.length; i++) {
             let explosion = this.explosions.create(0, 0, 'explosion', 0, false);
             explosion.anchor.set(0.5, 0.5);
             explosion.animations.add("bum", [0, 1, 2], 10, false);
+        }
+    }
+
+    private createListTank() {
+        let tankData = this.gameData[KeyExchange.KEY_DATA.LIST_PLAYER_INFO];
+        for (let i = 0; i < tankData.length; i++) {
+            let data = tankData[i];
+            let tank = new Tank(this.game, data[KeyExchange.KEY_DATA.PLAYER_ID],
+                                           data[KeyExchange.KEY_DATA.PLAYER_POSITION],
+                                           data[KeyExchange.KEY_DATA.TEAM_ID]);
+            if (tank.playerId == this.userService.getMyPlayerId()) {
+                this.myTank = tank;
+                this.myTank.setColor(Resources.bundle.colors.COLOR_ME);
+            }
+            this.listTank.push(tank);
+        }
+        for (let tank: Tank of this.listTank) {
+            if (tank !== this.myTank) {
+                tank.setColor(tank.teamId == this.myTank.teamId ? Resources.bundle.colors.COLOR_PARTNER : Resources.bundle.colors.COLOR_COMPETITOR);
+            }
         }
     }
 

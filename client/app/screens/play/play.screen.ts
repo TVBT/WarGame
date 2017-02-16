@@ -22,6 +22,8 @@ export class PlayScreen implements AfterViewInit, OnInit {
     startTime;
     isDead = false;
     deadTime = 0;
+    team1 = [];
+    team2 = [];
 
     constructor(private userService:UserService,
                 private commandService:CommandService,
@@ -72,13 +74,15 @@ export class PlayScreen implements AfterViewInit, OnInit {
     }
 
     ngOnInit() {
-        //code test
-        // this.data = {
-        //     [KeyExchange.KEY_DATA.START_GAME_TIME] : 3,
-        //     [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : 300,
-        // };
-
         this.startTime = this.data[KeyExchange.KEY_DATA.PLAY_GAME_TIME]/1000;
+        let listPlayerInfo = this.data[KeyExchange.KEY_DATA.LIST_PLAYER_INFO];
+        for (let playerInfo of listPlayerInfo) {
+            if (playerInfo[KeyExchange.KEY_DATA.PLAYER_ID] == this.userService.getMyPlayerId()) {
+                this.team1.push(playerInfo);
+            } else {
+                this.team2.push(playerInfo);
+            }
+        }
     }
 
     ngAfterViewInit() {
