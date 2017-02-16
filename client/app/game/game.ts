@@ -228,7 +228,7 @@ export class TankGame {
             let playerId = data[KeyExchange.KEY_DATA.PLAYER_ID];
             let playerPos = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
             let tank: Tank = this.getTankById(playerId);
-            if (tank && tank.playerId == this.userService.getMyPlayerId()) {
+            if (tank) {
                 tank.setPosition(playerPos);
                 tank.sprite.revive();
             }
