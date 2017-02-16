@@ -213,7 +213,7 @@ export class TankGame {
         if (tank && tank.playerId != this.userService.getMyPlayerId()) {
             let serverPos = data[KeyExchange.KEY_DATA.PLAYER_POSITION];
             let serverVel = data[KeyExchange.KEY_DATA.BULLET_DIRECTION];
-            let delayTime = Date.now() - data[KeyExchange.KEY_DATA.ACTION_TIME];
+            let delayTime = Date.now() - data[KeyExchange.KEY_DATA.ACTION_TIME] + this.commandService.deltaTime;
             serverPos = new Vector(serverPos.x, serverPos.y);
             serverVel = new Vector(serverVel.x, serverVel.y);
             let bulletStartPos = serverVel.mul(delayTime/1000);

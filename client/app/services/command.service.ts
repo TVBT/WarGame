@@ -11,6 +11,7 @@ export class CommandService {
     socketReady = false;
     onMessage = new EventEmitter();
     socketReadyListener = new EventEmitter();
+    deltaTime = 0;
 
     constructor(private stateService:StateService) {
 
@@ -84,7 +85,7 @@ export class CommandService {
                 [KeyExchange.KEY_DATA.COL_ID]: iCol,
                 [KeyExchange.KEY_DATA.MAP_ITEM_ID]: itemId,
                 [KeyExchange.KEY_DATA.BULLET_ID]: bulletId,
-                [KeyExchange.KEY_DATA.ACTION_TIME]: Date.now()
+                [KeyExchange.KEY_DATA.ACTION_TIME]: Date.now() - this.deltaTime
             }
         });
     }
@@ -135,7 +136,7 @@ export class CommandService {
             data: {
                 [KeyExchange.KEY_DATA.PLAYERID_BE_SHOOT]: playerId,
                 [KeyExchange.KEY_DATA.BULLET_ID]: bulletId,
-                [KeyExchange.KEY_DATA.ACTION_TIME]: Date.now(),
+                [KeyExchange.KEY_DATA.ACTION_TIME]: Date.now() - this.deltaTime,
             }
         });
     }
@@ -147,7 +148,7 @@ export class CommandService {
             data: {
                 [KeyExchange.KEY_DATA.PLAYER_POSITION]: playerPosition,
                 [KeyExchange.KEY_DATA.BULLET_DIRECTION]: bulletDirection,
-                [KeyExchange.KEY_DATA.ACTION_TIME]: Date.now()
+                [KeyExchange.KEY_DATA.ACTION_TIME]: Date.now() - this.deltaTime
             }
         });
     }

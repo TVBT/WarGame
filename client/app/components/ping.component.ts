@@ -37,7 +37,7 @@ export class PingComponent implements OnInit {
         this.commandService.onMessage.subscribe((msg) => {
             switch (msg.command) {
                 case KeyExchange.KEY_COMMAND.PING_PONG:
-                    this.receiveRequest();
+                    this.receiveRequest(msg.data);
                     break;
             }
         });
@@ -51,7 +51,8 @@ export class PingComponent implements OnInit {
         this.lastTime = Date.now();
     }
 
-    receiveRequest() {
+    receiveRequest(data) {
         this.ping = Date.now() - this.lastTime;
+        this.commandService.deltaTime = Date.now() - data[KeyExchange.KEY_DATA.TIME];
     }
 }
