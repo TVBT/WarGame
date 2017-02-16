@@ -93,7 +93,8 @@ export class Tank {
     }
 
     setPosition(point) {
-        this.sprite.reset(point.x, point.y);
+        this.sprite.x = point.x;
+        this.sprite.y = point.y;
     }
 
     setVelocity(velocity) {
