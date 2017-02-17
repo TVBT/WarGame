@@ -9,8 +9,8 @@ export class Tank {
     sprite;
     bullets;
     playerId:number;
+    initialPosition;
     teamId: number;
-    colorCode: number;
     fireRate = 1; // second
     lastFireTime = Date.now();
     maxBullets = 10;
@@ -18,6 +18,7 @@ export class Tank {
     constructor(game, playerId, playerPos, teamId) {
         this.game = game;
         this.playerId = playerId;
+        this.initialPosition = playerPos;
         this.teamId = teamId;
 
         this.bullets = this.game.add.group();
@@ -26,21 +27,6 @@ export class Tank {
         this.bullets.createMultiple(this.maxBullets, "bullet_up");
         this.bullets.setAll("checkWorldBounds", true);
         this.bullets.setAll("outOfBoundsKill", true);
-
-        this.sprite = this.game.add.sprite(playerPos.x, playerPos.y, 'tank');
-        this.sprite.anchor.set(0.5);
-        this.game.physics.enable(this.sprite);
-        this.sprite.body.setSize(25, 30, 3.5, 1);
-        this.sprite.body.collideWorldBounds = true;
-
-        this.sprite.animations.add("down", [0, 3], 10, true);
-        this.sprite.animations.add("left", [1, 4], 10, true);
-        this.sprite.animations.add("right", [6, 7], 10, true);
-        this.sprite.animations.add("up", [2, 5], 10, true);
-
-        // cheat, set initial animation
-        this.sprite.animations.play("down");
-        this.sprite.animations.stop();
     }
 
     canFire():boolean {
@@ -128,7 +114,20 @@ export class Tank {
         this.sprite.body.velocity.set(velocity.x, velocity.y);
     }
 
-    setColor(color) {
-        this.sprite.tint = color;
+    createSprite(key: string) {
+        this.sprite = this.game.add.sprite(this.initialPosition.x, this.initialPosition.y, key);
+        this.sprite.anchor.set(0.5);
+        this.game.physics.enable(this.sprite);
+        this.sprite.body.setSize(25, 30, 3.5, 1);
+        this.sprite.body.collideWorldBounds = true;
+
+        this.sprite.animations.add("down", [0, 3], 10, true);
+        this.sprite.animations.add("left", [1, 4], 10, true);
+        this.sprite.animations.add("right", [6, 7], 10, true);
+        this.sprite.animations.add("up", [2, 5], 10, true);
+
+        // cheat, set initial animation
+        this.sprite.animations.play("down");
+        this.sprite.animations.stop();
     }
 }

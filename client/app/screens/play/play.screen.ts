@@ -74,12 +74,34 @@ export class PlayScreen implements AfterViewInit, OnInit {
 
     ngOnInit() {
         this.startTime = this.data[KeyExchange.KEY_DATA.PLAY_GAME_TIME]/1000;
+
         let listPlayerInfo = this.data[KeyExchange.KEY_DATA.LIST_PLAYER_INFO];
-        for (let playerInfo of listPlayerInfo) {
-            if (playerInfo[KeyExchange.KEY_DATA.PLAYER_ID] == this.userService.getMyPlayerId()) {
-                this.team1.push(playerInfo);
+        let team1Id = -1, team2Id = -1, team1 = [], team2 = [], myInfo;
+        for (let i = 0; i < listPlayerInfo.length; i++) {
+            let info = listPlayerInfo[i];
+            if (info[KeyExchange.KEY_DATA.PLAYER_ID] == this.userService.getMyPlayerId()) {
+                myInfo = info;
+            }
+            if (i == 0 || info[KeyExchange.KEY_DATA.TEAM_ID] == team1Id) {
+                team1.push(info);
+                team1Id = info[KeyExchange.KEY_DATA.TEAM_ID];
+            } else if (info[KeyExchange.KEY_DATA.TEAM_ID] != team1Id) {
+                team2.push(info);
+                team2Id = info[KeyExchange.KEY_DATA.TEAM_ID];
+            }
+        }
+        if (team1Id < team2Id) {
+            this.team1 = team1;
+            this.team2 = team2;
+        } else {
+            this.team1 = team2;
+            this.team2 = team1;
+        }
+        for (let info of listPlayerInfo) {
+            if (info !== myInfo) {
+                info.isOp = (info[KeyExchange.KEY_DATA.TEAM_ID] != myInfo[KeyExchange.KEY_DATA.TEAM_ID])
             } else {
-                this.team2.push(playerInfo);
+                info.isMe = true;
             }
         }
     }

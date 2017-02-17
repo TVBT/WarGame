@@ -58,8 +58,19 @@ div, span {
 .tank-img {
     width: 32px;
     height: 32px;
-    background: url("./assets/images/tank2.png") center center no-repeat;
     display: inline-block;
+}
+
+.tank1 {
+    background: url("./assets/images/tank1.png") center center no-repeat;
+}
+
+.tank2 {
+    background: url("./assets/images/tank2.png") center center no-repeat;
+}
+
+.tank3 {
+    background: url("./assets/images/tank3.png") center center no-repeat;
 }
 
 .tank-name {
