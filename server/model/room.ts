@@ -197,19 +197,20 @@ export class Room {
         var users:Array<User> = this.getListUsers();
         var i = 0;
         var len = users.length;
-        var objPlayerPosArr = [];
-        var objPlayerPos:any;
+        var objPlayerInfos = [];
+        var obj:any;
 
         for (i; i < len; i++) {
-            objPlayerPos = {
+            obj = {
+                [KeyExchange.KEY_DATA.USER_NAME] : users[i].userName,
                 [KeyExchange.KEY_DATA.PLAYER_ID] : users[i].player.playerId,
                 [KeyExchange.KEY_DATA.TEAM_ID] : users[i].player.teamId,
                 [KeyExchange.KEY_DATA.PLAYER_POSITION] : users[i].player.pos
             };
-            objPlayerPosArr.push(objPlayerPos);
+            objPlayerInfos.push(obj);
         }
 
-        return objPlayerPosArr;
+        return objPlayerInfos;
     }
 
     public getUserByPlayerId(playerId:number) {

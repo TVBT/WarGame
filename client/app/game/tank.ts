@@ -9,13 +9,23 @@ export class Tank {
     sprite;
     bullets;
     playerId:number;
+    teamId: number;
+    colorCode: number;
     fireRate = 1; // second
     lastFireTime = Date.now();
     maxBullets = 10;
 
-    constructor(game, playerId, playerPos) {
+    constructor(game, playerId, playerPos, teamId) {
         this.game = game;
         this.playerId = playerId;
+        this.teamId = teamId;
+
+        this.bullets = this.game.add.group();
+        this.bullets.enableBody = true;
+        this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
+        this.bullets.createMultiple(this.maxBullets, "bullet_up");
+        this.bullets.setAll("checkWorldBounds", true);
+        this.bullets.setAll("outOfBoundsKill", true);
 
         this.sprite = this.game.add.sprite(playerPos.x, playerPos.y, 'tank');
         this.sprite.anchor.set(0.5);
@@ -27,16 +37,10 @@ export class Tank {
         this.sprite.animations.add("left", [1, 4], 10, true);
         this.sprite.animations.add("right", [6, 7], 10, true);
         this.sprite.animations.add("up", [2, 5], 10, true);
+
         // cheat, set initial animation
         this.sprite.animations.play("down");
         this.sprite.animations.stop();
-
-        this.bullets = this.game.add.group();
-        this.bullets.enableBody = true;
-        this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-        this.bullets.createMultiple(this.maxBullets, "bullet_up");
-        this.bullets.setAll("checkWorldBounds", true);
-        this.bullets.setAll("outOfBoundsKill", true);
     }
 
     canFire():boolean {
@@ -122,5 +126,9 @@ export class Tank {
         }
         this.sprite.body.angularVelocity = 0;
         this.sprite.body.velocity.set(velocity.x, velocity.y);
+    }
+
+    setColor(color) {
+        this.sprite.tint = color;
     }
 }

@@ -1,8 +1,23 @@
-
-<div class=clock>{{startTime | clock}}</div>
-<div id="game-content" class="game-content">
-
+<div class="row game-info">
+    <div class="col-sm-5 team-left">
+        <div *ngFor="let info of team1"
+             class="tank">
+            <div class="tank-img"></div>
+            <div class="tank-name">{{info.username}}</div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class=clock>{{startTime | clock}}</div>
+    </div>
+    <div class="col-sm-5 team-right">
+        <div *ngFor="let info of team2"
+             class="tank">
+            <div class="tank-img"></div>
+            <div class="tank-name">{{info.username}}</div>
+        </div>
+    </div>
 </div>
+<div id="game-content" class="game-content"></div>
 <div [class.death-bg]="isDead">
     Reborn in {{deadTime}}s
 </div>
