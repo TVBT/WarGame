@@ -8,10 +8,9 @@ import {KeyExchange} from "../../../../share/keyexchange";
 import {StateService} from "../../services/state.service";
 
 @Component({
-    moduleId: module.id,
     selector: 'lobby-screen',
-    templateUrl: './lobby.screen.html',
-    styleUrls: ['./lobby.screen.css']
+    templateUrl: 'app/screens/lobby/lobby.screen.html',
+    styleUrls: ['app/screens/lobby/lobby.screen.css']
 })
 export class LobbyScreen implements OnInit {
     @Input()

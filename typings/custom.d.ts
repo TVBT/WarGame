@@ -4,5 +4,7 @@
 
 interface Window {
     App:any;
+    baseURL:any;
 }
 
+declare var ENV: any;

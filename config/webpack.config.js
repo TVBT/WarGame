@@ -5,39 +5,47 @@
 const helpers = require('./helpers');
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const METADATA = {
-    title: 'Type Script Webpack Starter Kit',
     outputFile: "app.min.js",
-    baseUrl: '/',
-    isDevServer: helpers.isWebpackDevServer()
+    baseUrl: '/WarGame/dist/'
 };
 
 module.exports = {
-    entry: "./client/index.ts",
+    entry: {
+        'main': './client/main.prod.ts',
+        'lib': './client/lib.ts'
+    },
     output: {
         path: "./dist",
-        filename: METADATA.outputFile
+        filename: '[name].[hash].js',
+        chunkFilename: '[id].[hash].chunk.js'
     },
     resolve: {
         // Add '.ts' and '.tsx' as a resolvable extension.
         extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
-        alias: {
-            'vue$': 'vue/dist/vue.common.js'
-        }
     },
     module: {
         loaders: [
             // all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
-            { test: /\.ts?$/, loader: "ts-loader" }
+            {test: /\.ts?$/, loader: "ts-loader"},
+            {test: /\.css$/, loaders: 'style-loader!css-loader'}
         ]
     },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['main', 'lib']
+        }),
         new HtmlWebpackPlugin({
-            template: 'client/index.html',
+            template: 'client/prodindex.html',
             chunksSortMode: 'dependency',
             metadata: METADATA,
-            inject: 'head'
-        })
+            inject: 'body'
+        }),
+        new CopyWebpackPlugin([
+            {from: 'client/assets', to: 'assets'},
+            {from: 'client/styles.css'}
+        ])
     ]
 };

@@ -9,10 +9,9 @@ import {Resources} from "../../model/resources";
 import {UserService} from "../../services/user.service";
 
 @Component({
-    moduleId: module.id,
     selector: 'login-screen',
-    templateUrl: './login.screen.html',
-    styleUrls: ['./login.screen.css']
+    templateUrl: 'app/screens/login/login.screen.html',
+    styleUrls: ['app/screens/login/login.screen.css']
 })
 export class LoginScreen implements OnInit {
     @Input()

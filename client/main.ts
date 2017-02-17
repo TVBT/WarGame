@@ -1,5 +1,14 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+/// <reference path="../typings/custom.d.ts" />
 
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+var runApp = function() {
+    platformBrowserDynamic().bootstrapModule(AppModule);
+};
+
+export {
+    runApp
+}
+
+

@@ -4,7 +4,8 @@
     "routes": {
       "/node_modules": "node_modules",
       "/assets": "client/assets",
-      "/share": "share"
+      "/share": "share",
+      "/app": "client/app"
     }
   },
   "online": true

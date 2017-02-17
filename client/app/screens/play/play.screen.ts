@@ -9,10 +9,9 @@ import {CommandService} from "../../services/command.service";
 import {StateService} from "../../services/state.service";
 
 @Component({
-    moduleId: module.id,
     selector: 'play-screen',
-    templateUrl: './play.screen.html',
-    styleUrls: ['./play.screen.css'],
+    templateUrl: 'app/screens/play/play.screen.html',
+    styleUrls: ['app/screens/play/play.screen.css'],
     providers: [TankGame]
 })
 export class PlayScreen implements AfterViewInit, OnInit {

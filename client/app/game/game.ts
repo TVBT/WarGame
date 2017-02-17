@@ -51,11 +51,11 @@ export class TankGame {
 
     preload() {
         this.game.stage.disableVisibilityChange = true;
-        this.game.load.tilemap('tilemap', 'assets/map/map1.json?v=1', null, Phaser.Tilemap.TILED_JSON);
-        this.game.load.image('assetmap', 'assets/map/assetmap.png');
-        this.game.load.spritesheet('tank', 'assets/images/tank1.png', 32, 32);
-        this.game.load.image('bullet_up', 'assets/images/bullet_up.png');
-        this.game.load.spritesheet('explosion', 'assets/images/explosion.png', 32, 32);
+        this.game.load.tilemap('tilemap', window.baseURL + 'assets/map/map1.json?v=1', null, Phaser.Tilemap.TILED_JSON);
+        this.game.load.image('assetmap', window.baseURL + 'assets/map/assetmap.png');
+        this.game.load.spritesheet('tank', window.baseURL + 'assets/images/tank1.png', 32, 32);
+        this.game.load.image('bullet_up', window.baseURL + 'assets/images/bullet_up.png');
+        this.game.load.spritesheet('explosion', window.baseURL + 'assets/images/explosion.png', 32, 32);
     }
 
     create() {
