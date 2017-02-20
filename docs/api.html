@@ -44,7 +44,9 @@
 			<li><a href="#sub4">Shoot</a></li>
 			<li><a href="#sub5">HitMapItem</a></li>
 			<li><a href="#sub6">HitTank</a></li>
+			<li><a href="#sub7">HitTower</a></li>
 			<li><a href="#sub8">Reborn</a></li>
+			<li><a href="#sub9">EndGame</a></li>
         </ul>
     </div>
     <nav class="navbar-collapse collapse in navbar-inverse navbar-fixed-top" id="bs-navbar" aria-expanded="true">
@@ -446,6 +448,30 @@
 		</ul>
 	</div>
 
+	<div id="item">
+		<h2 id="sub7" class="anchor">* <strong>HIT TOWER</strong> *</h2>
+		<p>&lt;<em>Đội bị bắn bể thành.</em>&gt;</p>
+
+		<ul>
+			<li><p><strong>IdCommand</strong></p>
+				<code>
+					<p>ACTION_IN_GAME:int = 9</p>
+				</code>
+			<li><p><strong>IdSubCommand</strong></p>
+				<code>
+					<p>HIT_TOWER:int = 7</p>
+				</code>
+			<li><p><strong>Input:</strong></p>
+				<code>
+					<p>teamid:int (teamid của đội bị bắn bể thành)</p>
+				</code>
+
+			<li><p><strong>Output:</strong></p>
+				<code>
+					<p>teamid:int (teamid của đội bị bắn bể thành)</p>
+				</code>
+		</ul>
+	</div>
 
 	<div id="item">
 		<h2 id="sub8" class="anchor">* <strong>REBORN</strong> *</h2>
@@ -470,6 +496,31 @@
 					<p>status:number (1=thành công, 0=thất bại)</p>
 					<p>playerid:number (playerid của player được hồi sinh)</p>
 					<p>playerposition:object (vị trí của player ban đầu)</p>
+				</code>
+		</ul>
+	</div>
+
+	<div id="item">
+		<h2 id="sub9" class="anchor">* <strong>END GAME</strong> *</h2>
+		<p>&lt;<em>Kết thúc game.</em>&gt;</p>
+
+		<ul>
+			<li><p><strong>IdCommand</strong></p>
+				<code>
+					<p>ACTION_IN_GAME:int = 9</p>
+				</code>
+			<li><p><strong>IdSubCommand</strong></p>
+				<code>
+					<p>END_GAME:int = 9</p>
+				</code>
+			<li><p><strong>Input:</strong></p>
+				<code>
+				</code>
+
+			<li><p><strong>Output:</strong></p>
+				<code>
+					<p>teamidwin:number (teamid của đội chiến thắng)</p>
+					<p>teamidlose:number (teamid của đội thua cuộc)</p>
 				</code>
 		</ul>
 	</div>

@@ -51,6 +51,10 @@ export class TankGameLogic {
                 this.handlePlayerHitTank(data, client);
                 break;
 
+            case KeyExchange.KEY_COMMAND.HIT_TOWER:
+                this.handlePlayerHitTower(data, client);
+                break;
+
             case KeyExchange.KEY_COMMAND.REBORN:
                 this.handlePlayerReborn(data, client);
                 break;
@@ -125,6 +129,12 @@ export class TankGameLogic {
         let userShoot:User = this.currentRoom.getUserByClientId(client.id);
 
         this.controller.playerHitTank(userShoot.player.playerId, playerIdBeShoot, actionTime, idBullet);
+    }
+
+    private handlePlayerHitTower(data, client) {
+        let teamId:number = data[KeyExchange.KEY_DATA.TEAM_ID];
+
+        this.controller.playerHitTower(userShoot.player.playerId, playerIdBeShoot, actionTime, idBullet);
     }
 
     private handlePlayerReborn(data, client) {

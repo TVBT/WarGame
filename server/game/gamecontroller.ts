@@ -93,6 +93,15 @@ export  class GameController {
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.HIT_TANK, this.currentRoom.getListUsers());
     }
 
+    public playerHitTower(teamIdLose) {
+        let data = {
+            [KeyExchange.KEY_DATA.TEAM_ID] : teamIdLose,
+        };
+
+        this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.HIT_TOWER, this.currentRoom.getListUsers());
+        this.endGame(this.getTeamIdWin(teamIdLose), teamIdLose);
+    }
+
     public playerReborn(userReborn:User) {
         if (Date.now() - userReborn.player.deadTime < ConfigManager.getInstance().rebornTime) {
             return;
@@ -109,6 +118,28 @@ export  class GameController {
         };
 
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.REBORN, this.currentRoom.getListUsers());
+    }
+
+    private endGame(teamIdWin, teamIdLose) {
+        let data = {
+            [KeyExchange.KEY_DATA.TEAM_ID_WIN] : teamIdWin,
+            [KeyExchange.KEY_DATA.TEAM_ID_LOSE] : teamIdLose,
+        };
+
+        this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.END_GAME, this.currentRoom.getListUsers());
+    }
+
+    public getTeamIdWin(teamId) {
+        switch (teamId) {
+            case 1:
+                return 2;
+
+            case 2:
+                return 1;
+
+            default:
+                return 0;
+        }
     }
 
     public sendResponseToUser(data, cmd, user) {

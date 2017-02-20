@@ -23,6 +23,7 @@ class KeyCommand {
     HIT_TANK = 6;
     HIT_TOWER = 7;
     REBORN = 8;
+    END_GAME = 9;
 }
 
 class KeyData {
@@ -58,6 +59,8 @@ class KeyData {
     PLAYERID_BE_SHOOT = "playeridbeshoot";
     BULLET_ID= "idbullet";
     TIME = "time";
+    TEAM_ID_WIN = "teamidwin";
+    TEAM_ID_LOSE = "teamidlose";
 }
 
 class MapItem {
