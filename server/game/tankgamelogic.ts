@@ -134,7 +134,7 @@ export class TankGameLogic {
     private handlePlayerHitTower(data, client) {
         let teamId:number = data[KeyExchange.KEY_DATA.TEAM_ID];
 
-        this.controller.playerHitTower(userShoot.player.playerId, playerIdBeShoot, actionTime, idBullet);
+        this.controller.playerHitTower(teamId);
     }
 
     private handlePlayerReborn(data, client) {

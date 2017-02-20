@@ -61,6 +61,8 @@ class KeyData {
     TIME = "time";
     TEAM_ID_WIN = "teamidwin";
     TEAM_ID_LOSE = "teamidlose";
+    TOWER_POSITION = "towerposition";
+    LIST_TOWER_INFO = "listtowerinfo";
 }
 
 class MapItem {

@@ -262,8 +262,8 @@ export class Main {
             data : {
                 [KeyExchange.KEY_DATA.START_GAME_TIME] : this.configManager.startGameTime,
                 [KeyExchange.KEY_DATA.PLAY_GAME_TIME] : this.configManager.playGameTime,
-                [KeyExchange.KEY_DATA.LIST_PLAYER_INFO] : room.getPlayerInfos()
-
+                [KeyExchange.KEY_DATA.LIST_PLAYER_INFO] : room.getPlayerInfos(),
+                [KeyExchange.KEY_DATA.LIST_TOWER_INFO] : this.getListTowerInfos(),
             }
         };
 
@@ -294,6 +294,23 @@ export class Main {
         this.roomManager.leaveRoom(user);
         this.userManager.removeUser(user.client.id);
         this.userManager.removeUserName(user.userName);
+    }
+
+    getListTowerInfos() {
+        let objTowerInfos = [];
+        let obj:any = {
+            [KeyExchange.KEY_DATA.TEAM_ID] : 1,
+            [KeyExchange.KEY_DATA.TOWER_POSITION] : this.configManager.TOWER1_POS
+        };
+        objTowerInfos.push(obj);
+
+        obj = {
+            [KeyExchange.KEY_DATA.TEAM_ID] : 2,
+            [KeyExchange.KEY_DATA.TOWER_POSITION] : this.configManager.TOWER2_POS
+        };
+        objTowerInfos.push(obj);
+
+        return objTowerInfos;
     }
 }
 

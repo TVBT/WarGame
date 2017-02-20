@@ -20,6 +20,10 @@ export class ConfigManager {
     readonly TEAM1_POS = [new Point(10, 100), new Point(10, 400), new Point(10, 600)];
     readonly TEAM2_POS = [new Point(1260, 100), new Point(1260, 400), new Point(1260, 600)];
 
+    // vị trí tower của 2 đội chơi
+    readonly TOWER1_POS = new Point(0, 240);
+    readonly TOWER2_POS = new Point(1248, 240);
+
     readonly startGameTime = 3000;
     readonly playGameTime = 300000;
     readonly rebornTime = 5000;
