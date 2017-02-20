@@ -17,7 +17,7 @@ export class ConfigManager {
     readonly MAP_LIST = [this.MAP1];
 
     //vị trí xuất hiện của 2 team khi start game (dựa vào index của MAP)
-    readonly TEAM1_POS = [new Point(10, 100), new Point(10, 400), new Point(10, 600)];
+    readonly TEAM1_POS = [new Point(20, 100), new Point(20, 400), new Point(20, 600)];
     readonly TEAM2_POS = [new Point(1260, 100), new Point(1260, 400), new Point(1260, 600)];
 
     // vị trí tower của 2 đội chơi
