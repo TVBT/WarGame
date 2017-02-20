@@ -134,8 +134,8 @@ export class TankGame {
                     }
                 });
                 // check collision with other tanks
-                for (let otherTank of this.listTank) {
-                    if (tank === this.myTank && otherTank.playerId != tank.playerId) {
+                for (let otherTank: Tank of this.listTank) {
+                    if (tank === this.myTank && otherTank.playerId != tank.playerId && otherTank.teamId != tank.teamId) {
                         this.game.physics.arcade.collide(bullet, otherTank.sprite, () => {
                             bullet.kill();
                             this.playExplosion(bullet.centerX, bullet.centerY);

@@ -53,6 +53,11 @@ div, span {
 
 .tank {
     display: inline-block;
+    margin-right: 25px;
+}
+
+.team-left .tank:last-child {
+    margin-right: 0px;
 }
 
 .tank-img {
@@ -77,4 +82,5 @@ div, span {
     display: inline-block;
     line-height: 32px;
     vertical-align: top;
+    margin-left: -10px;
 }
