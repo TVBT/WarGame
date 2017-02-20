@@ -15,6 +15,9 @@ import {StateService} from "./services/state.service";
 import {ClockPipe} from "./app.pipe";
 import {PingComponent} from "./components/ping.component";
 import {ServerSelectComponent} from "./components/serverselect.component";
+import {DialogComponent} from "./components/dialog.component";
+import {EndGameDialog} from "./dialogs/endgame/endgame.dialog";
+import {DialogService} from "./services/dialog.service";
 
 @NgModule({
     imports: [
@@ -28,6 +31,10 @@ import {ServerSelectComponent} from "./components/serverselect.component";
         PlayScreen,
         PingComponent,
         ServerSelectComponent,
+        DialogComponent,
+
+        //Dialogs
+        EndGameDialog,
 
         //Pipes
         ClockPipe
@@ -35,7 +42,8 @@ import {ServerSelectComponent} from "./components/serverselect.component";
     providers: [
         UserService,
         CommandService,
-        StateService
+        StateService,
+        DialogService
     ],
     bootstrap: [AppComponent]
 })

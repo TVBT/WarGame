@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {StateService, SCREEN_STATE} from "./services/state.service";
 import {CommandService} from "./services/command.service";
+import {DialogService} from "./services/dialog.service";
 
 
 @Component({
@@ -15,6 +16,7 @@ import {CommandService} from "./services/command.service";
     </div>
     <ping class="ping"></ping>
     <server-select class="server-select"></server-select>
+    <dialogs></dialogs>
   `,
     styles: [
         `
@@ -44,8 +46,7 @@ export class AppComponent implements OnInit {
     screenState;
     data;
 
-    constructor(private stateService:StateService,
-                private commandService:CommandService) {
+    constructor(private stateService:StateService) {
         this.screenState = this.stateService.getScreenState();
         this.stateService.screenStateChange.subscribe((msg) => {
             this.screenState = msg.state;

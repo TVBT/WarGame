@@ -7,6 +7,7 @@ import {KeyExchange} from "../../../../share/keyexchange";
 import {StateService} from "../../services/state.service";
 import {Resources} from "../../model/resources";
 import {UserService} from "../../services/user.service";
+import {DialogService} from "../../services/dialog.service";
 
 @Component({
     selector: 'login-screen',
@@ -25,7 +26,8 @@ export class LoginScreen implements OnInit {
 
     constructor(private commandService:CommandService,
                 private stateService:StateService,
-                private userService:UserService)
+                private userService:UserService,
+                private dialogService:DialogService)
     {
         this.commandService.onMessage.subscribe((msg) => {
             switch (msg.command) {

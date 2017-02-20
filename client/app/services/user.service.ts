@@ -20,4 +20,8 @@ export class UserService {
         let playerInfo = this.myUser().playerInfo;
         return playerInfo ? playerInfo[KeyExchange.KEY_DATA.PLAYER_ID] : -1;
     }
+
+    getMyName() {
+        return this._myUser.name;
+    }
 }

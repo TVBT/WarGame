@@ -5,6 +5,7 @@
 interface Window {
     App:any;
     baseURL:any;
+    $:any;
 }
 
 declare var ENV: any;
