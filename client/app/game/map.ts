@@ -57,20 +57,6 @@ export class MapGame {
         return [iCol, iRow];
     }
 
-    hitHomeTown(iCol, iRow) {
-        var neightboor = [0, -2, -1, +1, +2];
-        for (let padx of neightboor) {
-            for (let pady of neightboor) {
-                let tile = this.map.getTile(iCol + padx, iRow + pady, this.floor);
-                if (tile && tile.index >= KeyExchange.MAP_ITEM.EAGLE_TOP_LEFT
-                    && tile.index <= KeyExchange.MAP_ITEM.EAGLE_BOT_RIGHT) {
-                    this.map.removeTile(iCol + padx, iRow + pady, this.floor);
-                }
-            }
-        }
-
-    }
-
     hitBullet(bullet) {
         let x = bullet.centerX,
             y = bullet.centerY;
@@ -85,10 +71,6 @@ export class MapGame {
 
         for (let point of points) {
             isBrickHitted = this.removeBrick(point[0], point[1], bullet.bulletId) || isBrickHitted;
-        }
-
-        if (!isBrickHitted) {
-            this.hitHomeTown.apply(this, this.tilePosFromPoint(rect.center));
         }
     }
 }

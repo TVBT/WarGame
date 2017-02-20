@@ -19,6 +19,7 @@ export class TankGame {
     map:MapGame;
     explosions;
     listTank = [];
+    listTown = [];
     myTank:Tank;
     playController:GameInput;
 
@@ -54,6 +55,7 @@ export class TankGame {
         this.game.stage.disableVisibilityChange = true;
         this.game.load.tilemap('tilemap', window.baseURL + 'assets/map/map1.json?v=1', null, Phaser.Tilemap.TILED_JSON);
         this.game.load.image('assetmap', window.baseURL + 'assets/map/assetmap.png');
+        this.game.load.spritesheet('hometown', window.baseURL + 'assets/map/hometown.png', 32, 32);
         this.game.load.spritesheet('tank1', window.baseURL + 'assets/images/tank1.png', 32, 32);
         this.game.load.spritesheet('tank2', window.baseURL + 'assets/images/tank2.png', 32, 32);
         this.game.load.spritesheet('tank3', window.baseURL + 'assets/images/tank3.png', 32, 32);
@@ -67,6 +69,7 @@ export class TankGame {
         this.map = new MapGame(this.game, this.commandService);
         this.map.createFloor();
         this.createListTank();
+        this.createHomeTown();
         this.map.createGrass();
 
         this.playController = new GameInput(this, this.myTank);
@@ -96,6 +99,18 @@ export class TankGame {
             } else {
                 this.myTank.createSprite("tank1");
             }
+        }
+    }
+
+    private createHomeTown() {
+        let townInfoList = this.gameData[KeyExchange.KEY_DATA.LIST_TOWER_INFO];
+        for (let townInfo of townInfoList) {
+            var townPos = townInfo[KeyExchange.KEY_DATA.TOWER_POSITION];
+            var town = this.game.add.sprite(townPos.x, townPos.y, "hometown");
+            town[KeyExchange.KEY_DATA.TEAM_ID] = townInfo[KeyExchange.KEY_DATA.TEAM_ID];
+            this.game.physics.enable(town);
+            town.body.setSize(32, 32, 0, 0);
+            this.listTown.push(town);
         }
     }
 
@@ -134,7 +149,7 @@ export class TankGame {
                     }
                 });
                 // check collision with other tanks
-                for (let otherTank: Tank of this.listTank) {
+                for (let otherTank of this.listTank) {
                     if (tank === this.myTank && otherTank.playerId != tank.playerId && otherTank.teamId != tank.teamId) {
                         this.game.physics.arcade.collide(bullet, otherTank.sprite, () => {
                             bullet.kill();
@@ -143,6 +158,16 @@ export class TankGame {
                             this.commandService.hitTank(otherTank.playerId, bullet.bulletId);
                         })
                     }
+                }
+
+                // check collision with hometowns
+                for (let town of this.listTown) {
+                    this.game.physics.arcade.collide(bullet, town, () => {
+                        bullet.kill();
+                        this.playExplosion(bullet.centerX, bullet.centerY);
+                        town.kill();
+                        this.commandService.hitHometown(town[KeyExchange.KEY_DATA.TEAM_ID]);
+                    });
                 }
             }
         }
@@ -246,6 +271,15 @@ export class TankGame {
             if (tank) {
                 tank.setPosition(playerPos);
                 tank.sprite.revive();
+            }
+        }
+    }
+
+    onHitTower(data) {
+        var teamId = data[KeyExchange.KEY_DATA.TEAM_ID];
+        for (let town of this.listTown) {
+            if (town[KeyExchange.KEY_DATA.TEAM_ID] == teamId) {
+                town.kill();
             }
         }
     }

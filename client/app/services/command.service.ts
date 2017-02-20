@@ -138,6 +138,16 @@ export class CommandService {
         });
     }
 
+    hitHometown(teamId) {
+        this.socket.emit("event", {
+            command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,
+            sub: KeyExchange.KEY_COMMAND.HIT_TOWER,
+            data: {
+                [KeyExchange.KEY_DATA.TEAM_ID]: teamId
+            }
+        });
+    }
+
     shoot(playerId, playerPosition, bulletDirection) {
         this.socket.emit("event", {
             command: KeyExchange.KEY_COMMAND.ACTION_IN_GAME,

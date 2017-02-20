@@ -67,6 +67,9 @@ export class PlayScreen implements AfterViewInit, OnInit {
                         this.isDead = false;
                         this.game.onPlayerReborn(msg.data);
                         break;
+                    case KeyExchange.KEY_COMMAND.HIT_TOWER:
+                        this.game.onHitTower(msg.data);
+                        break;
                 }
             }
         })
