@@ -24,4 +24,9 @@ export class UserService {
     getMyName() {
         return this._myUser.name;
     }
+
+    getMyTeamId() {
+        let playerInfo = this.myUser().playerInfo;
+        return playerInfo ? playerInfo[KeyExchange.KEY_DATA.TEAM_ID] : -1;
+    }
 }

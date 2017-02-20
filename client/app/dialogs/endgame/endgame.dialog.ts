@@ -7,6 +7,7 @@ import {CommandService} from "../../services/command.service";
 import {StateService} from "../../services/state.service";
 import {DialogService} from "../../services/dialog.service";
 import {UserService} from "../../services/user.service";
+import {KeyExchange} from "../../../../share/keyexchange";
 
 @Component({
     selector: 'endgame-dlg',
@@ -54,11 +55,27 @@ export class EndGameDialog implements OnInit, AfterViewInit {
                 private stateService:StateService,
                 private dialogService:DialogService,
                 private userService:UserService) {
-
+        this.commandService.onMessage.subscribe((msg) => {
+            switch (msg.command) {
+                case KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM:
+                    var status = msg.data[KeyExchange.KEY_DATA.STATUS];
+                    if (status) {
+                        var user = this.userService.myUser();
+                        user.roomId = msg.data[KeyExchange.KEY_DATA.ROOM_ID];
+                        user.playerInfo = msg.data[KeyExchange.KEY_DATA.PLAYER_INFO];
+                        this.stateService.showLobby();
+                    } else {
+                        this.stateService.showLogin();
+                    }
+                    break;
+            }
+        });
     }
 
     ngOnInit() {
-
+        var teamWin = this.data[KeyExchange.KEY_DATA.TEAM_ID_WIN];
+        var myTeam = this.userService.getMyTeamId();
+        this.isVictory = myTeam == teamWin;
     }
 
     ngAfterViewInit() {
@@ -72,7 +89,6 @@ export class EndGameDialog implements OnInit, AfterViewInit {
 
     onContinue() {
         this.dialogService.pop();
-        this.stateService.showLogin();
         this.commandService.autoJoinRoom(this.userService.getMyName());
     }
 }

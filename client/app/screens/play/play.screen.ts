@@ -7,6 +7,7 @@ import {TankGame} from "../../game/game";
 import {UserService} from "../../services/user.service";
 import {CommandService} from "../../services/command.service";
 import {StateService} from "../../services/state.service";
+import {DialogService} from "../../services/dialog.service";
 
 @Component({
     selector: 'play-screen',
@@ -27,6 +28,7 @@ export class PlayScreen implements AfterViewInit, OnInit {
     constructor(private userService:UserService,
                 private commandService:CommandService,
                 private stateService:StateService,
+                private dialogService:DialogService,
                 private game:TankGame) {
         this.commandService.onMessage.subscribe((msg) => {
             if (msg.command == KeyExchange.KEY_COMMAND.ACTION_IN_GAME) {
@@ -69,6 +71,9 @@ export class PlayScreen implements AfterViewInit, OnInit {
                         break;
                     case KeyExchange.KEY_COMMAND.HIT_TOWER:
                         this.game.onHitTower(msg.data);
+                        break;
+                    case KeyExchange.KEY_COMMAND.END_GAME:
+                        this.dialogService.showEndGame(msg.data);
                         break;
                 }
             }
