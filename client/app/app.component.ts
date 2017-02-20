@@ -14,6 +14,7 @@ import {CommandService} from "./services/command.service";
         <play-screen *ngIf="screenState=='${SCREEN_STATE.PLAY}'" [data]='data' ></play-screen>
     </div>
     <ping class="ping"></ping>
+    <server-select class="server-select"></server-select>
   `,
     styles: [
         `
@@ -27,6 +28,12 @@ import {CommandService} from "./services/command.service";
             position: fixed;
             top: 0;
             right: 0;
+        }
+        
+        .server-select {
+            position: fixed;
+            top: 0;
+            right: 100px;
         }
         `
     ]
@@ -47,9 +54,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        setTimeout(() => {
-            this.commandService.start();
-        }, 1000);
 
     }
 }

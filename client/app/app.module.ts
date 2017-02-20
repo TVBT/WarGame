@@ -14,6 +14,7 @@ import {CommandService} from "./services/command.service";
 import {StateService} from "./services/state.service";
 import {ClockPipe} from "./app.pipe";
 import {PingComponent} from "./components/ping.component";
+import {ServerSelectComponent} from "./components/serverselect.component";
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import {PingComponent} from "./components/ping.component";
         LobbyScreen,
         PlayScreen,
         PingComponent,
+        ServerSelectComponent,
 
         //Pipes
         ClockPipe

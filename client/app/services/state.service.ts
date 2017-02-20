@@ -34,6 +34,11 @@ class StateService {
         this.screenState = SCREEN_STATE.PLAY;
         this.screenStateChange.emit({state: this.screenState, data: data});
     }
+
+    showConnectServer() {
+        this.screenState = SCREEN_STATE.WAIT_SERVER;
+        this.screenStateChange.emit({state: this.screenState, data: {}});
+    }
 }
 
 export {
