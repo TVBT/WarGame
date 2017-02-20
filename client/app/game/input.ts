@@ -43,7 +43,7 @@ export class GameInput {
         this.checkMove();
     }
 
-    private checkMove() {
+    public checkMove() {
         if (this.stopped) {
             return;
         }

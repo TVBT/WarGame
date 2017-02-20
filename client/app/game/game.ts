@@ -117,8 +117,12 @@ export class TankGame {
 
     update() {
         this.playController.update();
-        for (let tank of this.listTank) {
-            this.game.physics.arcade.collide(tank.sprite, this.map.floor);
+        for (let tank: Tank of this.listTank) {
+            this.game.physics.arcade.collide(tank.sprite, this.map.floor, () => {
+                if (tank === this.myTank) {
+                    this.playController.checkMove();
+                }
+            });
             this.game.physics.arcade.collide(tank.sprite, this.map.sea);
             this.checkBulletsCollision(tank);
         }
