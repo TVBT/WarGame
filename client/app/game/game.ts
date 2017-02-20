@@ -166,6 +166,7 @@ export class TankGame {
                         bullet.kill();
                         this.playExplosion(bullet.centerX, bullet.centerY);
                         town.kill();
+                        this.playExplosion(town.centerX, town.centerY);
                         this.commandService.hitHometown(town[KeyExchange.KEY_DATA.TEAM_ID]);
                     });
                 }
@@ -280,6 +281,7 @@ export class TankGame {
         for (let town of this.listTown) {
             if (town[KeyExchange.KEY_DATA.TEAM_ID] == teamId) {
                 town.kill();
+                this.playExplosion(town.centerX, town.centerY);
             }
         }
     }
