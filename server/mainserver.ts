@@ -60,10 +60,7 @@ export class Main {
 
                     this.sendListUser(objectToOtherUser, user.room.getListUserExceptUserId(user.userId));
                 }
-
-                this.roomManager.leaveRoom(user);
-                this.userManager.removeUser(client.id);
-                this.userManager.removeUserName(user.userName);
+                this.userLeave(user);
             }.bind(this));
         });
 
@@ -116,6 +113,10 @@ export class Main {
 
             case KeyExchange.KEY_COMMAND.CHANGE_TEAM:
                 this.handleUserChangeTeam(msg.data, client);
+                break;
+
+            case KeyExchange.KEY_COMMAND.USER_LEAVE_LOBBY_ROOM:
+                this.handleUserLeaveLobbyRoom(msg.data, client);
                 break;
 
             case KeyExchange.KEY_COMMAND.ACTION_IN_GAME:
@@ -237,6 +238,21 @@ export class Main {
         this.sendListUser(object, user.room.getListUsers());
     }
 
+    handleUserLeaveLobbyRoom(data, client) {
+        var userLeave:User = this.userManager.getUserById(client.id);
+        var userId = data[KeyExchange.KEY_DATA.USER_ID];
+        var roomId = data[KeyExchange.KEY_DATA.ROOM_ID];
+        var room:Room = this.roomManager.getRoomById(roomId);
+        this.userLeave(userLeave);
+
+        var object = {
+            command: KeyExchange.KEY_COMMAND.USER_LEAVE_LOBBY_ROOM,
+            data : userLeave.parseJsonDataPlayer()
+        };
+
+        this.sendListUser(object, room.getListUsers());
+    }
+
     userJoinGame(user) {
         var room:Room = user.room;
         room.updatePositionPlayers();
@@ -272,6 +288,12 @@ export class Main {
 
     sendAllUser(command, object) {
         this.io.emit('event', object);
+    }
+
+    userLeave(user:User) {
+        this.roomManager.leaveRoom(user);
+        this.userManager.removeUser(user.client.id);
+        this.userManager.removeUserName(user.userName);
     }
 }
 
