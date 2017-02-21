@@ -79,7 +79,10 @@ export class EndGameDialog implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        window.$(this.dialog.nativeElement).modal();
+        window.$(this.dialog.nativeElement).modal({
+            backdrop: 'static',
+            keyboard: false
+        });
     }
 
     onExit() {
