@@ -1,6 +1,3 @@
-/// <reference path="../../typings/globals/phaser/index.d.ts" />
-/// <reference path="../../typings/globals/socket.io-client/index.d.ts" />
-
 import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
@@ -28,7 +25,6 @@ import {DialogService} from "./services/dialog.service";
         AppComponent,
         LoginScreen,
         LobbyScreen,
-        PlayScreen,
         PingComponent,
         ServerSelectComponent,
         DialogComponent,

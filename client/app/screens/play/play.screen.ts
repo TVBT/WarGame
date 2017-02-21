@@ -11,8 +11,8 @@ import {DialogService} from "../../services/dialog.service";
 
 @Component({
     selector: 'play-screen',
-    templateUrl: 'app/screens/play/play.screen.html',
-    styleUrls: ['app/screens/play/play.screen.css'],
+    templateUrl: 'play.screen.html',
+    styleUrls: ['play.screen.css'],
     providers: [TankGame]
 })
 export class PlayScreen implements AfterViewInit, OnInit {

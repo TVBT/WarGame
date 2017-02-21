@@ -53,14 +53,14 @@ export class TankGame {
 
     preload() {
         this.game.stage.disableVisibilityChange = true;
-        this.game.load.tilemap('tilemap', window.baseURL + 'assets/map/map1.json?v=1', null, Phaser.Tilemap.TILED_JSON);
-        this.game.load.image('assetmap', window.baseURL + 'assets/map/assetmap.png');
-        this.game.load.spritesheet('hometown', window.baseURL + 'assets/map/hometown.png', 32, 32);
-        this.game.load.spritesheet('tank1', window.baseURL + 'assets/images/tank1.png', 32, 32);
-        this.game.load.spritesheet('tank2', window.baseURL + 'assets/images/tank2.png', 32, 32);
-        this.game.load.spritesheet('tank3', window.baseURL + 'assets/images/tank3.png', 32, 32);
-        this.game.load.image('bullet_up', window.baseURL + 'assets/images/bullet_up.png');
-        this.game.load.spritesheet('explosion', window.baseURL + 'assets/images/explosion.png', 32, 32);
+        this.game.load.tilemap('tilemap',  'assets/map/map1.json?v=1', null, Phaser.Tilemap.TILED_JSON);
+        this.game.load.image('assetmap',  'assets/map/assetmap.png');
+        this.game.load.spritesheet('hometown',  'assets/map/hometown.png', 32, 32);
+        this.game.load.spritesheet('tank1',  'assets/images/tank1.png', 32, 32);
+        this.game.load.spritesheet('tank2',  'assets/images/tank2.png', 32, 32);
+        this.game.load.spritesheet('tank3',  'assets/images/tank3.png', 32, 32);
+        this.game.load.image('bullet_up',  'assets/images/bullet_up.png');
+        this.game.load.spritesheet('explosion',  'assets/images/explosion.png', 32, 32);
     }
 
     create() {
@@ -93,7 +93,7 @@ export class TankGame {
             }
             this.listTank.push(tank);
         }
-        for (let tank: Tank of this.listTank) {
+        for (let tank of this.listTank) {
             if (tank !== this.myTank) {
                 tank.createSprite(tank.teamId == this.myTank.teamId ? "tank3" : "tank2");
             } else {

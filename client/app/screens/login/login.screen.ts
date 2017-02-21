@@ -11,8 +11,8 @@ import {DialogService} from "../../services/dialog.service";
 
 @Component({
     selector: 'login-screen',
-    templateUrl: 'app/screens/login/login.screen.html',
-    styleUrls: ['app/screens/login/login.screen.css']
+    templateUrl: 'login.screen.html',
+    styleUrls: ['login.screen.css']
 })
 export class LoginScreen implements OnInit {
     @Input()

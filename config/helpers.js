@@ -1,15 +1,7 @@
-/**
- * Created by thinhtran on 1/31/17.
- */
-
 var path = require('path');
-var ROOT = path.resolve(__dirname, '..');
-
-function isWebpackDevServer() {
-    return process.argv[1] && !! (/webpack-dev-server/.exec(process.argv[1]));
+var _root = path.resolve(__dirname, '..');
+function root(args) {
+    args = Array.prototype.slice.call(arguments, 0);
+    return path.join.apply(path, [_root].concat(args));
 }
-
-var root = path.join.bind(path, ROOT);
-
-exports.isWebpackDevServer = isWebpackDevServer;
-
+exports.root = root;

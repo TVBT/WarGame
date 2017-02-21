@@ -9,8 +9,8 @@ import {StateService} from "../../services/state.service";
 
 @Component({
     selector: 'lobby-screen',
-    templateUrl: 'app/screens/lobby/lobby.screen.html',
-    styleUrls: ['app/screens/lobby/lobby.screen.css']
+    templateUrl: 'lobby.screen.html',
+    styleUrls: ['lobby.screen.css']
 })
 export class LobbyScreen implements OnInit {
     @Input()

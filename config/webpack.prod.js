@@ -1,23 +1,39 @@
-/**
- * Created by thinhtran on 1/31/17.
- */
+var commonConfig = require('./webpack.common.js');
 
-const webpack = require("webpack");
-const webpackMerge = require('webpack-merge');
-const commonConfig = require("./webpack.config");
-const DefinePlugin = require('webpack/lib/DefinePlugin');
+var webpack = require('webpack');
+var webpackMerge = require('webpack-merge');
+var helpers = require('./helpers');
+
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+var ENV = process.env.ENV = process.env.NODE_ENV = 'production';
 
 module.exports = webpackMerge(commonConfig, {
+    devtool: 'source-map',
+
+    output: {
+        path: helpers.root('dist'),
+        filename: '[name].[hash].js',
+        sourceMapFilename: '[name].[hash].map',
+        chunkFilename: '[id].[hash].chunk.js'
+    },
+
+    htmlLoader: {
+        minimize: false // workaround for ng2
+    },
+
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
+            mangle: {
+                keep_fnames: true
             }
         }),
-        new DefinePlugin({
-            'ENV': JSON.stringify("production"),
+        new ExtractTextPlugin('[name].[hash].css'),
+        new webpack.DefinePlugin({
             'process.env': {
-                'ENV': JSON.stringify("production")
+                'ENV': JSON.stringify(ENV)
             }
         })
     ]
