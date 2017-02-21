@@ -1,7 +1,7 @@
 /**
  * Created by thinhth2 on 2/6/2017.
  */
-import {Component, AfterViewInit, Input, OnInit} from '@angular/core';
+import {Component, AfterViewInit, Input, OnInit, OnDestroy} from '@angular/core';
 import {KeyExchange} from "../../../../share/keyexchange";
 import {TankGame} from "../../game/game";
 import {UserService} from "../../services/user.service";
@@ -15,7 +15,8 @@ import {DialogService} from "../../services/dialog.service";
     styleUrls: ['play.screen.css'],
     providers: [TankGame]
 })
-export class PlayScreen implements AfterViewInit, OnInit {
+export class PlayScreen implements AfterViewInit, OnInit, OnDestroy {
+
     @Input()
     data;
 
@@ -24,13 +25,18 @@ export class PlayScreen implements AfterViewInit, OnInit {
     deadTime = 0;
     team1 = [];
     team2 = [];
+    subscription;
 
     constructor(private userService:UserService,
                 private commandService:CommandService,
                 private stateService:StateService,
                 private dialogService:DialogService,
                 private game:TankGame) {
-        this.commandService.onMessage.subscribe((msg) => {
+
+    }
+
+    ngOnInit() {
+        this.subscription = this.commandService.onMessage.subscribe((msg) => {
             if (msg.command == KeyExchange.KEY_COMMAND.ACTION_IN_GAME) {
                 let subCommand = msg.sub;
                 switch (subCommand) {
@@ -77,10 +83,8 @@ export class PlayScreen implements AfterViewInit, OnInit {
                         break;
                 }
             }
-        })
-    }
+        });
 
-    ngOnInit() {
         this.startTime = this.data[KeyExchange.KEY_DATA.PLAY_GAME_TIME]/1000;
 
         let listPlayerInfo = this.data[KeyExchange.KEY_DATA.LIST_PLAYER_INFO];
@@ -112,6 +116,11 @@ export class PlayScreen implements AfterViewInit, OnInit {
                 info.isMe = true;
             }
         }
+    }
+
+    ngOnDestroy():void {
+        this.subscription.isStopped = true;
+        this.subscription.closed = true;
     }
 
     ngAfterViewInit() {

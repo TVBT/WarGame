@@ -1,7 +1,7 @@
 /**
  * Created by thinhth2 on 2/6/2017.
  */
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {CommandService} from "../../services/command.service";
 import {KeyExchange} from "../../../../share/keyexchange";
@@ -12,7 +12,8 @@ import {StateService} from "../../services/state.service";
     templateUrl: 'lobby.screen.html',
     styleUrls: ['lobby.screen.css']
 })
-export class LobbyScreen implements OnInit {
+export class LobbyScreen implements OnInit, OnDestroy {
+
     @Input()
     data;
 
@@ -21,11 +22,16 @@ export class LobbyScreen implements OnInit {
 
     totalPlayers = [];
     disableButtons = false;
+    subscription;
 
     constructor(private userService:UserService,
                 private commandService:CommandService,
                 private stateService:StateService) {
-        this.commandService.onMessage.subscribe((msg) => {
+
+    }
+
+    ngOnInit() {
+        this.subscription = this.commandService.onMessage.subscribe((msg) => {
             switch (msg.command) {
                 case KeyExchange.KEY_COMMAND.GET_ROOM_INFO:
                     this.onGetRoomInfo(msg.data);
@@ -46,12 +52,15 @@ export class LobbyScreen implements OnInit {
                     this.onUserJoinGame(msg.data);
                     break;
             }
-        })
-    }
+        });
 
-    ngOnInit() {
         var user = this.userService.myUser();
         this.commandService.getRoomInfo(user.roomId);
+    }
+
+    ngOnDestroy():void {
+        this.subscription.isStopped = true;
+        this.subscription.closed = true;
     }
 
     private onGetRoomInfo(data) {

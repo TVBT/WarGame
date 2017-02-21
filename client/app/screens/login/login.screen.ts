@@ -1,7 +1,7 @@
 /**
  * Created by thinhth2 on 2/6/2017.
  */
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import {CommandService} from "../../services/command.service";
 import {KeyExchange} from "../../../../share/keyexchange";
 import {StateService} from "../../services/state.service";
@@ -14,7 +14,7 @@ import {DialogService} from "../../services/dialog.service";
     templateUrl: 'login.screen.html',
     styleUrls: ['login.screen.css']
 })
-export class LoginScreen implements OnInit {
+export class LoginScreen implements OnInit, OnDestroy {
     @Input()
     data;
 
@@ -23,13 +23,18 @@ export class LoginScreen implements OnInit {
     userExist = true;
     userValidate = false;
     isValid = false;
+    private subscription;
 
     constructor(private commandService:CommandService,
                 private stateService:StateService,
                 private userService:UserService,
                 private dialogService:DialogService)
     {
-        this.commandService.onMessage.subscribe((msg) => {
+
+    }
+
+    ngOnInit() {
+        this.subscription = this.commandService.onMessage.subscribe((msg) => {
             switch (msg.command) {
                 case KeyExchange.KEY_COMMAND.CHECK_NICK_NAME:
                     this.onUsernameVerified(msg.data);
@@ -40,8 +45,9 @@ export class LoginScreen implements OnInit {
         });
     }
 
-    ngOnInit() {
-
+    ngOnDestroy():void {
+        this.subscription.isStopped = true;
+        this.subscription.closed = true;
     }
 
     onUsernameChanged() {
