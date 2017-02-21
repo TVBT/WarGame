@@ -65,4 +65,8 @@ export class UserManager {
         return true;
     }
 
+    clearUserNameArray() {
+        this.userNameArr.splice(0);
+    }
+
 }

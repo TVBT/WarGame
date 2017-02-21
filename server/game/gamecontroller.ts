@@ -9,6 +9,8 @@ import {Main} from "../mainserver";
 import {Point} from "../../share/math/primitive";
 import {User} from "../model/user";
 import {ConfigManager} from "../manager/configmanager";
+import {RoomManager} from "../manager/roommanager";
+import {UserManager} from "../manager/usermanager";
 
 export  class GameController {
     private gameLogic:TankGameLogic;
@@ -127,6 +129,9 @@ export  class GameController {
         };
 
         this.sendResponseToUsers(data, KeyExchange.KEY_COMMAND.END_GAME, this.currentRoom.getListUsers());
+
+        UserManager.getInstance().clearUserNameArray();
+        RoomManager.getInstance().removeRoom(this.currentRoom.roomId);
     }
 
     public getTeamIdWin(teamId) {

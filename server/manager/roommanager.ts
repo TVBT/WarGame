@@ -63,7 +63,12 @@ export class RoomManager {
     }
 
     removeRoom(roomId) {
+        var room:Room = this.getRoomById(roomId);
+        var index:number = this.rooms.indexOf(room);
 
+        if (index >= 0) {
+            this.rooms.splice(index, 1);
+        }
     }
 
     getRoomById(roomId) {
