@@ -139,8 +139,7 @@ export class Main {
     handleCheckUserNameExist(data, client) {
         var user:User = this.userManager.getUserById(client.id);
         var userName = data[KeyExchange.KEY_DATA.USER_NAME];
-        var isValid = this.userManager.checkValidNickName(userName);
-        var status = isValid ? 1 : 0;
+        var status = this.userManager.checkValidNickName(userName) ? 1 : 0;
         var object = {
             command: KeyExchange.KEY_COMMAND.CHECK_NICK_NAME,
             data : {
@@ -153,17 +152,17 @@ export class Main {
 
     handleAutoJoin(data, client) {
         var user:User = this.userManager.getUserById(client.id);
-        user.userName = data[KeyExchange.KEY_DATA.USER_NAME];
-        var status = this.userManager.checkValidNickName(user.userName) ? 1 : 0;
-        var object:{};
+        var userName:string = data[KeyExchange.KEY_DATA.USER_NAME];
+        var status = this.userManager.checkValidNickName(userName) ? 1 : 0;
 
         if (status == 1) {
+            user.userName = userName;
             this.userManager.addUserName(user.userName);
-            var room:Room = this.roomManager.joinRoom(user);
-            object = {
+            let room:Room = this.roomManager.joinRoom(user);
+            let object = {
                 command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
                 data : {
-                    [KeyExchange.KEY_DATA.STATUS] : 1,
+                    [KeyExchange.KEY_DATA.STATUS] : status,
                     [KeyExchange.KEY_DATA.ROOM_ID] : room.roomId,
                     [KeyExchange.KEY_DATA.PLAYER_INFO] : user.parseJsonDataPlayer()
                 }
@@ -174,13 +173,12 @@ export class Main {
                 command: KeyExchange.KEY_COMMAND.USER_JOIN_LOBBY_ROOM,
                 data : user.parseJsonDataPlayer()
             };
-
             this.sendListUser(objectToOtherUser, user.room.getListUserExceptUserId(user.userId));
         } else {
-            object = {
+            let object = {
                 command: KeyExchange.KEY_COMMAND.AUTO_JOIN_ROOM,
                 data : {
-                    [KeyExchange.KEY_DATA.STATUS] : 0,
+                    [KeyExchange.KEY_DATA.STATUS] : status,
                     [KeyExchange.KEY_DATA.MESSAGE] : "User này đã tồn tại, ko thể tham gia!"
                 }
             };

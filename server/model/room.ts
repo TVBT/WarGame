@@ -130,18 +130,16 @@ export class Room {
     }
 
     getListUserExceptUserId(userId:number) {
+        var allUsers:Array<User> = this.getListUsers();
         var users = [];
         var i = 0;
-        var len = this.team1.length;
-        for (i = 0; i < len; i++) {
-            if (this.team1[i].userId != userId)
-                users.push(this.team1[i]);
-        }
+        var len = allUsers.length;
+        for (i; i < len; i++) {
+            if (allUsers[i].userId == userId) {
+                continue;
+            }
 
-        len = this.team2.length;
-        for (i = 0; i < len; i++) {
-            if(this.team2[i].userId != userId)
-                users.push(this.team2[i]);
+            users.push(allUsers[i]);
         }
 
         return users;
