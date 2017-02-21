@@ -43,6 +43,10 @@ export class TankGame {
         });
     }
 
+    destroy() {
+        this.game.destroy();
+    }
+
     stopGame() {
         this.playController.stopped = true;
     }

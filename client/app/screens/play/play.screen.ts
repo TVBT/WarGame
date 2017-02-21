@@ -121,6 +121,7 @@ export class PlayScreen implements AfterViewInit, OnInit, OnDestroy {
     ngOnDestroy():void {
         this.subscription.isStopped = true;
         this.subscription.closed = true;
+        this.game.destroy();
     }
 
     ngAfterViewInit() {
