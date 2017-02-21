@@ -25,6 +25,7 @@ import {DialogService} from "./services/dialog.service";
         AppComponent,
         LoginScreen,
         LobbyScreen,
+        PlayScreen,
         PingComponent,
         ServerSelectComponent,
         DialogComponent,

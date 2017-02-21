@@ -12,6 +12,7 @@ import {DialogService} from "./services/dialog.service";
              class="waiting">Connecting To Server...</div>
         <login-screen *ngIf="screenState=='${SCREEN_STATE.LOGIN}'" [data]='data' ></login-screen>
         <lobby-screen *ngIf="screenState=='${SCREEN_STATE.LOBBY}'" [data]='data' ></lobby-screen>
+        <play-screen *ngIf="screenState=='${SCREEN_STATE.PLAY}'" [data]='data' ></play-screen>
         
     </div>
     <ping class="ping"></ping>
