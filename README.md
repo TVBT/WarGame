@@ -16,7 +16,7 @@
 - [x] User can change team in waiting room
 - [x] User can ready to start match
 - [x] User can hit other user in other team to get point.
-- [ ] Realtime moving, action in game
+- [x] Realtime moving, action in game
 
 
 **Optional** features:
