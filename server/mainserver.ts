@@ -4,6 +4,7 @@ import {KeyExchange} from "../share/keyexchange";
 import {Room} from "./model/room";
 import {User} from "./model/user";
 import {ConfigManager} from "./manager/configmanager";
+import {DemoFireBase} from "./demofirebase";
 
 /**
  * Created by thuctvd on 2/6/2017.
@@ -17,6 +18,8 @@ export class Main {
     public userManager:UserManager = UserManager.getInstance();
     public roomManager:RoomManager = RoomManager.getInstance();
     public configManager:ConfigManager = ConfigManager.getInstance();
+
+    public demoFireBase;
 
     static _instance: Main;
     static getInstance() : Main {
@@ -34,7 +37,7 @@ export class Main {
 
         this.startHttp(app, this.HTTP_PORT);
         this.startSocket(server, this.io, this.SOCKET_PORT);
-
+        this.startDemoFireBase();
     }
 
     startSocket(server, io, port) {
@@ -69,7 +72,7 @@ export class Main {
     }
 
     startHttp(app, port) {
-        var path    = require("path");
+        var path = require("path");
         app.get('/', function (req, res) {
             res.send('Welcome to WarGame!')
         })
@@ -87,8 +90,13 @@ export class Main {
 
     }
 
+    startDemoFireBase() {
+        this.demoFireBase = new DemoFireBase();
+        this.demoFireBase.initDemoFireBase();
+    }
+
     receiveMessageHandler(msg, client) {
-        console.log("RECEIVE Client msg --- cmd: " + msg.command + " --- data: " + JSON.stringify(msg.data));
+        // console.log("RECEIVE Client msg --- cmd: " + msg.command + " --- data: " + JSON.stringify(msg.data));
 
         switch (msg.command) {
             case KeyExchange.KEY_COMMAND.PING_PONG:
@@ -167,6 +175,8 @@ export class Main {
                     [KeyExchange.KEY_DATA.PLAYER_INFO] : user.parseJsonDataPlayer()
                 }
             };
+
+            this.demoFireBase.login(userName, "");
             this.sendUser(object, user);
 
             var objectToOtherUser = {
