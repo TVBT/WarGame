@@ -9,8 +9,12 @@ export class DemoFireBase {
 
     public initDemoFireBase() {
         this.startFireBase();
+
         this.loadListUser();
         this.loadEventType();
+        this.loadEventDetail();
+
+        this.testFunction();
     }
 
     public startFireBase() {
@@ -46,7 +50,29 @@ export class DemoFireBase {
         if (this.checkUserExist(userName)) {
             console.log("User login successful");
         } else {
-            this.createUser(userName, passWord);
+            let data = {
+                userName: userName,
+                password: passWord,
+                fullName: "",
+                email: "",
+                avatar: "/avatar_default.jpg",
+                birthday: "",
+                phoneNumber: ""
+            }
+            var userId:String = this.createUser(data);
+
+            // Test add event
+            for (var i = 0; i < 5; i++) {
+                let data = {
+                    userId: userId,
+                    description: "",
+                    eventType: 1,
+                    location: "Vietnam",
+                    createDate: Date()
+                };
+
+                this.createEvent(data);
+            }
         }
     }
 
@@ -54,8 +80,10 @@ export class DemoFireBase {
         this._users = {};
         var userRef = this.database.ref("users");
 
-        userRef.on("child_added", function (data) {
-            this._users[data.key] = data.val();
+        userRef.once("value").then(function (snapshot) {
+            if (snapshot.exists()) {
+                this._users = snapshot.val();
+            }
         }.bind(this));
     }
 
@@ -70,29 +98,19 @@ export class DemoFireBase {
         return false;
     }
 
-    public createUser(userName:String, passWord:String) {
-        var userRef = this.database.ref("users");
-        userRef.push({
-            userName: userName,
-            password: passWord,
-            fullName: "",
-            email: "",
-            avatar: "/avatar_default.jpg",
-            birthday: "",
-            phoneNumber: ""
-        }).then(function(snap) {
-            // Test inser event for user
-            for (var i = 0; i < 5; i++) {
-                this.createUserEvent(snap.key, "", 1, "USA", Date());
-            }
-        }.bind(this));
-    }
-
     public loadEventType() {
         this._eventTypes = {};
         var eventTypeRef = this.database.ref("event_type");
 
-        eventTypeRef.on("child_added", function (data) {
+        eventTypeRef.once("value", function (data) {
+            this._eventTypes[data.key] = data.val();
+        }.bind(this));
+    }
+
+    public loadEventDetail() {
+        var eventTypeRef = this.database.ref("events");
+
+        eventTypeRef.once("value", function (data) {
             this._eventTypes[data.key] = data.val();
         }.bind(this));
     }
@@ -112,15 +130,127 @@ export class DemoFireBase {
         });
     }
 
-    public createUserEvent(keyUser:String, description:String, eventType:number, location:String, createDate:String) {
-        var eventRef = this.database.ref("events");
-        eventRef.push({
-            keyUser: keyUser,
-            description: description,
-            eventType: eventType,
-            location: location,
-            createDate: createDate
+
+
+    /**
+     * QUERY DATABASE
+     */
+    public testFunction() {
+        var userId = "-Kec2JVaPQPIx8Ci6u_A";
+
+
+
+        this.getAllUser();
+
+        this.getAllEventType();
+        this.getEventTypeByType(1);
+
+        this.getAllEvent();
+        this.getEventsByUserId(userId);
+
+        var data = {
+            password: "000000",
+            fullName: "Immortal Killer",
+            email: "vutp@mecorp.vn",
+            birthday: "08/11/1989",
+            phoneNumber: "0933454933"
+        };
+
+        this.updateUser(userId, data);
+    }
+
+    public createUser(data:any) {
+        var userRef = this.database.ref("users");
+        var userId:String = userRef.push(data).getKey();
+
+        return userId;
+    }
+
+    public updateUser(userId:String, data:any) {
+        var usersRef = this.database.ref("users");
+        usersRef.child(userId).once('value', function(snapshot) {
+            if (snapshot.val() !== null) {
+                usersRef.child(userId).update(data);
+            }
         });
+    }
+
+    public deleteUser(userId:String) {
+        var userRef = this.database.ref("users").child(userId).remove();
+    }
+
+    public deleteAllUser() {
+        var userRef = this.database.ref("users").remove();
+    }
+
+    public getAllUser() {
+        var userRef = this.database.ref("users");
+        userRef.once("value", function (snapshot) {
+            snapshot.forEach(function (data) {
+                console.log("***** getAllUser ***** data = " + JSON.stringify(data.val()))
+            })
+        })
+    }
+
+    public createEvent(data:any) {
+        var eventRef = this.database.ref("events");
+        var eventId = eventRef.push(data).getKey;
+
+        return eventId;
+    }
+
+    public deleteEvent(eventId:String) {
+        var userRef = this.database.ref("events").child(eventId).remove();
+    }
+
+    public deleteAllEvent() {
+        var userRef = this.database.ref("events").remove();
+    }
+
+    public getAllEvent() {
+        var eventRef = this.database.ref("events");
+        eventRef.once("value", function(snapshot) {
+            snapshot.forEach(function (data) {
+                console.log("***** getAllEvent ***** data = " + JSON.stringify(data.val()))
+            })
+
+        });
+    }
+
+    public getEventsByUserId(userId:String) {
+        var eventRef = this.database.ref("events");
+        eventRef.orderByChild("keyUser").equalTo(userId).once("value").then(function(snapshot) {
+            snapshot.forEach(function (data) {
+                console.log("***** getEventsByUserId by " + userId + " ***** data = " + JSON.stringify(data.val()))
+            })
+
+        });
+    }
+
+    public getEventByEventId(eventId:String) {
+        var eventRef = this.database.ref("events");
+        eventRef.child(eventId).once("value", function(snapshot) {
+            snapshot.forEach(function (data) {
+                console.log("***** getEventByEventId by " + eventId + " ***** data = " + JSON.stringify(data.val()));
+            })
+
+        });
+    }
+
+    public getAllEventType() {
+        var eventTypeRef = this.database.ref("event_type");
+        eventTypeRef.once("value", function (snapshot) {
+            snapshot.forEach(function (data) {
+                console.log("***** getAllEventType ***** data = " + JSON.stringify(data.val()));
+            })
+        })
+    }
+
+    public getEventTypeByType(type) {
+        var eventTypeRef = this.database.ref("event_type");
+        eventTypeRef.orderByChild("type").equalTo(type).once("value", function (snapshot) {
+            console.log("***** getEventTypeByType by " + type + " ***** data = " + JSON.stringify(snapshot.val()))
+        })
     }
 
 
